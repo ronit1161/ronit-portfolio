@@ -1,0 +1,52 @@
+/* ==========================================================================
+   FLUID INVERSION / DIFFERENCE STENCIL CURSOR
+   ========================================================================== */
+.cursor-stencil,
+.cursor-stencil-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  z-index: 9999999;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+.cursor-stencil {
+  width: 34px;
+  height: 34px;
+  background-color: #ffffff;
+  transition: opacity 0.25s var(--ease-standard);
+}
+
+.cursor-stencil-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  transition: opacity 0.2s var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor {
+    cursor: none;
+  }
+  
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor .project-image-clipper,
+  body.has-custom-cursor .marquee-row-wrapper,
+  body.has-custom-cursor .hero-character-card,
+  body.has-custom-cursor .profile-portrait-frame {
+    cursor: none !important;
+  }
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .cursor-stencil,
+  .cursor-stencil-dot {
+    display: none !important;
+  }
+}
