@@ -1,0 +1,214 @@
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+  .hero-upper-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-character-stage {
+    justify-content: flex-start;
+  }
+
+  .hero-character-card {
+    width: 300px;
+  }
+
+  .editorial-profile-section {
+    padding-top: 160px;
+    padding-bottom: 160px;
+  }
+
+  .hero-lower-grid,
+  .profile-layout-grid,
+  .contact-layout-split {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .profile-primary-column {
+    position: static;
+  }
+
+  .projects-editorial-feed {
+    gap: 72px;
+  }
+
+  .project-showcase-item {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-bottom: 72px;
+  }
+
+
+  .section-header {
+    grid-template-columns: 100px 1fr;
+    gap: 28px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-upper-grid {
+    gap: 24px;
+  }
+
+  .hero-character-card {
+    width: 230px;
+  }
+
+  .editorial-profile-section {
+    padding-top: 130px;
+    padding-bottom: 130px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .nav-menu,
+  .nav-actions .nav-cv-btn {
+    display: none;
+  }
+
+  .mobile-menu-trigger {
+    display: inline-flex;
+  }
+
+  .section {
+    padding: var(--section-padding-mobile-y) 0;
+  }
+
+  .hero-stage {
+    padding: 72px 0 84px;
+  }
+
+  .hero-title-canvas {
+    margin: 0 0 16px;
+  }
+
+
+  /* Section 03 Marquee Responsive */
+  .marquee-tech-card {
+    padding: 10px 20px 10px 10px;
+    gap: 14px;
+    border-radius: 10px;
+  }
+
+  .marquee-icon-pod {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+  }
+
+  .marquee-card-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .marquee-card-name {
+    font-size: 1.02rem;
+  }
+
+  .profile-spec-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 56px;
+  }
+
+  .site-footer {
+    padding: 64px 0 48px;
+  }
+
+  .footer-inner {
+    gap: 36px;
+  }
+
+  .footer-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .footer-nav-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .footer-links-group {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .kinetic-word-item {
+    font-size: clamp(1.1rem, 5.2vw, 1.45rem);
+    letter-spacing: -0.01em;
+  }
+
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .marquee-tech-card {
+    padding: 8px 16px 8px 8px;
+    gap: 10px;
+    border-radius: 9px;
+  }
+
+  .marquee-icon-pod {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+
+  .marquee-card-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .marquee-card-name {
+    font-size: 0.92rem;
+  }
+
+  .hero-primary-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-primary-actions .action-editorial-btn {
+    justify-content: center;
+  }
+
+  .hero-aux-links {
+    justify-content: flex-start;
+  }
+
+  .contact-dossier-panel {
+    padding: 28px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

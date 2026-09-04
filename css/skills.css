@@ -1,0 +1,122 @@
+/* ==========================================================================
+   SECTION 03: CONTINUOUS HORIZONTAL SKILLS MARQUEE
+   ========================================================================== */
+.marquee-skills-section {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--section-padding-desktop-y);
+  padding-bottom: calc(var(--section-padding-desktop-y) * 1.25);
+}
+
+.marquee-showcase-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: 24px 0 32px;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.marquee-row-wrapper {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  cursor: grab;
+  touch-action: pan-y;
+  padding: 12px 0;
+}
+
+.marquee-row-wrapper.is-dragging {
+  cursor: grabbing;
+}
+
+.marquee-row-wrapper.is-dragging .marquee-tech-card {
+  cursor: grabbing;
+  pointer-events: none;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+  padding: 4px 0;
+}
+
+.marquee-tech-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px 12px 12px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(15, 16, 19, 0.04), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.95),
+              0 0 0 1px rgba(15, 16, 19, 0.03);
+  transition: transform var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard),
+              background var(--duration-fast) var(--ease-standard);
+  cursor: default;
+}
+
+.marquee-tech-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(224, 86, 36, 0.45);
+  box-shadow: 0 16px 36px rgba(224, 86, 36, 0.12),
+              0 6px 18px rgba(15, 16, 19, 0.06),
+              inset 0 1px 1px #ffffff;
+}
+
+.marquee-icon-pod {
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(15, 16, 19, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+.marquee-tech-card:hover .marquee-icon-pod {
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(224, 86, 36, 0.2);
+  border-color: rgba(224, 86, 36, 0.35);
+}
+
+.marquee-card-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+}
+
+.marquee-card-name {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1;
+}
