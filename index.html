@@ -4,423 +4,984 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
+
+    <!-- SEO & Metadata -->
+    <title>Ronit Tambe — Full-Stack &amp; Backend Software Developer</title>
+    <meta
+      name="description"
+      content="Software Developer specializing in Full-Stack and Backend Engineering with Java, Spring Boot, REST APIs, Microservices, React, Next.js, and SQL databases."
+    />
+    <meta name="author" content="Ronit Tambe" />
+    <meta name="theme-color" content="#090a0d" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ronit Tambe — Full-Stack &amp; Backend Software Developer" />
+    <meta
+      property="og:description"
+      content="Engineering portfolio, architecture case studies, and full-stack software built by Ronit Tambe. Java, Spring Boot, REST APIs, MySQL, React."
+    />
+
+    <!-- Favicon & Stylesheet -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-    <script
-      src="https://kit.fontawesome.com/d1c6d09977.js"
-      crossorigin="anonymous"
-      defer
-    ></script>
   </head>
   <body>
-    <nav id="desktop-nav">
-      <div class="logo">Ronit</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Ronit</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+    <!-- ==========================================================================
+         FLUID INVERSION / DIFFERENCE STENCIL CURSOR
+         ========================================================================== -->
+    <div class="cursor-stencil" id="cursor-stencil" aria-hidden="true"></div>
+    <div class="cursor-stencil-dot" id="cursor-stencil-dot" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         OPTION 04: KINETIC TYPOGRAPHIC SHUTTER PRELOADER
+         ========================================================================== -->
+    <div id="preloader-overlay" class="preloader-overlay kinetic-loader" aria-hidden="false">
+      <div class="preloader-shutter-top" id="shutter-top"></div>
+      <div class="preloader-shutter-bottom" id="shutter-bottom"></div>
+      
+      <div class="preloader-kinetic-stage" id="kinetic-stage">
+        <div class="kinetic-meta-bar">
+          <span class="kinetic-badge">[ 2026 // SYSTEM KERNEL ]</span>
+          <span class="kinetic-counter" id="kinetic-counter">00%</span>
         </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+
+        <div class="kinetic-words-viewport">
+          <div class="kinetic-words-track" id="kinetic-words-track">
+            <div class="kinetic-word-item">BACKEND SYSTEMS</div>
+            <div class="kinetic-word-item">SPRING BOOT &amp; APIS</div>
+            <div class="kinetic-word-item">DISTRIBUTED SQL</div>
+            <div class="kinetic-word-item">FULL-STACK</div>
+            <div class="kinetic-word-item highlight">RONIT TAMBE</div>
+          </div>
+        </div>
+
+        <div class="kinetic-progress-line">
+          <div class="kinetic-progress-bar" id="kinetic-progress-bar"></div>
         </div>
       </div>
-    </nav>
-    <section id="profile">
-      <div class="my-photo">
-        <img
-          src="./assets/profile-pic.jpg"
-          alt="Ronit Tambe   profile picture"
-        />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Ronit Tambe</h1>
-        <p class="section__text__p2">Fullstack Developer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/resume-example.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
+    </div>
+
+    <!-- ==========================================================================
+         MINIMAL EDITORIAL NAVBAR
+         ========================================================================== -->
+    <header class="site-header" id="site-header">
+      <div class="container navbar">
+        <a href="#hero" class="nav-brand" aria-label="Ronit Tambe Homepage">
+          <span class="nav-brand-dot"></span>
+          <span>Ronit Tambe</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu" aria-label="Main Navigation">
+          <a href="#projects" class="nav-link">Work</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Right Action & Mobile Trigger -->
+        <div class="nav-actions">
           <a
+            href="./assets/resume-example.pdf"
             target="_blank"
-            href="http://www.linkedin.com/in/ronit-tambe-781a09204/"
+            rel="noopener noreferrer"
+            class="nav-cv-btn"
           >
-            <img
-              src="./assets/linkedin.png"
-              alt="My LinkedIn profile"
-              class="icon"
-            />
+            CV ↗
           </a>
 
-          <a href="https://github.com/ronit1161" target="_blank">
-            <img
-              src="./assets/github.png"
-              alt="My Github profile"
-              class="icon"
-            />
-          </a>
+          <button
+            class="mobile-menu-trigger"
+            id="mobile-menu-trigger"
+            aria-label="Toggle Navigation Menu"
+            aria-expanded="false"
+          >
+            <span id="menu-text">Menu</span>
+            <div class="mobile-menu-icon">
+              <span></span>
+              <span></span>
+            </div>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/kjsdbc.jpg"
-            alt="Profile picture"
-            class="about-pic"
-          />
+    <!-- Fullscreen Editorial Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true">
+      <nav class="mobile-nav-links">
+        <a href="#projects" class="mobile-nav-item" onclick="closeMobileMenu()">
+          <span>01</span> Work
+        </a>
+        <a href="#about" class="mobile-nav-item" onclick="closeMobileMenu()">
+          <span>02</span> About
+        </a>
+        <a href="#skills" class="mobile-nav-item" onclick="closeMobileMenu()">
+          <span>03</span> Skills
+        </a>
+        <a href="#contact" class="mobile-nav-item" onclick="closeMobileMenu()">
+          <span>04</span> Contact
+        </a>
+      </nav>
+
+      <div class="mobile-overlay-footer">
+        <div>Pune, India · Available for roles</div>
+        <div class="mobile-overlay-socials">
+          <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">CV (PDF) ↗</a>
         </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>Fresher <br />Fullstack Development</p>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <!-- ==========================================================================
+           HERO SECTION (MONUMENTAL EDITORIAL TYPOGRAPHY)
+           ========================================================================== -->
+      <section id="hero" class="hero-stage">
+        <div class="container">
+          <!-- Hero Upper Grid: Typography on Left, Character on Right -->
+          <div class="hero-upper-grid">
+            <div class="hero-title-canvas">
+              <div class="hero-line-mask">
+                <h1 class="hero-giant-word hero-name">
+                  RONIT TAMBE
+                </h1>
+              </div>
+              <div class="hero-line-mask">
+                <span class="hero-giant-word hero-role-line1">
+                  FULL-STACK
+                </span>
+              </div>
+              <div class="hero-line-mask">
+                <span class="hero-giant-word hero-role-line2">
+                  DEVELOPER<span class="hero-accent-period">.</span>
+                </span>
+              </div>
             </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>
-                B.E. Bachelors Degree in<br />Electronics and Telecommunication
+
+            <div class="hero-character-stage">
+              <div class="hero-character-card">
+                <div class="character-greeting-tag">
+                  <span class="greeting-text">HI, I'M RONIT </span>
+                </div>
+                <img
+                  src="./assets/hero-character.png"
+                  alt="Cute 3D Cartoon Developer Character Waving Hi"
+                  class="hero-character-img"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Asymmetric Narrative Spread & Refined Actions -->
+          <div class="hero-lower-grid">
+            <div class="hero-narrative-col">
+              <p class="hero-statement-text">
+                I build web applications, backend systems, and APIs with <strong>Java, Spring Boot, MySQL</strong>, and <strong>React / modern web technologies</strong> — engineered for scalability, transactional safety, and performance.
+              </p>
+              <div class="hero-credentials-tag">
+                <span>CDAC PG-DAC (Sunbeam)</span>
+                <span class="sep">/</span>
+                <span>B.E. Electronics &amp; Telecommunication</span>
+              </div>
+            </div>
+
+            <div class="hero-cta-ensemble">
+              <div class="hero-primary-actions">
+                <a href="#projects" class="action-editorial-btn" id="hero-cta-work">
+                  <span class="btn-text">View Work</span>
+                  <span class="btn-arrow" aria-hidden="true">↓</span>
+                </a>
+                <a href="#contact" class="action-editorial-link" id="hero-cta-contact">
+                  <span class="link-text">Get In Touch</span>
+                  <span class="link-arrow" aria-hidden="true">↗</span>
+                </a>
+              </div>
+
+              <div class="hero-aux-links">
+                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <span class="dot-sep">·</span>
+                <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                <span class="dot-sep">·</span>
+                <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">Resume (PDF) ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 01: SELECTED WORK (EDITORIAL PROJECT SHOWCASE)
+           ========================================================================== -->
+      <section id="projects" class="section work-editorial-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="section-header">
+            <span class="section-index">01 / SELECTED WORK</span>
+            <div class="section-title-group">
+              <h2 class="section-title">Selected Projects</h2>
+              <p class="section-subtitle">
+                A selection of applications and systems I've built with an emphasis on backend architecture, data integrity, and performant user interfaces.
               </p>
             </div>
           </div>
-          <div class="text-container">
-            <p>
-              Enthusiastic and self-motivated web developer with a solid
-              foundation in full-stack development, specializing in Next.js,
-              React, and Node.js. Skilled in creating real-time applications,
-              such as food delivery, location tracking, and expense tracker
-              apps. Proficient in building responsive, user-friendly interfaces
-              and implementing secure backend solutions. Adept at working with
-              MongoDB, Mongoose, Socket.IO, and AWS S3 for cloud integrations. A
-              fresher eager to contribute strong technical skills and a passion
-              for coding to a dynamic team.
+
+          <div class="projects-editorial-feed">
+            <!-- ==================================================================
+                 PROJECT 01: FREELANCE MARKETPLACE
+                 ================================================================== -->
+            <article class="project-showcase-item" data-project="freelance-marketplace">
+              <div class="project-info-side">
+                <div class="project-meta-strip">
+                  <span class="project-index-num">01</span>
+                  <span class="project-domain-tag">SYSTEM ARCHITECTURE &amp; BACKEND</span>
+                  <span class="project-year-badge">2026</span>
+                </div>
+
+                <h3 class="project-showcase-title">
+                  Freelance Marketplace Platform
+                </h3>
+
+                <p class="project-showcase-desc">
+                  A multi-party freelance platform engineered with a Spring Boot modular monolith backend, Spring Security stateless JWT RBAC, and an ACID-compliant escrow wallet state machine for secure milestone transactions.
+                </p>
+
+                <ul class="project-highlights-list">
+                  <li>Domain-isolated modules communicating via clean service interfaces</li>
+                  <li>ACID virtual escrow ledger preventing race conditions during fund release</li>
+                </ul>
+
+                <div class="project-stack-pills">
+                  <span class="tech-pill">Java</span>
+                  <span class="tech-pill">Spring Boot</span>
+                  <span class="tech-pill">Spring Security</span>
+                  <span class="tech-pill">JWT</span>
+                  <span class="tech-pill">MySQL</span>
+                  <span class="tech-pill">Hibernate</span>
+                  <span class="tech-pill">Docker</span>
+                  <span class="tech-pill">React</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="https://github.com/ronit1161"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-editorial-btn"
+                  >
+                    <span>GitHub Source</span>
+                    <span class="btn-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="project-visual-side">
+                <a
+                  href="https://github.com/ronit1161"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-image-clipper"
+                  aria-label="Open Freelance Marketplace GitHub Source"
+                >
+                  <img
+                    src="./assets/freelance-marketplace.svg"
+                    alt="Freelance Marketplace Architecture & System Schematic"
+                    loading="lazy"
+                    class="project-dominant-image"
+                  />
+                  <div class="visual-hover-badge">
+                    <span>GITHUB SOURCE ↗</span>
+                  </div>
+                </a>
+              </div>
+            </article>
+
+            <!-- ==================================================================
+                 PROJECT 02: FOOD ORDERING PLATFORM
+                 ================================================================== -->
+            <article class="project-showcase-item" data-project="food-ordering">
+              <div class="project-info-side">
+                <div class="project-meta-strip">
+                  <span class="project-index-num">02</span>
+                  <span class="project-domain-tag">FULL-STACK &amp; COMMERCE</span>
+                  <span class="project-year-badge">2025</span>
+                </div>
+
+                <h3 class="project-showcase-title">
+                  Food Ordering Web Application
+                </h3>
+
+                <p class="project-showcase-desc">
+                  Full-stack culinary platform built with Next.js and React. Features NextAuth session authentication, real-time shopping cart state synchronization, Razorpay payment processing with server-side HMAC-SHA256 signature verification, and Cloudinary media optimization.
+                </p>
+
+                <ul class="project-highlights-list">
+                  <li>Server-side payment signature verification preventing transaction spoofing</li>
+                  <li>Cloudinary media transformation pipeline for automated WebP image delivery</li>
+                </ul>
+
+                <div class="project-stack-pills">
+                  <span class="tech-pill">Next.js</span>
+                  <span class="tech-pill">React</span>
+                  <span class="tech-pill">MongoDB</span>
+                  <span class="tech-pill">NextAuth</span>
+                  <span class="tech-pill">Razorpay</span>
+                  <span class="tech-pill">Cloudinary</span>
+                  <span class="tech-pill">Tailwind CSS</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="https://food-ordering-app-roan.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-editorial-btn"
+                  >
+                    <span>Live Application</span>
+                    <span class="btn-arrow">↗</span>
+                  </a>
+                  <a
+                    href="https://github.com/ronit1161/food-ordering"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-editorial-link"
+                  >
+                    <span>GitHub</span>
+                    <span class="link-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="project-visual-side">
+                <a
+                  href="https://food-ordering-app-roan.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-image-clipper"
+                  aria-label="Open Food Ordering Live Application"
+                >
+                  <img
+                    src="./assets/food ordering.png"
+                    alt="Food Ordering Application Interface Preview"
+                    loading="lazy"
+                    class="project-dominant-image"
+                  />
+                  <div class="visual-hover-badge">
+                    <span>LIVE DEMO ↗</span>
+                  </div>
+                </a>
+              </div>
+            </article>
+
+            <!-- ==================================================================
+                 PROJECT 03: EXPENSEWISE FINANCIAL TRACKER
+                 ================================================================== -->
+            <article class="project-showcase-item" data-project="expense-tracker">
+              <div class="project-info-side">
+                <div class="project-meta-strip">
+                  <span class="project-index-num">03</span>
+                  <span class="project-domain-tag">FINANCE &amp; REST SERVICES</span>
+                  <span class="project-year-badge">2025</span>
+                </div>
+
+                <h3 class="project-showcase-title">
+                  ExpenseWise Financial Tracker
+                </h3>
+
+                <p class="project-showcase-desc">
+                  Personal financial analytics application pairing an Express REST API with a normalized MySQL database. Engineered with indexed date-range SQL queries for low latency and a fast React + Vite frontend dashboard for instant cash flow computation.
+                </p>
+
+                <ul class="project-highlights-list">
+                  <li>Compound indexing on transaction dates ensuring sub-millisecond query latency</li>
+                  <li>Client-side reactive state pipelines for real-time category spending computation</li>
+                </ul>
+
+                <div class="project-stack-pills">
+                  <span class="tech-pill">React</span>
+                  <span class="tech-pill">Vite</span>
+                  <span class="tech-pill">Node.js</span>
+                  <span class="tech-pill">Express</span>
+                  <span class="tech-pill">MySQL</span>
+                  <span class="tech-pill">REST APIs</span>
+                  <span class="tech-pill">Tailwind CSS</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="https://expense-tracker-react-sage.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-editorial-btn"
+                  >
+                    <span>Live Application</span>
+                    <span class="btn-arrow">↗</span>
+                  </a>
+                  <a
+                    href="https://github.com/ronit1161/expense-tracker-react"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-editorial-link"
+                  >
+                    <span>GitHub</span>
+                    <span class="link-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="project-visual-side">
+                <a
+                  href="https://expense-tracker-react-sage.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-image-clipper"
+                  aria-label="Open ExpenseWise Live Application"
+                >
+                  <img
+                    src="./assets/expense tracker.png"
+                    alt="ExpenseWise Financial Dashboard Preview"
+                    loading="lazy"
+                    class="project-dominant-image"
+                  />
+                  <div class="visual-hover-badge">
+                    <span>LIVE DEMO ↗</span>
+                  </div>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 02: EDITORIAL PROFILE (ABOUT)
+           ========================================================================== -->
+      <section id="about" class="section editorial-profile-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="section-header">
+            <span class="section-index">02 / ABOUT</span>
+            <div class="section-title-group">
+              <h2 class="section-title">Profile &amp; Discipline</h2>
+            </div>
+          </div>
+
+          <div class="profile-layout-grid">
+            <!-- Left Side: Sticky Editorial Portrait Pillar -->
+            <div class="profile-primary-column">
+              <div class="profile-portrait-frame">
+                <div class="portrait-image-wrapper">
+                  <img
+                    src="./assets/profile-pic.jpg"
+                    alt="Ronit Tambe — Full-Stack & Backend Developer"
+                    loading="lazy"
+                    class="profile-editorial-photo"
+                  />
+                </div>
+                <div class="portrait-caption-bar">
+                  <span class="caption-idx">[ PROFILE // 2026 ]</span>
+                  <div class="portrait-status-badge" id="portrait-status-badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text" id="portrait-badge-text">STATUS: ACTIVE</span>
+                  </div>
+                  <span class="caption-location">RONIT TAMBE · PUNE, IN</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Statement Headline, Narrative Foundation & Factual Specification Matrix -->
+            <div class="profile-spec-column">
+              <div class="profile-statement-wrap">
+                <h3 class="profile-statement-text">
+                  "I build software with a focus on backend systems, APIs and full-stack applications."
+                </h3>
+              </div>
+
+              <div class="profile-bio-narrative">
+                <p>
+                  My engineering foundation bridges rigorous computer science specialization from the <strong>CDAC Post Graduate Diploma (Sunbeam Institute)</strong> with a Bachelor's degree in <strong>Electronics &amp; Telecommunication Engineering</strong> from Finolex Academy.
+                </p>
+                <p>
+                  I emphasize architectural resilience, transactional safety, database normalization, and type-safe API contracts — building software that is clear, scalable, and maintainable.
+                </p>
+              </div>
+
+              <div class="profile-spec-row" data-profile-status="SPEC: LOCATION // PUNE, IN">
+                <div class="spec-label">
+                  <span class="spec-num">01</span>
+                  <span>LOCATION</span>
+                </div>
+                <div class="spec-content">
+                  <h4 class="spec-title">Pune, Maharashtra, India</h4>
+                  <p class="spec-desc">Open to full-time engineering roles, hybrid, and remote opportunities.</p>
+                </div>
+              </div>
+
+              <div class="profile-spec-row" data-profile-status="SPEC: FORMATION // CDAC + BE">
+                <div class="spec-label">
+                  <span class="spec-num">02</span>
+                  <span>EDUCATION</span>
+                </div>
+                <div class="spec-content">
+                  <div class="spec-subgroup">
+                    <h4 class="spec-title">CDAC — PG-DAC</h4>
+                    <span class="spec-sub">Sunbeam Institute of Information Technology, Pune</span>
+                    <p class="spec-desc">Intensive post-graduate program focused on Java, Spring Boot, Data Structures, Relational Database Design, and Enterprise Software Systems.</p>
+                  </div>
+                  <div class="spec-subgroup">
+                    <h4 class="spec-title">Bachelor of Engineering (B.E.)</h4>
+                    <span class="spec-sub">Electronics &amp; Telecommunication Engineering</span>
+                    <p class="spec-desc">Finolex Academy of Management and Technology (FAMT).</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="profile-spec-row" data-profile-status="SPEC: PRACTICE // DATA & QA">
+                <div class="spec-label">
+                  <span class="spec-num">03</span>
+                  <span>EXPERIENCE</span>
+                </div>
+                <div class="spec-content">
+                  <h4 class="spec-title">ValuPitch Pvt. Ltd.</h4>
+                  <span class="spec-sub">Data Annotator · Approx. 1.5 Years</span>
+                  <p class="spec-desc">
+                    Conducted data annotation, accuracy validation, and dataset curation according to rigorous quality benchmarks — instilling disciplined handling of structured data and system inputs.
+                  </p>
+                </div>
+              </div>
+
+              <div class="profile-spec-row" data-profile-status="SPEC: ARCHITECTURE // JAVA & SPRING">
+                <div class="spec-label">
+                  <span class="spec-num">04</span>
+                  <span>CURRENT FOCUS</span>
+                </div>
+                <div class="spec-content">
+                  <h4 class="spec-title">Backend Architecture &amp; REST APIs</h4>
+                  <p class="spec-desc">
+                    Designing modular monoliths and microservice-oriented systems with Java, Spring Boot, Spring Security, MySQL, Docker, and React.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 03: CONTINUOUS HORIZONTAL SKILLS MARQUEE
+           ========================================================================== -->
+      <section id="skills" class="section marquee-skills-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="section-header">
+            <span class="section-index">03 / TECHNOLOGIES</span>
+            <div class="section-title-group">
+              <h2 class="section-title">Technical Disciplines</h2>
+              <p class="section-subtitle">
+                A continuously moving marquee of backend systems, databases, interfaces, and infrastructure tools I leverage in production.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full-Width Infinite Marquee Canvas -->
+        <div class="marquee-showcase-container">
+
+          <!-- Track 01: Backend & Data Systems (Flows Left) -->
+          <div class="marquee-row-wrapper">
+            <div class="marquee-track marquee-track-left">
+              <!-- Set 1 -->
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Java</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Spring Boot</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Security" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Spring Security</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" alt="Hibernate JPA" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Spring Data JPA</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="REST APIs" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">RESTful APIs</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# .NET" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">C# &amp; ASP.NET Core</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">MySQL (InnoDB)</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">SQL &amp; Query Tuning</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">MongoDB</span>
+              </div>
+
+              <!-- Duplicated Set 1 for Infinite Seamless Flow -->
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Java</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Spring Boot</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Security" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Spring Security</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" alt="Hibernate JPA" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Spring Data JPA</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="REST APIs" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">RESTful APIs</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# .NET" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">C# &amp; ASP.NET Core</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">MySQL (InnoDB)</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">SQL &amp; Query Tuning</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">MongoDB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Track 02: Frontend, Cloud & DevOps (Flows Right) -->
+          <div class="marquee-row-wrapper">
+            <div class="marquee-track marquee-track-right">
+              <!-- Set 2 -->
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">React.js</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Next.js</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">JavaScript</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 & CSS3" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">HTML5 &amp; CSS3</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Tailwind CSS</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Docker</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git & GitHub" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Git &amp; GitHub</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">AWS (EC2 &amp; S3)</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Postman</span>
+              </div>
+
+              <div class="marquee-tech-card">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Apache Maven</span>
+              </div>
+
+              <!-- Duplicated Set 2 for Infinite Seamless Flow -->
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">React.js</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Next.js</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">JavaScript</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 & CSS3" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">HTML5 &amp; CSS3</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Tailwind CSS</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Docker</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git & GitHub" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Git &amp; GitHub</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">AWS (EC2 &amp; S3)</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Postman</span>
+              </div>
+
+              <div class="marquee-tech-card" aria-hidden="true">
+                <div class="marquee-icon-pod">
+                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven" loading="lazy" />
+                </div>
+                <span class="marquee-card-name">Apache Maven</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 04: CONTACT SECTION
+           ========================================================================== -->
+      <section id="contact" class="section contact-section-wrapper">
+        <div class="container contact-layout-split">
+          <div class="contact-text-col">
+            <div class="hero-eyebrow-row">
+              <span>// 04 · GET IN TOUCH</span>
+            </div>
+            <h2 class="contact-hero-statement">Let's Build Together.</h2>
+            <p class="contact-sub-copy">
+              I am actively seeking software engineering, backend developer, and full-stack opportunities. Feel free to reach out directly via email or connect on LinkedIn.
             </p>
           </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
-    </section>
 
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>HTML</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>CSS</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>React.js</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Tailwind</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Bootstrap</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
+          <div class="contact-dossier-panel" id="contact-tilt-card">
+            <div class="contact-slot">
+              <span class="contact-slot-label">Direct Email</span>
+              <div class="email-copy-bar">
+                <span class="contact-slot-val" id="email-text">ronittambe116@gmail.com</span>
+                <button class="btn-copy-action" id="btn-copy-email" onclick="copyEmail()">Copy</button>
+              </div>
             </div>
-          </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Backend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Node JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Next JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Express JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>MongoDB</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Mongoose</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Git</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
-    </section>
 
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/food ordering.png"
-                alt="Project 1"
-                class="project-img"
-              />
+            <div class="contact-slot">
+              <span class="contact-slot-label">LinkedIn</span>
+              <span class="contact-slot-val">
+                <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">
+                  linkedin.com/in/ronit-tambe-781a09204 ↗
+                </a>
+              </span>
             </div>
-            <h2 class="experience-sub-title project-title">
-              Food Ordering App
-            </h2>
-            <div class="btn-container">
-              <a
-                href="https://github.com/ronit1161/food-ordering"
-                target="_blank"
-              >
-                <button class="btn btn-color-2 project-btn">Github</button>
-              </a>
-              <a
-                href="https://food-ordering-app-roan.vercel.app/"
-                target="_blank"
-              >
-                <button class="btn btn-color-2 project-btn">Live Demo</button>
-              </a>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/expense tracker.png"
-                alt="Project 2"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Expense Tracker</h2>
-            <div class="btn-container">
-              <a
-                href="https://github.com/ronit1161/expense-tracker-react"
-                target="_blank"
-              >
-                <button class="btn btn-color-2 project-btn">Github</button>
-              </a>
-              <a
-                href="https://expense-tracker-react-sage.vercel.app/"
-                target="_blank"
-              >
-                <button class="btn btn-color-2 project-btn">Live Demo</button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
-    </section>
 
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p>
-            <a href="mailto:ronittambe116@gmail.com">ronittambe116@gmail.com</a>
-          </p>
-        </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p>
-            <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/"
-              >LinkedIn</a
+            <div class="contact-slot">
+              <span class="contact-slot-label">GitHub</span>
+              <span class="contact-slot-val">
+                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">
+                  github.com/ronit1161 ↗
+                </a>
+              </span>
+            </div>
+
+            <div class="contact-slot">
+              <span class="contact-slot-label">Location</span>
+              <span class="contact-slot-val">Pune, Maharashtra, India</span>
+            </div>
+
+            <a
+              href="mailto:ronittambe116@gmail.com"
+              class="btn btn-primary"
+              style="margin-top: 12px; justify-content: center;"
             >
-          </p>
+              Send Direct Email ↗
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+         MINIMAL EDITORIAL FOOTER
+         ========================================================================== -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-top-row">
+          <div class="footer-identity-block">
+            <h3 class="footer-name">Ronit Tambe</h3>
+            <div class="footer-role-meta">
+              <span>Full-Stack Developer</span>
+              <span class="footer-sep">·</span>
+              <span>Pune, India</span>
+            </div>
+          </div>
+
+          <div class="footer-nav-block">
+            <nav class="footer-links-group" aria-label="Footer Links">
+              <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer" class="footer-link">
+                GitHub ↗
+              </a>
+              <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer" class="footer-link">
+                LinkedIn ↗
+              </a>
+              <a href="mailto:ronittambe116@gmail.com" class="footer-link">
+                Email ↗
+              </a>
+              <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">
+                Resume ↗
+              </a>
+            </nav>
+
+            <button class="btn-back-to-top" onclick="scrollToTop()" aria-label="Back to top of page">
+              <span>Back to top</span>
+              <span class="top-arrow-icon">↑</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div class="footer-copyright">
+            © 2026 Ronit Tambe. All rights reserved.
+          </div>
         </div>
       </div>
-    </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="social">
-        <a href="https://www.instagram.com/ronit_tambe_116/" target="_blank"
-          ><i class="fa-brands fa-instagram"></i
-        ></a>
-        <a
-          href="http://www.linkedin.com/in/ronit-tambe-781a09204/"
-          target="_blank"
-          ><i class="fa-brands fa-linkedin"></i
-        ></a>
-        <a href="https://github.com/ronit1161" target="_blank"
-          ><i class="fa-brands fa-github"></i
-        ></a>
-      </div>
-
-      <p>Copyright &#169; 2025 Ronit Tambe. All Rights Reserved.</p>
     </footer>
+
+    <!-- Lenis Smooth Scrolling, GSAP Core & ScrollTrigger Engine -->
+    <script src="assets/lenis.min.js"></script>
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
