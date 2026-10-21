@@ -53,54 +53,56 @@
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  padding: 12px 24px 12px 12px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
+  padding: 12px 24px 12px 14px;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
   white-space: nowrap;
   flex-shrink: 0;
   box-shadow: 0 4px 20px rgba(15, 16, 19, 0.04), 
-              inset 0 1px 1px rgba(255, 255, 255, 0.95),
-              0 0 0 1px rgba(15, 16, 19, 0.03);
+              inset 0 1px 1px rgba(255, 255, 255, 1),
+              0 0 0 1px rgba(15, 16, 19, 0.04);
   transition: transform var(--duration-fast) var(--ease-standard),
               border-color var(--duration-fast) var(--ease-standard),
               box-shadow var(--duration-fast) var(--ease-standard),
               background var(--duration-fast) var(--ease-standard);
-  cursor: default;
+  cursor: grab;
 }
 
 .marquee-tech-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(224, 86, 36, 0.45);
-  box-shadow: 0 16px 36px rgba(224, 86, 36, 0.12),
-              0 6px 18px rgba(15, 16, 19, 0.06),
-              inset 0 1px 1px #ffffff;
+  transform: translateY(-6px) scale(1.03);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: var(--card-brand, var(--color-accent));
+  box-shadow: 0 18px 38px var(--card-glow, rgba(255, 62, 24, 0.16)),
+              0 6px 14px rgba(15, 16, 19, 0.05),
+              inset 0 1px 2px #ffffff;
 }
 
 .marquee-icon-pod {
   width: 44px;
   height: 44px;
-  border-radius: 9px;
-  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(15, 16, 19, 0.06);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 
-              inset 0 1px 1px rgba(255, 255, 255, 0.85);
+              inset 0 1px 1px rgba(255, 255, 255, 0.9);
   flex-shrink: 0;
   transition: transform var(--duration-fast) var(--ease-standard),
               box-shadow var(--duration-fast) var(--ease-standard),
-              border-color var(--duration-fast) var(--ease-standard);
+              border-color var(--duration-fast) var(--ease-standard),
+              background var(--duration-fast) var(--ease-standard);
 }
 
 .marquee-tech-card:hover .marquee-icon-pod {
-  transform: scale(1.06);
-  box-shadow: 0 4px 14px rgba(224, 86, 36, 0.2);
-  border-color: rgba(224, 86, 36, 0.35);
+  transform: scale(1.08);
+  background: var(--card-tint, rgba(255, 255, 255, 0.98));
+  border-color: var(--card-brand, rgba(255, 62, 24, 0.4));
+  box-shadow: 0 4px 14px var(--card-glow, rgba(0, 0, 0, 0.1));
 }
 
 .marquee-card-icon {
@@ -120,3 +122,25 @@
   margin: 0;
   line-height: 1;
 }
+
+/* Individual Brand Signatures & Glow Themes */
+.marquee-tech-card[data-tech="java"] { --card-brand: #ea580c; --card-glow: rgba(234, 88, 12, 0.24); --card-tint: rgba(234, 88, 12, 0.08); }
+.marquee-tech-card[data-tech="spring"] { --card-brand: #65a30d; --card-glow: rgba(101, 163, 13, 0.28); --card-tint: rgba(101, 163, 13, 0.09); }
+.marquee-tech-card[data-tech="spring-sec"] { --card-brand: #16a34a; --card-glow: rgba(22, 163, 74, 0.28); --card-tint: rgba(22, 163, 74, 0.09); }
+.marquee-tech-card[data-tech="hibernate"] { --card-brand: #59666c; --card-glow: rgba(89, 102, 108, 0.25); --card-tint: rgba(89, 102, 108, 0.08); }
+.marquee-tech-card[data-tech="rest"] { --card-brand: #059669; --card-glow: rgba(5, 150, 105, 0.25); --card-tint: rgba(5, 150, 105, 0.08); }
+.marquee-tech-card[data-tech="csharp"] { --card-brand: #7c3aed; --card-glow: rgba(124, 58, 237, 0.25); --card-tint: rgba(124, 58, 237, 0.08); }
+.marquee-tech-card[data-tech="mysql"] { --card-brand: #0284c7; --card-glow: rgba(2, 132, 199, 0.25); --card-tint: rgba(2, 132, 199, 0.08); }
+.marquee-tech-card[data-tech="sql"] { --card-brand: #2563eb; --card-glow: rgba(37, 99, 235, 0.25); --card-tint: rgba(37, 99, 235, 0.08); }
+.marquee-tech-card[data-tech="mongodb"] { --card-brand: #16a34a; --card-glow: rgba(22, 163, 74, 0.28); --card-tint: rgba(22, 163, 74, 0.09); }
+
+.marquee-tech-card[data-tech="react"] { --card-brand: #0284c7; --card-glow: rgba(2, 132, 199, 0.28); --card-tint: rgba(2, 132, 199, 0.09); }
+.marquee-tech-card[data-tech="nextjs"] { --card-brand: #090a0d; --card-glow: rgba(9, 10, 13, 0.22); --card-tint: rgba(9, 10, 13, 0.06); }
+.marquee-tech-card[data-tech="javascript"] { --card-brand: #ca8a04; --card-glow: rgba(202, 138, 4, 0.28); --card-tint: rgba(202, 138, 4, 0.1); }
+.marquee-tech-card[data-tech="html-css"] { --card-brand: #ea580c; --card-glow: rgba(234, 88, 12, 0.24); --card-tint: rgba(234, 88, 12, 0.08); }
+.marquee-tech-card[data-tech="tailwind"] { --card-brand: #0891b2; --card-glow: rgba(8, 145, 178, 0.28); --card-tint: rgba(8, 145, 178, 0.09); }
+.marquee-tech-card[data-tech="docker"] { --card-brand: #0284c7; --card-glow: rgba(2, 132, 199, 0.28); --card-tint: rgba(2, 132, 199, 0.09); }
+.marquee-tech-card[data-tech="git"] { --card-brand: #dc2626; --card-glow: rgba(220, 38, 38, 0.25); --card-tint: rgba(220, 38, 38, 0.08); }
+.marquee-tech-card[data-tech="aws"] { --card-brand: #d97706; --card-glow: rgba(217, 119, 6, 0.28); --card-tint: rgba(217, 119, 6, 0.09); }
+.marquee-tech-card[data-tech="postman"] { --card-brand: #ea580c; --card-glow: rgba(234, 88, 12, 0.28); --card-tint: rgba(234, 88, 12, 0.09); }
+.marquee-tech-card[data-tech="maven"] { --card-brand: #be123c; --card-glow: rgba(190, 18, 60, 0.25); --card-tint: rgba(190, 18, 60, 0.08); }
