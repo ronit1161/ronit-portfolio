@@ -1,122 +1,308 @@
 /**
  * ============================================================================
- * 1.5. OPTION 04: KINETIC TYPOGRAPHIC SHUTTER PRELOADER
- * High-speed disciplinary text flips, real-time counter, and dual-shutter reveal
+ * SWISS EDITORIAL LOADING EXPERIENCE
+ * Typographic Identity Reveal with Cinematic Two-Panel Curtain Transition
+ * 
+ * Sequence:
+ * Stage 1: The Blank Canvas & Monogram 'RT.' (150-250ms)
+ * Stage 2: The Identity Reveal: 'RONIT TAMBE' + Cobalt Line + Role (400-600ms)
+ * Stage 3: The Name Lifts (150-250ms)
+ * Stage 4: Two-Panel Curtain Transition: Left & Right Panels Slide Out (500-700ms)
+ * Stage 5: Homepage Reveal & Cleanup
  * ============================================================================
  */
 function initPreloaderMotion() {
   const overlay = document.getElementById('preloader-overlay');
-  const wordsTrack = document.getElementById('kinetic-words-track');
-  const wordItems = wordsTrack ? wordsTrack.querySelectorAll('.kinetic-word-item') : [];
-  const progressBar = document.getElementById('kinetic-progress-bar');
-  const counterEl = document.getElementById('kinetic-counter');
-  const shutterTop = document.getElementById('shutter-top');
-  const shutterBottom = document.getElementById('shutter-bottom');
-  const kineticStage = document.getElementById('kinetic-stage');
+  const curtainLeft = document.getElementById('curtain-left');
+  const curtainRight = document.getElementById('curtain-right');
+  const stage = document.getElementById('identity-stage');
+  const monogram = document.getElementById('monogram-wrapper');
+  const nameEl = document.getElementById('identity-name');
+  const lineEl = document.getElementById('identity-line');
+  const roleEl = document.getElementById('identity-role');
 
-  if (!overlay || !wordsTrack || !wordItems.length) {
+  if (!overlay || !curtainLeft || !curtainRight || !stage) {
     if (overlay) overlay.style.display = 'none';
     initPageLoadMotion();
     return;
   }
 
-  if (isReducedMotion() || typeof gsap === 'undefined') {
+  // Ensure overlay is active and visible
+  overlay.style.display = 'block';
+
+  // Session Storage Check: Full experience on initial visit in session
+  const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const urlParams = new URLSearchParams(window.location.search);
+  const forceIntro = urlParams.get('intro') === 'true' || urlParams.get('reload') === 'true';
+  const skipIntro = urlParams.get('skip') === 'true';
+
+  const hasSeenIntro = sessionStorage.getItem('portfolio_editorial_seen');
+  if ((hasSeenIntro === 'true' && !forceIntro && !isLocalDev) || skipIntro) {
     overlay.style.display = 'none';
     initPageLoadMotion();
     return;
   }
+  sessionStorage.setItem('portfolio_editorial_seen', 'true');
 
-  if (lenis) lenis.stop();
+  // Lock scroll while intro is playing
+  document.body.classList.add('preloader-active');
+  if (typeof lenis !== 'undefined' && lenis) lenis.stop();
 
-  const totalWords = wordItems.length; // 5 items
-  const preloaderTl = gsap.timeline({
+  if (typeof gsap === 'undefined') {
+    runVanillaEditorialFallback(overlay, curtainLeft, curtainRight, stage, monogram, nameEl, lineEl, roleEl);
+    return;
+  }
+
+  const tl = gsap.timeline({
     defaults: { ease: 'power3.out' },
   });
 
-  // Initial setup
-  gsap.set(kineticStage, { opacity: 1, scale: 1 });
+  // Initial Setup: Stage centered, elements hidden behind clipping masks
+  gsap.set(overlay, { display: 'block', pointerEvents: 'auto' });
+  gsap.set(curtainLeft, { xPercent: 0 });
+  gsap.set(curtainRight, { xPercent: 0 });
+  gsap.set(stage, { y: 0, opacity: 1 });
+  gsap.set(monogram, { opacity: 0, y: 12 });
+  gsap.set(nameEl, { y: 0, yPercent: 115 });
+  gsap.set(lineEl, { scaleX: 0 });
+  gsap.set(roleEl, { y: 0, yPercent: 115 });
 
-  // 1. Kinetic Typographic Steps (0% to -80%)
-  const wordStepPercent = 100 / totalWords; // 20%
-  const stepDur = 0.28;
-  for (let i = 1; i < totalWords; i++) {
-    preloaderTl.to(
-      wordsTrack,
-      {
-        yPercent: -(i * wordStepPercent),
-        duration: stepDur,
-        ease: 'power4.inOut',
-      },
-      0.35 + (i - 1) * 0.32
-    );
+  // Stage Inspector: freeze at specific sequence stage for visual review
+  const pauseStage = urlParams.get('pause');
+  if (pauseStage === 'stage1') {
+    gsap.set(monogram, { opacity: 1, y: 0 });
+    return;
+  }
+  if (pauseStage === 'stage2') {
+    gsap.set(monogram, { opacity: 1, y: 0 });
+    gsap.set(nameEl, { y: 0, yPercent: 0 });
+    gsap.set(lineEl, { scaleX: 1 });
+    gsap.set(roleEl, { y: 0, yPercent: 0 });
+    return;
+  }
+  if (pauseStage === 'stage3') {
+    gsap.set(stage, { y: -26, opacity: 1 });
+    gsap.set(monogram, { opacity: 0 });
+    gsap.set(nameEl, { y: 0, yPercent: 0 });
+    gsap.set(lineEl, { scaleX: 1 });
+    gsap.set(roleEl, { y: 0, yPercent: 0 });
+    return;
+  }
+  if (pauseStage === 'curtain') {
+    gsap.set(curtainLeft, { xPercent: -50 });
+    gsap.set(curtainRight, { xPercent: 50 });
+    gsap.set(stage, { opacity: 0.25, y: -26 });
+    return;
   }
 
-  // 2. Counter & Progress Fill (00% to 100%)
-  const counterObj = { val: 0 };
-  preloaderTl.to(
-    counterObj,
+  // Fast-Forward on User Click / Tap
+  let isFastForwarded = false;
+  overlay.addEventListener('click', () => {
+    if (!isFastForwarded) {
+      isFastForwarded = true;
+      tl.timeScale(3.2);
+    }
+  });
+
+  // --------------------------------------------------------------------------
+  // Stage 1: The Blank Canvas & Monogram 'RT.' (~220ms)
+  // --------------------------------------------------------------------------
+  tl.to(
+    monogram,
     {
-      val: 100,
-      duration: 1.65,
-      ease: 'power2.inOut',
-      onUpdate: () => {
-        const cur = Math.floor(counterObj.val);
-        const formatted = cur < 10 ? `0${cur}%` : `${cur}%`;
-        if (counterEl) counterEl.textContent = formatted;
-        if (progressBar) progressBar.style.width = `${cur}%`;
-      },
+      opacity: 1,
+      y: 0,
+      duration: 0.28,
+      ease: 'power3.out',
     },
-    0.1
+    0.15
   );
 
-  // 3. Highlight Flash on Landing ('RONIT TAMBE')
-  preloaderTl.to(
-    kineticStage,
+  // --------------------------------------------------------------------------
+  // Stage 2: The Identity Reveal (~520ms)
+  // --------------------------------------------------------------------------
+  // Name 'RONIT TAMBE' uncovered vertically from behind invisible clipping boundary
+  tl.to(
+    nameEl,
     {
-      scale: 1.04,
+      y: 0,
+      yPercent: 0,
+      duration: 0.58,
+      ease: 'power4.out',
+    },
+    0.38
+  );
+
+  // Thin cobalt line extends smoothly from left to right
+  tl.to(
+    lineEl,
+    {
+      scaleX: 1,
+      duration: 0.44,
+      ease: 'power3.inOut',
+    },
+    0.62
+  );
+
+  // Role subtitle 'FULL STACK DEVELOPER' unmasks vertically
+  tl.to(
+    roleEl,
+    {
+      y: 0,
+      yPercent: 0,
+      duration: 0.46,
+      ease: 'power3.out',
+    },
+    0.72
+  );
+
+  // --------------------------------------------------------------------------
+  // Stage 3: The Name Lifts (~240ms)
+  // --------------------------------------------------------------------------
+  // The identity lifts subtly (~26px), monogram fades out cleanly to reduce clutter
+  tl.to(
+    stage,
+    {
+      y: -26,
+      duration: 0.32,
+      ease: 'power3.out',
+    },
+    1.25
+  );
+
+  tl.to(
+    monogram,
+    {
+      opacity: 0,
+      duration: 0.22,
+      ease: 'power2.in',
+    },
+    1.25
+  );
+
+  // --------------------------------------------------------------------------
+  // Stage 4: The Two-Panel Curtain Transition (~600ms)
+  // --------------------------------------------------------------------------
+  // Left and right warm-white sheets separate to reveal the homepage
+  tl.to(
+    curtainLeft,
+    {
+      xPercent: -100,
+      duration: 0.68,
+      ease: 'power4.inOut',
+    },
+    1.55
+  );
+
+  // Slight 35ms stagger on right panel for organic physical rhythm
+  tl.to(
+    curtainRight,
+    {
+      xPercent: 100,
+      duration: 0.68,
+      ease: 'power4.inOut',
+    },
+    1.585
+  );
+
+  // Fade out identity composition as sheets separate
+  tl.to(
+    stage,
+    {
+      opacity: 0,
       duration: 0.35,
-      ease: 'back.out(1.8)',
+      ease: 'power2.in',
     },
-    1.65
+    1.56
   );
 
-  // 4. Kinetic Stage Fade & Dual Shutter Split Reveal
-  preloaderTl
-    .to(
-      kineticStage,
-      {
-        opacity: 0,
-        scale: 1.1,
-        duration: 0.45,
-        ease: 'power3.in',
-      },
-      '+=0.2'
-    )
-    .to(
-      shutterTop,
-      {
-        yPercent: -100,
-        duration: 0.95,
-        ease: 'power4.inOut',
-        onStart: () => {
-          if (lenis) lenis.start();
-          initPageLoadMotion();
-        },
-      },
-      '<0.1'
-    )
-    .to(
-      shutterBottom,
-      {
-        yPercent: 100,
-        duration: 0.95,
-        ease: 'power4.inOut',
-        onComplete: () => {
-          overlay.style.display = 'none';
-        },
-      },
-      '<'
-    );
+  // --------------------------------------------------------------------------
+  // Stage 5: Homepage Reveal & Cleanup
+  // --------------------------------------------------------------------------
+  tl.call(
+    () => {
+      // Re-enable smooth scrolling
+      if (typeof lenis !== 'undefined' && lenis) lenis.start();
+      // Trigger coordinated hero entrance
+      initPageLoadMotion();
+    },
+    null,
+    1.62
+  );
+
+  tl.call(
+    () => {
+      document.body.classList.remove('preloader-active');
+      overlay.style.display = 'none';
+      overlay.style.pointerEvents = 'none';
+    },
+    null,
+    2.28
+  );
+}
+
+/**
+ * Robust fallback if vendor GSAP is unavailable
+ */
+function runVanillaEditorialFallback(overlay, curtainLeft, curtainRight, stage, monogram, nameEl, lineEl, roleEl) {
+  setTimeout(() => {
+    if (monogram) {
+      monogram.style.opacity = '1';
+      monogram.style.transform = 'translateY(0)';
+      monogram.style.transition = 'all 0.28s ease-out';
+    }
+  }, 150);
+
+  setTimeout(() => {
+    if (nameEl) {
+      nameEl.style.transform = 'translateY(0)';
+      nameEl.style.transition = 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)';
+    }
+    if (lineEl) {
+      lineEl.style.transform = 'scaleX(1)';
+      lineEl.style.transition = 'transform 0.44s ease-in-out';
+    }
+  }, 400);
+
+  setTimeout(() => {
+    if (roleEl) {
+      roleEl.style.transform = 'translateY(0)';
+      roleEl.style.transition = 'transform 0.45s ease-out';
+    }
+  }, 700);
+
+  setTimeout(() => {
+    if (stage) {
+      stage.style.transform = 'translateY(-26px)';
+      stage.style.transition = 'transform 0.32s ease-out';
+    }
+    if (monogram) {
+      monogram.style.opacity = '0';
+      monogram.style.transition = 'opacity 0.22s ease-in';
+    }
+  }, 1200);
+
+  setTimeout(() => {
+    if (curtainLeft) {
+      curtainLeft.style.transform = 'translateX(-100%)';
+      curtainLeft.style.transition = 'transform 0.68s cubic-bezier(0.76, 0, 0.24, 1)';
+    }
+    if (curtainRight) {
+      curtainRight.style.transform = 'translateX(100%)';
+      curtainRight.style.transition = 'transform 0.68s cubic-bezier(0.76, 0, 0.24, 1)';
+    }
+    if (stage) {
+      stage.style.opacity = '0';
+      stage.style.transition = 'opacity 0.35s ease-in';
+    }
+    if (typeof lenis !== 'undefined' && lenis) lenis.start();
+    initPageLoadMotion();
+  }, 1550);
+
+  setTimeout(() => {
+    document.body.classList.remove('preloader-active');
+    overlay.style.display = 'none';
+  }, 2250);
 }
 
 /**
