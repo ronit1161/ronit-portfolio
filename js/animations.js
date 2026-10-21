@@ -542,6 +542,23 @@ function initScrollSpy() {
  * 8. CLIPBOARD & NAVIGATION UTILITIES
  * ============================================================================
  */
+function showToast(message) {
+  let toast = document.getElementById('ui-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'ui-toast';
+    toast.className = 'ui-toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<span class="toast-icon">✓</span><span>${message}</span>`;
+  toast.classList.add('is-visible');
+
+  clearTimeout(window._toastTimeout);
+  window._toastTimeout = setTimeout(() => {
+    toast.classList.remove('is-visible');
+  }, 2600);
+}
+
 function copyEmail() {
   const email = 'ronittambe116@gmail.com';
   const copyBtn = document.getElementById('btn-copy-email');
@@ -561,6 +578,7 @@ function copyEmail() {
           copyBtn.style.borderColor = '';
         }, 2200);
       }
+      showToast('Email address copied to clipboard');
     })
     .catch((err) => {
       console.error('Failed to copy email:', err);
@@ -579,4 +597,50 @@ function scrollToTop() {
       behavior: 'smooth',
     });
   }
+}
+
+/**
+ * ============================================================================
+ * 10. DYNAMIC FOOTER MONUMENT WORDMARK AUTO-SCALER
+ * Automatically measures and sizes RONIT to fit 100% of viewport width
+ * with 0 clipping on any resolution (mobile, tablet, desktop, ultra-wide)
+ * ============================================================================
+ */
+function initFooterMonumentScale() {
+  const stage = document.querySelector('.footer-monument-stage');
+  const text = document.querySelector('.footer-monument-text');
+  if (!stage || !text) return;
+
+  function fitMonument() {
+    text.style.fontSize = '';
+    const stageWidth = stage.clientWidth;
+    if (stageWidth <= 0) return;
+
+    // Available target width with 2vw total safety padding
+    const usableWidth = stageWidth * 0.98;
+    const currentTextWidth = text.scrollWidth;
+
+    if (currentTextWidth > usableWidth && currentTextWidth > 0) {
+      const currentFontSize = parseFloat(window.getComputedStyle(text).fontSize);
+      const scale = usableWidth / currentTextWidth;
+      const targetFontSize = Math.floor(currentFontSize * scale);
+      text.style.fontSize = `${targetFontSize}px`;
+    }
+  }
+
+  window.addEventListener('resize', fitMonument);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitMonument);
+  }
+  setTimeout(fitMonument, 50);
+  setTimeout(fitMonument, 250);
+  setTimeout(fitMonument, 600);
+  fitMonument();
+}
+
+// Auto-initialize when document is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFooterMonumentScale);
+} else {
+  initFooterMonumentScale();
 }
