@@ -20,7 +20,10 @@ const isReducedMotion = () =>
 window.isReducedMotion = isReducedMotion;
 
 // Lifecycle Initialization
-document.addEventListener('DOMContentLoaded', () => {
+let masterInitialized = false;
+function initMaster() {
+  if (masterInitialized) return;
+  masterInitialized = true;
   initSmoothScrolling();
   initHeaderScroll();
   initScrollSpy();
@@ -38,7 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initMobileNavMotion();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMaster);
+} else {
+  initMaster();
+}
 
 /**
  * ============================================================================
