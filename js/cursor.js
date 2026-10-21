@@ -77,10 +77,10 @@ function initFluidDifferenceCursor() {
     const angle = Math.atan2(vy, vx) * (180 / Math.PI);
 
     // Dynamic jelly stretch calculation along movement direction
-    const stretch = Math.min(speed * 0.0075, 0.65);
-    const baseScale = isPressed ? 0.75 : isHovering ? 2.3 : 1.0;
+    const stretch = Math.min(speed * 0.005, 0.4);
+    const baseScale = isPressed ? 0.75 : isHovering ? 1.6 : 1.0;
     const scaleX = baseScale * (1 + stretch);
-    const scaleY = baseScale * (1 - stretch * 0.45);
+    const scaleY = baseScale * (1 - stretch * 0.35);
 
     gsap.set(stencil, {
       x: currentX,
