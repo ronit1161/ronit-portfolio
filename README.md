@@ -4,7 +4,7 @@ A modern, high-performance developer portfolio website engineered with clean sem
 
 ## 🚀 Live Demo & Profiles
 - **Live Website**: [Ronit Tambe Portfolio](https://ronit1161.github.io/ronit-portfolio/) (or deployed URL)
-- **LinkedIn**: [Ronit Tambe](http://www.linkedin.com/in/ronit-tambe-781a09204/)
+- **LinkedIn**: [Ronit Tambe](https://www.linkedin.com/in/ronit-tambe-781a09204/)
 - **GitHub**: [@ronit1161](https://github.com/ronit1161)
 - **Email**: [ronittambe116@gmail.com](mailto:ronittambe116@gmail.com)
 

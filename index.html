@@ -22,11 +22,16 @@
       content="Engineering portfolio, architecture case studies, and full-stack software built by Ronit Tambe. Java, Spring Boot, REST APIs, MySQL, React."
     />
 
-    <!-- Favicon & Modular Stylesheets -->
+    <!-- Favicon & Typography -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- Modular Stylesheets -->
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/cursor.css" />
-    <link rel="stylesheet" href="css/preloader.css" />
+    <link rel="stylesheet" href="css/preloader.css?v=2.9" />
     <link rel="stylesheet" href="css/hero.css" />
     <link rel="stylesheet" href="css/projects.css" />
     <link rel="stylesheet" href="css/skills.css" />
@@ -42,30 +47,33 @@
     <div class="cursor-stencil-dot" id="cursor-stencil-dot" aria-hidden="true"></div>
 
     <!-- ==========================================================================
-         OPTION 04: KINETIC TYPOGRAPHIC SHUTTER PRELOADER
+         SWISS EDITORIAL LOADING EXPERIENCE (TWO-PANEL CURTAIN & IDENTITY REVEAL)
          ========================================================================== -->
-    <div id="preloader-overlay" class="preloader-overlay kinetic-loader" aria-hidden="false">
-      <div class="preloader-shutter-top" id="shutter-top"></div>
-      <div class="preloader-shutter-bottom" id="shutter-bottom"></div>
-      
-      <div class="preloader-kinetic-stage" id="kinetic-stage">
-        <div class="kinetic-meta-bar">
-          <span class="kinetic-badge">[ 2026 // SYSTEM KERNEL ]</span>
-          <span class="kinetic-counter" id="kinetic-counter">00%</span>
+    <div id="preloader-overlay" class="editorial-preloader" aria-hidden="false">
+      <!-- Two-Panel Warm-White Curtain (#F7F7F2) -->
+      <div class="curtain-panel curtain-left" id="curtain-left"></div>
+      <div class="curtain-panel curtain-right" id="curtain-right"></div>
+
+      <!-- Centered Minimalist Identity Composition -->
+      <div class="editorial-identity-stage" id="identity-stage">
+        <!-- Stage 1: Monogram (Space Grotesk, Bold, Cobalt Blue) -->
+        <div class="monogram-wrapper" id="monogram-wrapper">
+          <span class="editorial-monogram">RT.</span>
         </div>
 
-        <div class="kinetic-words-viewport">
-          <div class="kinetic-words-track" id="kinetic-words-track">
-            <div class="kinetic-word-item">BACKEND SYSTEMS</div>
-            <div class="kinetic-word-item">SPRING BOOT &amp; APIS</div>
-            <div class="kinetic-word-item">DISTRIBUTED SQL</div>
-            <div class="kinetic-word-item">FULL-STACK</div>
-            <div class="kinetic-word-item highlight">RONIT TAMBE</div>
-          </div>
+        <!-- Stage 2: Typographic Name Reveal (Behind invisible clipping boundary) -->
+        <div class="identity-name-mask">
+          <h1 class="editorial-identity-name" id="identity-name">RONIT TAMBE</h1>
         </div>
 
-        <div class="kinetic-progress-line">
-          <div class="kinetic-progress-bar" id="kinetic-progress-bar"></div>
+        <!-- Cobalt Blue Horizontal Divider Line -->
+        <div class="identity-divider-track">
+          <div class="identity-divider-line" id="identity-line"></div>
+        </div>
+
+        <!-- Role Subtitle (Masked vertical reveal) -->
+        <div class="identity-role-mask">
+          <span class="editorial-identity-role" id="identity-role">FULL STACK DEVELOPER</span>
         </div>
       </div>
     </div>
@@ -136,7 +144,7 @@
         <div>Pune, India · Available for roles</div>
         <div class="mobile-overlay-socials">
           <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">CV (PDF) ↗</a>
         </div>
       </div>
@@ -212,7 +220,7 @@
               <div class="hero-aux-links">
                 <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                 <span class="dot-sep">·</span>
-                <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
                 <span class="dot-sep">·</span>
                 <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">Resume (PDF) ↗</a>
               </div>
@@ -523,8 +531,9 @@
                   <span>LOCATION</span>
                 </div>
                 <div class="spec-content">
+                  <span class="spec-pill">CURRENT BASE</span>
                   <h4 class="spec-title">Pune, Maharashtra, India</h4>
-                  <p class="spec-desc">Open to full-time engineering roles, hybrid, and remote opportunities.</p>
+                  <p class="spec-desc">Open to full-time engineering roles, hybrid, and remote software developer opportunities.</p>
                 </div>
               </div>
 
@@ -535,14 +544,16 @@
                 </div>
                 <div class="spec-content">
                   <div class="spec-subgroup">
+                    <span class="spec-pill">POST-GRADUATE DIPLOMA</span>
                     <h4 class="spec-title">CDAC — PG-DAC</h4>
                     <span class="spec-sub">Sunbeam Institute of Information Technology, Pune</span>
-                    <p class="spec-desc">Intensive post-graduate program focused on Java, Spring Boot, Data Structures, Relational Database Design, and Enterprise Software Systems.</p>
+                    <p class="spec-desc">Intensive post-graduate specialization in Java, Spring Boot, Data Structures, Relational Database Design, and Enterprise Software Systems.</p>
                   </div>
                   <div class="spec-subgroup">
+                    <span class="spec-pill">BACHELOR'S DEGREE</span>
                     <h4 class="spec-title">Bachelor of Engineering (B.E.)</h4>
-                    <span class="spec-sub">Electronics &amp; Telecommunication Engineering</span>
-                    <p class="spec-desc">Finolex Academy of Management and Technology (FAMT).</p>
+                    <span class="spec-sub">Electronics &amp; Telecommunication Engineering · FAMT</span>
+                    <p class="spec-desc">Core engineering curriculum covering microprocessors, digital logic, systems architecture, signals, and algorithmic programming.</p>
                   </div>
                 </div>
               </div>
@@ -553,11 +564,14 @@
                   <span>EXPERIENCE</span>
                 </div>
                 <div class="spec-content">
-                  <h4 class="spec-title">ValuPitch Pvt. Ltd.</h4>
-                  <span class="spec-sub">Data Annotator · Approx. 1.5 Years</span>
-                  <p class="spec-desc">
-                    Conducted data annotation, accuracy validation, and dataset curation according to rigorous quality benchmarks — instilling disciplined handling of structured data and system inputs.
-                  </p>
+                  <div class="spec-subgroup">
+                    <span class="spec-pill">INDUSTRY PRACTICE // ~1.5 YEARS</span>
+                    <h4 class="spec-title">ValuPitch Pvt. Ltd.</h4>
+                    <span class="spec-sub">Data Quality &amp; Systems Annotation</span>
+                    <p class="spec-desc">
+                      Conducted precision data annotation, structured schema validation, and dataset curation according to rigorous quality benchmarks — instilling disciplined handling of structured data, type safety, and system inputs.
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -567,9 +581,10 @@
                   <span>CURRENT FOCUS</span>
                 </div>
                 <div class="spec-content">
+                  <span class="spec-pill">CORE SPECIALIZATION</span>
                   <h4 class="spec-title">Backend Architecture &amp; REST APIs</h4>
                   <p class="spec-desc">
-                    Designing modular monoliths and microservice-oriented systems with Java, Spring Boot, Spring Security, MySQL, Docker, and React.
+                    Designing modular monoliths, transactional escrow engines, and RESTful microservices with Java 17+, Spring Boot 3, Spring Security, MySQL, Docker, and React.
                   </p>
                 </div>
               </div>
@@ -602,63 +617,63 @@
           <div class="marquee-row-wrapper">
             <div class="marquee-track marquee-track-left">
               <!-- Set 1 -->
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="java">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Java</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="spring">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Spring Boot</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="spring-sec">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Security" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Spring Security</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="hibernate">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" alt="Hibernate JPA" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Spring Data JPA</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="rest">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="REST APIs" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">RESTful APIs</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="csharp">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# .NET" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">C# &amp; ASP.NET Core</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="mysql">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">MySQL (InnoDB)</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="sql">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">SQL &amp; Query Tuning</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="mongodb">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
                 </div>
@@ -666,63 +681,63 @@
               </div>
 
               <!-- Duplicated Set 1 for Infinite Seamless Flow -->
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="java" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Java</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="spring" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Spring Boot</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="spring-sec" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Security" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Spring Security</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="hibernate" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" alt="Hibernate JPA" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Spring Data JPA</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="rest" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="REST APIs" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">RESTful APIs</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="csharp" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# .NET" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">C# &amp; ASP.NET Core</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="mysql" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">MySQL (InnoDB)</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="sql" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">SQL &amp; Query Tuning</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="mongodb" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
                 </div>
@@ -735,70 +750,70 @@
           <div class="marquee-row-wrapper">
             <div class="marquee-track marquee-track-right">
               <!-- Set 2 -->
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="react">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">React.js</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="nextjs">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Next.js</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="javascript">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">JavaScript</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="html-css">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 & CSS3" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">HTML5 &amp; CSS3</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="tailwind">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Tailwind CSS</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="docker">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Docker</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="git">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git & GitHub" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Git &amp; GitHub</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="aws">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">AWS (EC2 &amp; S3)</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="postman">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Postman</span>
               </div>
 
-              <div class="marquee-tech-card">
+              <div class="marquee-tech-card" data-tech="maven">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven" loading="lazy" />
                 </div>
@@ -806,70 +821,70 @@
               </div>
 
               <!-- Duplicated Set 2 for Infinite Seamless Flow -->
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="react" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">React.js</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="nextjs" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Next.js</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="javascript" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">JavaScript</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="html-css" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 & CSS3" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">HTML5 &amp; CSS3</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="tailwind" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Tailwind CSS</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="docker" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Docker</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="git" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git & GitHub" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Git &amp; GitHub</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="aws" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">AWS (EC2 &amp; S3)</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="postman" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy" />
                 </div>
                 <span class="marquee-card-name">Postman</span>
               </div>
 
-              <div class="marquee-tech-card" aria-hidden="true">
+              <div class="marquee-tech-card" data-tech="maven" aria-hidden="true">
                 <div class="marquee-icon-pod">
                   <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven" loading="lazy" />
                 </div>
@@ -908,7 +923,7 @@
             <div class="contact-slot">
               <span class="contact-slot-label">LinkedIn</span>
               <span class="contact-slot-val">
-                <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">
                   linkedin.com/in/ronit-tambe-781a09204 ↗
                 </a>
               </span>
@@ -941,47 +956,83 @@
     </main>
 
     <!-- ==========================================================================
-         MINIMAL EDITORIAL FOOTER
+         MONUMENTAL EDITORIAL FOOTER (COSMOS-INSPIRED)
          ========================================================================== -->
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-top-row">
-          <div class="footer-identity-block">
-            <h3 class="footer-name">Ronit Tambe</h3>
-            <div class="footer-role-meta">
-              <span>Full-Stack Developer</span>
-              <span class="footer-sep">·</span>
-              <span>Pune, India</span>
+      <div class="container footer-container">
+        <!-- Top Editorial & Multi-Column Navigation -->
+        <div class="footer-top-grid">
+          <div class="footer-brand-column">
+            <div class="footer-cluster-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="2" r="1.8"/>
+                <circle cx="19.07" cy="4.93" r="1.8"/>
+                <circle cx="22" cy="12" r="1.8"/>
+                <circle cx="19.07" cy="19.07" r="1.8"/>
+                <circle cx="12" cy="22" r="1.8"/>
+                <circle cx="4.93" cy="19.07" r="1.8"/>
+                <circle cx="2" cy="12" r="1.8"/>
+                <circle cx="4.93" cy="4.93" r="1.8"/>
+              </svg>
+            </div>
+            <p class="footer-brand-statement">
+              Engineering scalable backend systems, APIs &amp; distributed software.
+            </p>
+            <div class="footer-status-indicator">
+              <span class="status-pulse-dot"></span>
+              <span>Pune, India · Available for roles</span>
             </div>
           </div>
 
-          <div class="footer-nav-block">
-            <nav class="footer-links-group" aria-label="Footer Links">
-              <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer" class="footer-link">
-                GitHub ↗
-              </a>
-              <a href="http://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer" class="footer-link">
-                LinkedIn ↗
-              </a>
-              <a href="mailto:ronittambe116@gmail.com" class="footer-link">
-                Email ↗
-              </a>
-              <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">
-                Resume ↗
-              </a>
-            </nav>
+          <div class="footer-columns-group">
+            <div class="footer-col">
+              <span class="footer-col-title">NAVIGATION</span>
+              <nav class="footer-nav-list" aria-label="Footer Navigation">
+                <a href="#projects" class="footer-nav-link">Work</a>
+                <a href="#about" class="footer-nav-link">About</a>
+                <a href="#skills" class="footer-nav-link">Skills</a>
+                <a href="#contact" class="footer-nav-link">Contact</a>
+              </nav>
+            </div>
 
-            <button class="btn-back-to-top" onclick="scrollToTop()" aria-label="Back to top of page">
-              <span>Back to top</span>
-              <span class="top-arrow-icon">↑</span>
-            </button>
+            <div class="footer-col">
+              <span class="footer-col-title">CONNECT</span>
+              <nav class="footer-nav-list" aria-label="Social Profiles">
+                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
+                  GitHub ↗
+                </a>
+                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
+                  LinkedIn ↗
+                </a>
+                <a href="mailto:ronittambe116@gmail.com" class="footer-nav-link">
+                  Email ↗
+                </a>
+                <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
+                  Resume ↗
+                </a>
+              </nav>
+            </div>
+
+            <div class="footer-col">
+              <span class="footer-col-title">DETAILS</span>
+              <div class="footer-nav-list">
+                <span class="footer-static-item">CDAC PG-DAC</span>
+                <span class="footer-static-item">B.E. Telecomm</span>
+                <span class="footer-static-item">Java &amp; Spring Boot</span>
+                <button class="footer-back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+                  <span>Back to top</span>
+                  <span class="arrow-up">↑</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="footer-bottom-bar">
-          <div class="footer-copyright">
-            © 2026 Ronit Tambe. All rights reserved.
-          </div>
+      <!-- Monumental Edge-to-Edge Typography: RONIT -->
+      <div class="footer-monument-stage">
+        <div class="footer-monument-row">
+          <span class="footer-monument-text">RONIT</span>
         </div>
       </div>
     </footer>
@@ -992,10 +1043,10 @@
     <script src="assets/ScrollTrigger.min.js"></script>
 
     <!-- Modular Application Logic -->
-    <script src="js/main.js"></script>
-    <script src="js/cursor.js"></script>
-    <script src="js/preloader.js"></script>
-    <script src="js/marquee.js"></script>
-    <script src="js/animations.js"></script>
+    <script src="js/cursor.js?v=2.9"></script>
+    <script src="js/preloader.js?v=2.9"></script>
+    <script src="js/marquee.js?v=2.9"></script>
+    <script src="js/animations.js?v=2.9"></script>
+    <script src="js/main.js?v=2.9"></script>
   </body>
 </html>
