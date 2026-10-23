@@ -1,18 +1,30 @@
 /**
  * ============================================================================
- * 9. FLUID INVERSION / DIFFERENCE STENCIL CURSOR ENGINE
- * Smooth inertial following, velocity-based jelly stretch & difference inversion
+ * PRECISION RETICLE CURSOR ENGINE
+ * Aesthetic: Minimal Inverted Stencil Reticle for Fine Pointers
  * ============================================================================
  */
-function initFluidDifferenceCursor() {
+
+function initPrecisionCursor() {
   const stencil = document.getElementById('cursor-stencil');
   const dot = document.getElementById('cursor-stencil-dot');
 
-  if (!stencil || !dot || isReducedMotion()) return;
+  if (!stencil || !dot) return;
+
+  // Check reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stencil.style.display = 'none';
+    dot.style.display = 'none';
+    return;
+  }
 
   // Check if fine pointer (desktop mouse)
   const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (!isFinePointer) return;
+  if (!isFinePointer) {
+    stencil.style.display = 'none';
+    dot.style.display = 'none';
+    return;
+  }
 
   document.body.classList.add('has-custom-cursor');
 
@@ -20,101 +32,59 @@ function initFluidDifferenceCursor() {
   let mouseY = window.innerHeight / 2;
   let currentX = mouseX;
   let currentY = mouseY;
-  let isHovering = false;
-  let isPressed = false;
   let isVisible = false;
 
-  const setDotX = gsap.quickSetter(dot, 'x', 'px');
-  const setDotY = gsap.quickSetter(dot, 'y', 'px');
-
-  // Mouse movement listener
+  // Track mouse coordinates
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
     if (!isVisible) {
       isVisible = true;
-      gsap.to([stencil, dot], { opacity: 1, duration: 0.3, ease: 'power2.out' });
+      stencil.style.opacity = '1';
+      dot.style.opacity = '1';
     }
 
-    setDotX(mouseX);
-    setDotY(mouseY);
-  });
+    // Direct dot positioning (0 lag)
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  // Smooth lerp follow for the outer reticle ring
+  function renderCursor() {
+    if (isVisible) {
+      currentX += (mouseX - currentX) * 0.22;
+      currentY += (mouseY - currentY) * 0.22;
+      stencil.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+    }
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
 
   // Mouse leave / enter window
   document.addEventListener('mouseleave', () => {
     isVisible = false;
-    gsap.to([stencil, dot], { opacity: 0, duration: 0.25 });
+    stencil.style.opacity = '0';
+    dot.style.opacity = '0';
   });
 
   document.addEventListener('mouseenter', () => {
     isVisible = true;
-    gsap.to([stencil, dot], { opacity: 1, duration: 0.25 });
+    stencil.style.opacity = '1';
+    dot.style.opacity = '1';
   });
 
-  // Mouse Down / Up click compression
-  window.addEventListener('mousedown', () => {
-    isPressed = true;
+  // Interactive Hover Expansion
+  const interactiveSelector =
+    'a, button, input, [role="button"], [tabindex="0"], .scene-image-frame, .domain-column, .about-portrait-frame, .email-display-wrap';
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      stencil.classList.add('is-hovering');
+    }
   });
 
-  window.addEventListener('mouseup', () => {
-    isPressed = false;
-  });
-
-  // 60FPS Fluid Ticker Loop (Lerp + Velocity Jelly Stretch)
-  gsap.ticker.add(() => {
-    if (!isVisible) return;
-
-    // Smooth Lerp
-    const lerpFactor = 0.18;
-    currentX += (mouseX - currentX) * lerpFactor;
-    currentY += (mouseY - currentY) * lerpFactor;
-
-    // Velocity vector calculation
-    const vx = mouseX - currentX;
-    const vy = mouseY - currentY;
-    const speed = Math.hypot(vx, vy);
-    const angle = Math.atan2(vy, vx) * (180 / Math.PI);
-
-    // Dynamic jelly stretch calculation along movement direction
-    const stretch = Math.min(speed * 0.005, 0.4);
-    const baseScale = isPressed ? 0.75 : isHovering ? 1.6 : 1.0;
-    const scaleX = baseScale * (1 + stretch);
-    const scaleY = baseScale * (1 - stretch * 0.35);
-
-    gsap.set(stencil, {
-      x: currentX,
-      y: currentY,
-      rotation: angle,
-      scaleX: scaleX,
-      scaleY: scaleY,
-    });
-  });
-
-  // Attach hover listeners to all interactive elements
-  const interactiveSelectors = [
-    'a',
-    'button',
-    '.nav-link',
-    '.action-editorial-btn',
-    '.action-editorial-link',
-    '.project-image-clipper',
-    '.marquee-row-wrapper',
-    '.hero-character-card',
-    '.profile-portrait-frame',
-    '.profile-spec-row',
-    '.tech-pill',
-  ];
-
-  document.querySelectorAll(interactiveSelectors.join(',')).forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      isHovering = true;
-      gsap.to(dot, { scale: 0, opacity: 0, duration: 0.2, ease: 'power2.out' });
-    });
-
-    el.addEventListener('mouseleave', () => {
-      isHovering = false;
-      gsap.to(dot, { scale: 1, opacity: 1, duration: 0.2, ease: 'power2.out' });
-    });
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      stencil.classList.remove('is-hovering');
+    }
   });
 }
