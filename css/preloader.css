@@ -1,11 +1,8 @@
 /* ==========================================================================
-   SWISS EDITORIAL LOADING EXPERIENCE
-   Aesthetic: Minimalist Contemporary Editorial / Modernist Swiss Typographic
-   Palette: Warm White #F7F7F2 · Primary #171717 · Muted #777777 · Cobalt #2457E6
+   PURPOSEFUL TYPOGRAPHIC ENTRANCE (SCENE 0)
+   Monogram "RT." Expands into Architectural Framing & Curtain Reveal
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 
-/* Preloader Master Viewport Container */
 #preloader-overlay.editorial-preloader {
   position: fixed !important;
   inset: 0 !important;
@@ -16,19 +13,20 @@
   overflow: hidden !important;
   user-select: none !important;
   pointer-events: auto;
+  background-color: transparent;
 }
 
 body.preloader-active {
   overflow: hidden !important;
 }
 
-/* Two-Panel Warm-White Curtain (#F7F7F2) */
+/* Two-Panel Deep Obsidian Curtain (#090A0F) */
 .curtain-panel {
   position: absolute;
   top: 0;
   height: 100vh;
   height: 100dvh;
-  background-color: #F7F7F2;
+  background-color: #0A0A0C;
   z-index: 1;
   will-change: transform;
 }
@@ -36,23 +34,19 @@ body.preloader-active {
 .curtain-panel.curtain-left {
   left: 0;
   width: 50vw;
-  transform: translate3d(0, 0, 0);
+  border-right: 1px solid var(--color-border-hairline);
 }
 
 .curtain-panel.curtain-right {
   right: 0;
-  width: 50.5vw; /* Subpixel bleed ensures zero seam gap across all retina displays */
-  transform: translate3d(0, 0, 0);
+  width: 50.5vw; /* Subpixel bleed prevents retina hairline gaps */
+  border-left: 1px solid var(--color-border-hairline);
 }
 
-/* Center Editorial Identity Stage */
+/* Center Typographic Identity Stage */
 .editorial-identity-stage {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,31 +54,27 @@ body.preloader-active {
   z-index: 2;
   pointer-events: none;
   padding: 0 24px;
-  will-change: transform, opacity;
 }
 
-/* Stage 1: Monogram (Space Grotesk, Bold, Cobalt Blue) */
+/* Monogram (Syne, Bold, Accent Ember) */
 .monogram-wrapper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: clamp(12px, 1.8vw, 22px);
-  will-change: transform, opacity;
-  opacity: 0;
-  transform: translateY(12px);
+  margin-bottom: 16px;
 }
 
 .editorial-monogram {
-  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  color: #2457E6;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--color-accent);
+  letter-spacing: -0.04em;
   display: inline-block;
   line-height: 1;
 }
 
-/* Stage 2: Typographic Name Reveal (Behind invisible clipping boundary) */
+/* Typographic Name Reveal */
 .identity-name-mask {
   overflow: hidden;
   padding: 4px 8px;
@@ -92,100 +82,52 @@ body.preloader-active {
 }
 
 .editorial-identity-name {
-  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.35rem, 5.8vw, 5.2rem);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.2vw, 3.6rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  color: #171717;
+  color: #F0EFEA;
   margin: 0;
-  padding: 0;
-  text-align: center;
-  white-space: nowrap;
-  will-change: transform;
 }
 
-/* Thin Horizontal Cobalt Divider Line */
+/* Vermilion Horizontal Divider Line */
 .identity-divider-track {
-  width: 100%;
-  max-width: clamp(240px, 38vw, 420px);
+  width: min(280px, 60vw);
   height: 1.5px;
-  background-color: transparent;
-  margin: clamp(14px, 2vw, 22px) auto;
-  display: flex;
-  justify-content: center;
+  background-color: #29292D;
+  margin: 14px 0;
   overflow: hidden;
+  position: relative;
 }
 
 .identity-divider-line {
-  width: 100%;
-  height: 100%;
-  background-color: #2457E6;
-  transform: scaleX(0);
-  transform-origin: left;
-  will-change: transform;
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  transform-origin: center;
 }
 
-/* Role Subtitle (Masked vertical reveal) */
+/* Role Subtitle */
 .identity-role-mask {
   overflow: hidden;
-  padding: 3px 0;
-  display: block;
-  text-align: center;
+  padding: 2px 4px;
 }
 
 .editorial-identity-role {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(0.72rem, 1.15vw, 0.88rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.2vw, 0.85rem);
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
+  color: #898991;
   text-transform: uppercase;
-  color: #777777;
-  margin: 0;
-  display: inline-block;
-  line-height: 1.2;
-  will-change: transform;
+  display: block;
 }
 
-/* ==========================================================================
-   RESPONSIVE POLISH (TABLET & MOBILE)
-   ========================================================================== */
-@media screen and (max-width: 768px) {
-  .editorial-identity-stage {
-    padding: 0 20px;
-  }
-
-  .editorial-identity-name {
-    font-size: clamp(2rem, 7vw, 3.2rem);
-    letter-spacing: -0.025em;
-  }
-
-  .identity-divider-track {
-    max-width: clamp(200px, 60vw, 320px);
-    margin: 14px auto;
-  }
-
-  .editorial-identity-role {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .editorial-identity-name {
-    font-size: clamp(1.75rem, 8.2vw, 2.4rem);
-    white-space: normal;
-    line-height: 1.12;
-  }
-
-  .identity-divider-track {
-    max-width: 180px;
-    margin: 12px auto;
-  }
-
-  .editorial-identity-role {
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  #preloader-overlay.editorial-preloader {
+    display: none !important;
   }
 }
