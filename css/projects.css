@@ -1,223 +1,460 @@
 /* ==========================================================================
-   SELECTED WORK (EDITORIAL PROJECT SHOWCASE)
+   SCENE 3: THE ENGINEERING GALLERY (AN EDITORIAL EXHIBITION OF SOFTWARE)
+   Creative Direction: Curated Editorial Exhibition · Three Distinct Compositions
+   Palette: Background #0B0B0C · Text #F0EFEA / #898991 · Lines #29292D · Accent #E6533D
    ========================================================================== */
-.work-editorial-section {
-  position: relative;
-  z-index: 1;
-}
 
-.projects-editorial-feed {
+/* Outer Exhibition Section */
+.horizontal-gallery-section {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-}
-
-.project-showcase-item {
-  position: sticky;
-  top: 96px;
-  display: grid;
-  grid-template-columns: 1.15fr 1.25fr;
-  gap: 56px;
-  align-items: center;
   background-color: var(--color-bg);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
-  padding: 48px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
-  will-change: transform;
-  transform-origin: top center;
+  width: 100%;
 }
 
-.project-showcase-item:nth-child(1) {
-  z-index: 1;
+/* Desktop Pinned Stage (Height: 100vh) */
+@media screen and (min-width: 769px) {
+  .horizontal-gallery-section {
+    height: 100vh;
+    min-height: 680px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(20px, 3vh, 32px) 0 clamp(24px, 3.5vh, 40px);
+  }
 }
 
-.project-showcase-item:nth-child(2) {
-  z-index: 2;
+/* Accessible Layout for Reduced-Motion Users: Clean Vertical Exhibition */
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-gallery-section {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    padding: clamp(60px, 8vh, 100px) 0 !important;
+  }
+
+  .horizontal-gallery-viewport {
+    overflow: visible !important;
+  }
+
+  .gallery-header-right {
+    display: none !important;
+  }
+
+  .horizontal-track {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: clamp(48px, 6vh, 80px) !important;
+    transform: none !important;
+    padding: 0 clamp(20px, 4vw, 48px) !important;
+  }
+
+  .project-scene {
+    width: 100% !important;
+  }
 }
 
-.project-showcase-item:nth-child(3) {
-  z-index: 3;
-}
-
-.project-showcase-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Information Side */
-.project-info-side {
-  display: flex;
-  flex-direction: column;
-}
-
-.project-meta-strip {
+/* Restrained Gallery Identifier Bar */
+.gallery-exhibition-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  padding: 0 clamp(24px, 4.5vw, 64px);
+  height: 44px;
+  border-bottom: 1px solid var(--color-border-hairline);
+  margin-bottom: clamp(16px, 2.5vh, 28px);
+  flex-shrink: 0;
+}
+
+.gallery-identifier {
   font-family: var(--font-mono);
-  font-size: var(--type-label);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
-}
-
-.project-index-num {
-  color: var(--color-accent);
-  font-weight: 700;
-}
-
-.project-domain-tag {
-  color: var(--color-text-secondary);
+  font-size: 0.78rem;
   font-weight: 600;
-}
-
-.project-year-badge {
-  color: var(--color-text-muted);
-  margin-left: auto;
-}
-
-.project-showcase-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
   text-transform: uppercase;
-  color: var(--color-text-primary);
-  margin: 12px 0 16px;
-  transition: transform var(--duration-normal) var(--ease-editorial);
 }
 
-.project-showcase-item:hover .project-showcase-title {
-  transform: translateX(6px);
+.gallery-header-rule {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--color-border-hairline);
+  margin: 0 28px;
 }
 
-.project-showcase-desc {
-  font-size: 1.05rem;
-  color: var(--color-text-secondary);
-  line-height: 1.68;
-  margin-bottom: 18px;
+.gallery-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
 }
 
-/* Bullet Highlights */
-.project-highlights-list {
+.gallery-scroll-arrow {
+  color: var(--color-accent);
+  display: inline-block;
+  animation: promptShift 2.2s ease-in-out infinite;
+}
+
+@keyframes promptShift {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+/* Horizontal Track Viewport & Panels */
+.horizontal-gallery-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(48px, 5vw, 84px);
+  width: max-content;
+  will-change: transform;
+  padding: 0 clamp(24px, 4.5vw, 64px);
+}
+
+/* ==========================================================================
+   INDIVIDUAL PROJECT SCENES: THREE DISTINCT ARCHITECTURAL COMPOSITIONS
+   ========================================================================== */
+
+.project-scene {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 22px;
-  padding-left: 0;
-}
-
-.project-highlights-list li {
+  justify-content: center;
   position: relative;
-  padding-left: 18px;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
 }
 
-.project-highlights-list li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: var(--color-accent);
-  font-weight: 600;
+/* Shared Inner Scene Box */
+.scene-inner {
+  border: 1px solid var(--color-border-hairline);
+  background-color: var(--color-bg-surface);
+  position: relative;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-/* Tech Stack Monospace Pills */
-.project-stack-pills {
+.scene-inner:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* --- SCENE 01: FREELANCE MARKETPLACE (Asymmetric Lateral Split) --- */
+@media screen and (min-width: 769px) {
+  .scene-freelance {
+    width: clamp(860px, 78vw, 1140px);
+  }
+
+  .scene-layout-split {
+    display: grid;
+    grid-template-columns: 1.15fr 1.35fr;
+    gap: clamp(32px, 3.8vw, 56px);
+    align-items: center;
+    padding: clamp(32px, 3.5vw, 48px);
+    height: 100%;
+  }
+}
+
+/* --- SCENE 02: FOOD ORDERING PLATFORM (Inverted Rhythm / Panoramic Frame) --- */
+@media screen and (min-width: 769px) {
+  .scene-food {
+    width: clamp(920px, 82vw, 1220px);
+  }
+
+  .scene-layout-stacked {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(20px, 2.5vh, 28px);
+    padding: clamp(28px, 3vw, 40px);
+    height: 100%;
+  }
+
+  .scene-visual-monolith .scene-image-frame {
+    max-height: clamp(260px, 36vh, 380px);
+  }
+
+  .scene-stacked-lower {
+    display: grid;
+    grid-template-columns: 1.15fr 1.35fr;
+    gap: clamp(28px, 3.5vw, 48px);
+    align-items: start;
+  }
+}
+
+/* --- SCENE 03: EXPENSE TRACKER (Editorial Conclusion & Section Handoff) --- */
+@media screen and (min-width: 769px) {
+  .scene-expense {
+    width: clamp(880px, 80vw, 1160px);
+  }
+
+  .scene-layout-concluding {
+    display: grid;
+    grid-template-columns: 1.35fr 1.15fr;
+    gap: clamp(32px, 3.8vw, 56px);
+    align-items: center;
+    padding: clamp(32px, 3.5vw, 48px);
+    height: 100%;
+  }
+}
+
+/* ==========================================================================
+   EDITORIAL SCENE CONTENT TYPOGRAPHY & ELEMENTS
+   ========================================================================== */
+
+/* Meta Strip: 01 / CATEGORY */
+.scene-meta-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
-.tech-pill {
+.scene-index {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.scene-category {
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  font-weight: 500;
-  padding: 4px 10px;
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-hairline);
+  font-weight: 600;
+  letter-spacing: 0.14em;
   color: var(--color-text-secondary);
-  border-radius: 2px;
-  letter-spacing: 0.04em;
-  transition: border-color var(--duration-fast);
+  text-transform: uppercase;
 }
 
-.project-showcase-item:hover .tech-pill {
-  border-color: var(--color-border-subtle);
+/* Project Title in Syne */
+.scene-project-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.14;
   color: var(--color-text-primary);
+  margin-bottom: 16px;
 }
 
-/* Action Rows */
-.project-actions-row {
+.scene-title-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.scene-title-inner {
+  display: block;
+  will-change: transform, opacity;
+}
+
+/* Concise Factual Technical Description in Inter */
+.scene-project-description {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+  color: var(--color-text-secondary);
+  line-height: 1.68;
+  margin-bottom: 20px;
+}
+
+/* Technology List Presented as Simple Text Manifest (No Rounded Pills) */
+.scene-tech-manifest {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.62;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-border-hairline);
+  border-bottom: 1px solid var(--color-border-hairline);
+  margin-bottom: 24px;
+}
+
+.tech-manifest-label {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-right: 6px;
+}
+
+.tech-manifest-items {
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* Actions Row */
+.scene-actions-strip {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
-
-/* Dominant Visual Viewport */
-.project-visual-side {
-  position: relative;
-  cursor: pointer;
-  border-radius: 4px;
+/* Primary Action Button (Live Demo) */
+.scene-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #F0EFEA;
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
 }
 
-.project-image-clipper {
+.scene-action-btn:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #ffffff;
+}
+
+.scene-action-btn .action-arrow {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.scene-action-btn:hover .action-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Secondary Action Link (GitHub Repository) */
+.scene-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border: 1px solid var(--color-border-hairline);
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+.scene-action-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.scene-action-link .action-arrow {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.scene-action-link:hover .action-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
+   PROMINENT SCREENSHOT FRAMING & ARCHITECTURAL TICKS
+   ========================================================================== */
+
+.scene-image-frame {
   position: relative;
   overflow: hidden;
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 4px;
-  aspect-ratio: 16 / 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  transition: border-color var(--duration-normal) var(--ease-editorial),
-              box-shadow var(--duration-normal) var(--ease-editorial);
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-hairline);
+  display: block;
+  aspect-ratio: 16 / 9;
 }
 
-.project-showcase-item:hover .project-image-clipper {
-  border-color: var(--color-border-medium);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
-}
-
-.project-dominant-image {
+.scene-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
   display: block;
-  transition: transform var(--duration-slow) var(--ease-editorial);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
-.project-showcase-item:hover .project-dominant-image {
-  transform: scale(1.04);
+.scene-image-frame:hover .scene-image {
+  transform: scale(1.025);
 }
 
-.visual-hover-badge {
+/* Corner Architectural Ticks */
+.frame-tick-top-left {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background-color: var(--color-text-primary);
-  border: 1px solid var(--color-text-primary);
-  padding: 8px 14px;
-  font-family: var(--font-mono);
-  font-size: var(--type-mono-sm);
-  color: var(--color-text-inverse);
-  letter-spacing: 0.08em;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: all var(--duration-fast) var(--ease-standard);
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-accent);
+  z-index: 2;
   pointer-events: none;
 }
 
-.project-showcase-item:hover .visual-hover-badge {
-  opacity: 1;
-  transform: translateY(0);
+.frame-tick-bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   SCENE 03: ARCHITECTURAL TRANSITION HANDOFF
+   ========================================================================== */
+
+.scene-gallery-handoff {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--color-border-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+}
+
+.handoff-line {
+  width: 24px;
+  height: 1px;
+  background-color: var(--color-border-hairline);
+}
+
+.handoff-text {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.handoff-arrow {
+  color: var(--color-accent);
+  font-weight: 700;
+  transition: transform var(--duration-fast);
+}
+
+.project-scene:hover .handoff-arrow {
+  transform: translateX(3px);
 }
