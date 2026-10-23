@@ -1,646 +1,1291 @@
 /**
  * ============================================================================
- * 3. GSAP SCROLLTRIGGER VIEWPORT REVEALS
- * Precise, weighted viewport entrances across all editorial sections
+ * GSAP SCROLLTRIGGER ANIMATION ENGINE — PHASE 9 IMMERSIVE SCROLL SYSTEM
+ *
+ * Core Responsibilities:
+ * 1. Hero: Kinetic Typography entrance (~0.8–1.0s) & scroll-linked recede
+ * 2. Editorial Transition: Cinematic scroll-driven bi-directional timeline
+ * 3. Project Gallery: Three animated horizontal chapters with containerAnimation
+ * 4. Technical Expertise: Animated index with domain masks & numeral shifts
+ * 5. About, Education & Experience: Portrait clip-path reveal, parallax & ledgers
+ * 6. Contact & Footer: Line-by-line masked typography & monumental resolution
  * ============================================================================
  */
-function initScrollRevealMotion() {
-  if (isReducedMotion() || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  // A. Section Headers
-  document.querySelectorAll('.section-header').forEach((header) => {
-    const indexBadge = header.querySelector('.section-index');
-    const title = header.querySelector('.section-title');
-    const subtitle = header.querySelector('.section-subtitle');
+// Register GSAP ScrollTrigger
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-    const headerTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: header,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
+// Accessibility guard: respects user's OS preference
+const isReducedMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (indexBadge) {
-      headerTl.fromTo(
-        indexBadge,
-        { opacity: 0, x: -35 },
-        { opacity: 1, x: 0, duration: 0.95, ease: 'power3.out' },
-        0
-      );
-    }
+/**
+ * ============================================================================
+ * 1. HERO: KINETIC TYPOGRAPHY ENTRANCE & SCROLL INTERACTION
+ * ============================================================================
+ * Initial entrance:
+ * - Reveal RONIT TAMBE with rhythmic word-level masked reveals.
+ * - Architectural divider lines draw in using scale transforms.
+ * - Narrative and actions enter in coordinated sequence (~0.8–1.0s total).
+ */
+function initHeroEntrance() {
+  if (typeof gsap === 'undefined') return;
 
-    if (title) {
-      headerTl.fromTo(
-        title,
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 1.25, ease: 'power4.out' },
-        0.1
-      );
-    }
+  const words = document.querySelectorAll('.seb-word-inner');
+  const sticker = document.querySelector('.seb-avatar-sticker');
+  const regMark = document.querySelector('.seb-registered-mark');
+  const microTags = document.querySelectorAll('.seb-micro-tag');
+  const portraitCard = document.querySelector('.seb-portrait-card');
+  const adjacentLinks = document.querySelector('.seb-adjacent-links');
+  const bottomCluster = document.querySelector('.seb-hero-bottom-cluster');
 
-    if (subtitle) {
-      headerTl.fromTo(
-        subtitle,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.05, ease: 'power3.out' },
-        0.22
-      );
-    }
+  const allHeroElements = [
+    ...words,
+    sticker,
+    regMark,
+    ...microTags,
+    portraitCard,
+    adjacentLinks,
+    bottomCluster,
+  ].filter(Boolean);
+
+  // Reduced motion guard
+  if (isReducedMotion()) {
+    gsap.set(allHeroElements, { opacity: 1, y: 0, yPercent: 0, x: 0, xPercent: 0, scale: 1 });
+    return;
+  }
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'power3.out' },
   });
 
-  // B. Selected Work Project Items & Stacking Overlap Scrub
-  const projectCards = gsap.utils.toArray('.project-showcase-item');
-  projectCards.forEach((project, index) => {
-    const infoElements = project.querySelectorAll(
-      '.project-meta-strip, .project-showcase-title, .project-showcase-desc, .project-highlights-list, .project-stack-pills, .project-actions-row'
+  // 1. Display typography masked entrance
+  if (words.length) {
+    tl.fromTo(
+      words,
+      { yPercent: 110, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.65,
+        stagger: 0.05,
+        ease: 'power4.out',
+      },
+      0.05
     );
-    const image = project.querySelector('.project-dominant-image');
-
-    // 1. Initial Viewport Entrance Reveal
-    const projectTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: project,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    if (infoElements.length) {
-      projectTl.fromTo(
-        infoElements,
-        { opacity: 0, y: 55 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.15,
-          stagger: 0.08,
-          ease: 'power3.out',
-        },
-        0.05
-      );
-    }
-
-    if (image) {
-      projectTl.fromTo(
-        image,
-        { opacity: 0.1, scale: 1.18, y: 40 },
-        {
-          opacity: 1,
-          scale: 1.0,
-          y: 0,
-          duration: 1.45,
-          ease: 'power4.out',
-        },
-        0.1
-      );
-    }
-
-  });
-
-  // 3. Final Overlap Curtain: Pin the entire project section so it stays fixed while About slides over it
-  const projectsSection = document.getElementById('projects');
-  const aboutSection = document.getElementById('about');
-  if (projectsSection && aboutSection && !isReducedMotion()) {
-    ScrollTrigger.create({
-      trigger: projectsSection,
-      start: 'bottom bottom',
-      endTrigger: aboutSection,
-      end: 'top top',
-      pin: true,
-      pinSpacing: false,
-    });
   }
 
-  // C. About Section (Profile & Specification Matrix)
-  const profileSection = document.querySelector('.editorial-profile-section');
-  if (profileSection) {
-    const statement = profileSection.querySelector('.profile-statement-wrap');
-    const bio = profileSection.querySelector('.profile-bio-narrative');
-    const portraitFrame = profileSection.querySelector('.profile-portrait-frame');
-    const specRows = profileSection.querySelectorAll('.profile-spec-row');
+  // 2. Avatar sticker springs into line 1
+  if (sticker) {
+    tl.fromTo(
+      sticker,
+      { scale: 0, rotate: -25, opacity: 0 },
+      { scale: 1, rotate: -8, opacity: 1, duration: 0.5, ease: 'back.out(2)' },
+      0.22
+    );
+  }
 
-    const profileTl = gsap.timeline({
+  // 3. Registered tag
+  if (regMark) {
+    tl.fromTo(
+      regMark,
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2)' },
+      0.3
+    );
+  }
+
+  // 4. Micro-tags
+  if (microTags.length) {
+    tl.fromTo(
+      microTags,
+      { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, duration: 0.45, stagger: 0.05, ease: 'power2.out' },
+      0.32
+    );
+  }
+
+  // 5. Docked Black Portrait Card slides up
+  if (portraitCard) {
+    const isMobile = window.innerWidth <= 991;
+    tl.fromTo(
+      portraitCard,
+      { yPercent: isMobile ? 0 : 35, y: isMobile ? 24 : 0, opacity: 0 },
+      { yPercent: 0, y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+      0.25
+    );
+  }
+
+  // 6. Adjacent links and bottom cluster
+  if (adjacentLinks) {
+    tl.fromTo(
+      adjacentLinks,
+      { opacity: 0, x: -10 },
+      { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out' },
+      0.35
+    );
+  }
+
+  if (bottomCluster) {
+    tl.fromTo(
+      bottomCluster,
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+      0.32
+    );
+  }
+}
+
+let heroTransitionMM = null;
+
+/**
+ * ============================================================================
+ * 2. EDITORIAL TRANSITION: CINEMATIC SCROLL SEQUENCE
+ * ============================================================================
+ * Pinned scrubbed timeline linking Hero to Work Gallery:
+ * 1. Hero composition recedes (main typography moves up with restrained scale).
+ * 2. Editorial statement enters using line-by-line masked reveals.
+ * 3. Selected italic words receive subtle scale / emphasis.
+ * 4. Architectural lines draw across the composition.
+ * 5. 01 / SELECTED WORK indicator enters before releasing into the gallery.
+ */
+function initHeroToWorkTransition() {
+  const container = document.getElementById('hero-transition-scene');
+  const heroStage = document.getElementById('hero');
+  const bridgeSection = document.getElementById('editorial-bridge');
+
+  if (
+    !container ||
+    !heroStage ||
+    !bridgeSection ||
+    typeof gsap === 'undefined' ||
+    typeof ScrollTrigger === 'undefined'
+  ) {
+    return;
+  }
+
+  // Clean up existing matchMedia instance if reinitializing
+  if (heroTransitionMM) {
+    heroTransitionMM.revert();
+  }
+
+  // Reduced motion guard
+  if (isReducedMotion()) {
+    document.documentElement.classList.remove('js-transition-ready');
+    gsap.set([heroStage, bridgeSection], { clearProps: 'all' });
+    gsap.set(
+      document.querySelectorAll(
+        '.quote-line, .quote-line-inner, .bridge-forward-lead, .bridge-structural-line, .serif-italic'
+      ),
+      { clearProps: 'all' }
+    );
+    return;
+  }
+
+  heroTransitionMM = gsap.matchMedia();
+
+  // Desktop & Tablet (> 768px): Coordinated Pinned Scrubbed Transition
+  heroTransitionMM.add('(min-width: 769px)', () => {
+    document.documentElement.classList.add('js-transition-ready');
+
+    const heroCanvas = heroStage.querySelector('.seb-hero-canvas');
+    const upperCluster = heroStage.querySelector('.seb-hero-upper-cluster');
+    const bottomCluster = heroStage.querySelector('.seb-hero-bottom-cluster');
+    const portraitCard = heroStage.querySelector('.seb-portrait-card');
+    const adjacentLinks = heroStage.querySelector('.seb-adjacent-links');
+    const displayLines = heroStage.querySelectorAll('.seb-display-line');
+
+    const bridgeLines = bridgeSection.querySelectorAll('.bridge-structural-line');
+    const quoteWrap = bridgeSection.querySelector('.bridge-statement-wrap');
+    const quoteInners = bridgeSection.querySelectorAll('.quote-line-inner');
+    const italicWords = bridgeSection.querySelectorAll('.serif-italic');
+    const forwardLead = bridgeSection.querySelector('.bridge-forward-lead');
+    const axisLine = bridgeSection.querySelector('.axis-line');
+    const axisNode = bridgeSection.querySelector('.axis-node');
+
+    // Initial state before Stage C
+    gsap.set(bridgeSection, { opacity: 0, pointerEvents: 'none' });
+    if (bridgeLines.length) {
+      gsap.set(bridgeLines, { scaleX: 0, transformOrigin: 'center center' });
+    }
+    if (quoteInners.length) {
+      gsap.set(quoteInners, { yPercent: 110, opacity: 0 });
+    }
+    if (italicWords.length) {
+      gsap.set(italicWords, { scale: 1 });
+    }
+    if (forwardLead) {
+      gsap.set(forwardLead, { opacity: 0, y: 16 });
+    }
+    if (axisLine) {
+      gsap.set(axisLine, { scaleY: 0, transformOrigin: 'top center' });
+    }
+    if (axisNode) {
+      gsap.set(axisNode, { scale: 0 });
+    }
+
+    // Master Scrubbed Timeline
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: profileSection,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
+        trigger: container,
+        start: 'top top',
+        end: '+=140%',
+        pin: true,
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     });
 
-    if (statement) {
-      profileTl.fromTo(
-        statement,
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 1.25, ease: 'power4.out' },
+    // ------------------------------------------------------------------------
+    // STAGE A: Hero elements recede & Background transitions from Orange to White (0.00 -> 0.35)
+    // ------------------------------------------------------------------------
+    if (heroCanvas) {
+      tl.to(
+        heroCanvas,
+        { backgroundColor: '#FFFFFF', duration: 0.35, ease: 'power1.inOut' },
         0
       );
     }
+    tl.to(
+      heroStage,
+      { backgroundColor: '#FFFFFF', duration: 0.35, ease: 'power1.inOut' },
+      0
+    );
+    tl.to(
+      container,
+      { backgroundColor: '#FFFFFF', duration: 0.35, ease: 'power1.inOut' },
+      0
+    );
 
-    if (bio) {
-      profileTl.fromTo(
-        bio,
-        { opacity: 0, y: 48 },
-        { opacity: 1, y: 0, duration: 1.15, ease: 'power3.out' },
-        0.15
+    if (upperCluster) {
+      tl.to(
+        upperCluster,
+        { yPercent: -22, scale: 0.94, duration: 0.32, ease: 'power1.inOut' },
+        0
+      );
+    }
+    if (displayLines.length) {
+      displayLines.forEach((line, index) => {
+        const xOffset = index % 2 === 0 ? -15 : 20;
+        tl.to(
+          line,
+          { xPercent: xOffset, duration: 0.3, ease: 'power1.inOut' },
+          0.02 * index
+        );
+      });
+    }
+    if (portraitCard) {
+      tl.to(portraitCard, { yPercent: 40, opacity: 0, duration: 0.28, ease: 'power1.out' }, 0.02);
+    }
+    if (adjacentLinks) {
+      tl.to(adjacentLinks, { opacity: 0, y: 15, duration: 0.2, ease: 'power1.out' }, 0);
+    }
+    if (bottomCluster) {
+      tl.to(bottomCluster, { opacity: 0, x: 40, duration: 0.25, ease: 'power1.out' }, 0.02);
+    }
+
+    // ------------------------------------------------------------------------
+    // STAGE B: Hero fades & Hero stage exits (0.28 -> 0.48)
+    // ------------------------------------------------------------------------
+    if (upperCluster) {
+      tl.to(
+        upperCluster,
+        { yPercent: -50, opacity: 0, scale: 0.88, duration: 0.2, ease: 'power2.in' },
+        0.28
+      );
+    }
+    tl.to(heroStage, { opacity: 0, pointerEvents: 'none', duration: 0.16 }, 0.34);
+
+    // ------------------------------------------------------------------------
+    // STAGE C: Editorial statement emerges with line-by-line reveals (0.42 -> 0.82)
+    // ------------------------------------------------------------------------
+    tl.to(bridgeSection, { opacity: 1, pointerEvents: 'auto', duration: 0.16 }, 0.42);
+
+    if (bridgeLines.length) {
+      tl.to(
+        bridgeLines,
+        { scaleX: 1, opacity: 1, duration: 0.26, ease: 'power2.out' },
+        0.44
       );
     }
 
-    if (portraitFrame) {
-      profileTl.fromTo(
-        portraitFrame,
-        { opacity: 0.1, scale: 0.92, y: 55 },
-        { opacity: 1, scale: 1.0, y: 0, duration: 1.45, ease: 'power4.out' },
-        0.2
+    // Line-by-line masked reveals
+    if (quoteInners.length) {
+      quoteInners.forEach((inner, idx) => {
+        tl.to(
+          inner,
+          { yPercent: 0, opacity: 1, duration: 0.22, ease: 'power3.out' },
+          0.48 + idx * 0.07
+        );
+      });
+    }
+
+    // Restrained emphasis / subtle scale on selected italic words
+    if (italicWords.length) {
+      tl.to(
+        italicWords,
+        { scale: 1.04, duration: 0.24, ease: 'power1.out' },
+        0.62
       );
     }
 
-    if (specRows.length) {
-      profileTl.fromTo(
-        specRows,
-        { opacity: 0, y: 48 },
-        { opacity: 1, y: 0, duration: 1.1, stagger: 0.12, ease: 'power3.out' },
-        0.25
-      );
+    // ------------------------------------------------------------------------
+    // STAGE D: Visual bridge toward Work Gallery (0.74 -> 1.00)
+    // ------------------------------------------------------------------------
+    if (axisLine) {
+      tl.to(axisLine, { scaleY: 1, duration: 0.18, ease: 'power2.out' }, 0.74);
     }
-  }
+    if (axisNode) {
+      tl.to(axisNode, { scale: 1, duration: 0.15, ease: 'back.out(2)' }, 0.78);
+    }
+    if (forwardLead) {
+      tl.to(forwardLead, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }, 0.78);
+    }
+    if (quoteWrap) {
+      tl.to(quoteWrap, { y: -20, duration: 0.24, ease: 'power1.out' }, 0.76);
+    }
 
-  // D. Section 03 Continuous Horizontal Marquee Viewport Reveal
-  const skillsSection = document.querySelector('.marquee-skills-section');
-  if (skillsSection) {
-    const marqueeShowcase = skillsSection.querySelector('.marquee-showcase-container');
-    if (marqueeShowcase) {
+    // Teardown
+    return () => {
+      document.documentElement.classList.remove('js-transition-ready');
+      gsap.set([heroStage, bridgeSection, container, heroCanvas].filter(Boolean), { clearProps: 'all' });
+      const allSub = [
+        wordRonit,
+        wordTambe,
+        wordFullstack,
+        wordDeveloper,
+        registeredTag,
+        statementBlock,
+        portraitCard,
+        metaBar,
+        eyebrowRow,
+        ...annotations,
+        actionBar,
+        stamp,
+        lineBottom,
+        quoteWrap,
+        ...quoteInners,
+        ...italicWords,
+        forwardLead,
+        axisLine,
+        axisNode,
+        ...bridgeLines,
+      ].filter(Boolean);
+      gsap.set(allSub, { clearProps: 'all' });
+    };
+  });
+
+  // Mobile Fallback (<= 768px): Natural Vertical Flow & Viewport Reveals
+  heroTransitionMM.add('(max-width: 768px)', () => {
+    document.documentElement.classList.remove('js-transition-ready');
+    gsap.set([heroStage, bridgeSection], { clearProps: 'all' });
+
+    const quoteInners = bridgeSection.querySelectorAll('.quote-line-inner');
+    const lead = bridgeSection.querySelector('.bridge-forward-lead');
+
+    if (quoteInners.length) {
       gsap.fromTo(
-        marqueeShowcase,
-        { opacity: 0, y: 50 },
+        quoteInners,
+        { yPercent: 100, opacity: 0 },
         {
+          yPercent: 0,
           opacity: 1,
-          y: 0,
-          duration: 1.2,
+          duration: 0.7,
+          stagger: 0.12,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: skillsSection,
+            trigger: bridgeSection,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    if (lead) {
+      gsap.fromTo(
+        lead,
+        { opacity: 0, y: 14 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 0.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: bridgeSection,
             start: 'top 80%',
             toggleActions: 'play none none none',
           },
         }
       );
     }
+
+    return () => {
+      gsap.set([heroStage, bridgeSection, ...quoteInners, lead].filter(Boolean), {
+        clearProps: 'all',
+      });
+    };
+  });
+}
+
+let horizontalTriggerInstance = null;
+let horizontalMM = null;
+
+/**
+ * ============================================================================
+ * 3. PROJECT GALLERY: THREE ANIMATED CHAPTERS
+ * ============================================================================
+ * Primary driver: Desktop pinned horizontal track tween.
+ * Child scroll effects: containerAnimation coordinates child scene timelines.
+ * - Scene 01: Title overflow mask, image controlled directional translation,
+ *             staggered manifest, deliberate exit transition.
+ * - Scene 02: Restrained panoramic image expansion, coordinated title/manifest,
+ *             internal parallax shift.
+ * - Scene 03: Opposing directions reveal, divider line draw, handoff indicator.
+ */
+function initHorizontalGallery() {
+  const section = document.querySelector('.horizontal-gallery-section');
+  const track = document.getElementById('horizontal-track');
+
+  if (
+    !section ||
+    !track ||
+    typeof gsap === 'undefined' ||
+    typeof ScrollTrigger === 'undefined'
+  ) {
+    return;
   }
 
-  // E. Contact Section
-  const contactSection = document.querySelector('.contact-section-wrapper');
-  if (contactSection) {
-    const textCol = contactSection.querySelector('.contact-text-col');
-    const dossierPanel = contactSection.querySelector('.contact-dossier-panel');
+  // Clean up existing instances
+  if (horizontalTriggerInstance) {
+    horizontalTriggerInstance.kill();
+    horizontalTriggerInstance = null;
+  }
+  if (horizontalMM) {
+    horizontalMM.revert();
+  }
+  gsap.set(track, { clearProps: 'all' });
 
-    const contactTl = gsap.timeline({
+  // Reduced motion guard: keep clean vertical layout
+  if (isReducedMotion()) {
+    gsap.set(track, { clearProps: 'all' });
+    return;
+  }
+
+  horizontalMM = gsap.matchMedia();
+
+  // Desktop Pinned Horizontal Scroll (> 768px)
+  horizontalMM.add('(min-width: 769px)', () => {
+    // Exact travel distance: track scroll width minus visible viewport width
+    const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+
+    const tween = gsap.to(track, {
+      x: () => -getDistance(),
+      ease: 'none',
+    });
+
+    horizontalTriggerInstance = ScrollTrigger.create({
+      trigger: section,
+      pin: true,
+      start: 'top top',
+      end: () => `+=${getDistance()}`,
+      scrub: 0.8,
+      invalidateOnRefresh: true,
+      animation: tween,
+      anticipatePin: 1,
+    });
+
+    // ------------------------------------------------------------------------
+    // SCENE 01: FREELANCE MARKETPLACE
+    // ------------------------------------------------------------------------
+    const scene1 = track.querySelector('.scene-freelance');
+    const scene2 = track.querySelector('.scene-food');
+    const scene3 = track.querySelector('.scene-expense');
+
+    const childTriggers = [];
+
+    if (scene1) {
+      const s1Title = scene1.querySelector('.scene-title-inner');
+      const s1ImageFrame = scene1.querySelector('.scene-image-frame');
+      const s1Desc = scene1.querySelector('.scene-project-description');
+      const s1Manifest = scene1.querySelector('.scene-tech-manifest');
+      const s1Actions = scene1.querySelector('.scene-actions-strip');
+
+      // Title masked reveal
+      if (s1Title) {
+        gsap.fromTo(
+          s1Title,
+          { yPercent: 105 },
+          {
+            yPercent: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: scene1,
+              containerAnimation: tween,
+              start: 'left center',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // Controlled directional translation & subtle scale
+      if (s1ImageFrame) {
+        gsap.fromTo(
+          s1ImageFrame,
+          { x: 36, scale: 1.04 },
+          {
+            x: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene1,
+              containerAnimation: tween,
+              start: 'left center',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // Description & manifest stagger
+      const s1Items = [s1Desc, s1Manifest, s1Actions].filter(Boolean);
+      if (s1Items.length) {
+        gsap.fromTo(
+          s1Items,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene1,
+              containerAnimation: tween,
+              start: 'left center',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // Deliberate exit transition as track scrolls to Scene 02
+      if (scene2) {
+        gsap.to(scene1, {
+          opacity: 0.38,
+          scale: 0.985,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: scene2,
+            containerAnimation: tween,
+            start: 'left 85%',
+            end: 'left 25%',
+            scrub: true,
+          },
+        });
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // SCENE 02: FOOD ORDERING PLATFORM
+    // ------------------------------------------------------------------------
+    if (scene2) {
+      const s2ImageFrame = scene2.querySelector('.scene-visual-monolith .scene-image-frame');
+      const s2Image = scene2.querySelector('.scene-visual-monolith .scene-image');
+      const s2Title = scene2.querySelector('.scene-title-inner');
+      const s2StackedLower = scene2.querySelector('.scene-stacked-lower');
+
+      // Panoramic monolith image expansion
+      if (s2ImageFrame) {
+        gsap.fromTo(
+          s2ImageFrame,
+          { scale: 0.94, opacity: 0.85 },
+          {
+            scale: 1,
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene2,
+              containerAnimation: tween,
+              start: 'left 90%',
+              end: 'left 35%',
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Internal subtle parallax within panoramic frame
+      if (s2Image) {
+        gsap.fromTo(
+          s2Image,
+          { xPercent: -5 },
+          {
+            xPercent: 4,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: scene2,
+              containerAnimation: tween,
+              start: 'left right',
+              end: 'right left',
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Coordinated reveal of title and lower dual-column manifest
+      if (s2Title) {
+        gsap.fromTo(
+          s2Title,
+          { yPercent: 105 },
+          {
+            yPercent: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: scene2,
+              containerAnimation: tween,
+              start: 'left 70%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      if (s2StackedLower) {
+        gsap.fromTo(
+          s2StackedLower,
+          { opacity: 0, y: 22 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene2,
+              containerAnimation: tween,
+              start: 'left 65%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // Smooth departure as Scene 03 arrives
+      if (scene3) {
+        gsap.to(scene2, {
+          opacity: 0.4,
+          scale: 0.985,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: scene3,
+            containerAnimation: tween,
+            start: 'left 85%',
+            end: 'left 25%',
+            scrub: true,
+          },
+        });
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // SCENE 03: EXPENSE TRACKER
+    // ------------------------------------------------------------------------
+    if (scene3) {
+      const s3Visual = scene3.querySelector('.scene-visual-column');
+      const s3Editorial = scene3.querySelector('.scene-editorial-column');
+      const s3Title = scene3.querySelector('.scene-title-inner');
+      const handoffLine = scene3.querySelector('.handoff-line');
+      const handoffWrap = scene3.querySelector('.scene-gallery-handoff');
+
+      // Opposing directions reveal: visual from right, editorial from left
+      if (s3Visual) {
+        gsap.fromTo(
+          s3Visual,
+          { x: 44, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: scene3,
+              containerAnimation: tween,
+              start: 'left 75%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      if (s3Editorial) {
+        gsap.fromTo(
+          s3Editorial,
+          { x: -36, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: scene3,
+              containerAnimation: tween,
+              start: 'left 75%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      if (s3Title) {
+        gsap.fromTo(
+          s3Title,
+          { yPercent: 105 },
+          {
+            yPercent: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: scene3,
+              containerAnimation: tween,
+              start: 'left 70%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // Draw handoff divider line and reveal indicator
+      if (handoffLine) {
+        gsap.fromTo(
+          handoffLine,
+          { scaleX: 0, transformOrigin: 'left center' },
+          {
+            scaleX: 1,
+            duration: 0.55,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene3,
+              containerAnimation: tween,
+              start: 'left 60%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      if (handoffWrap) {
+        gsap.fromTo(
+          handoffWrap,
+          { opacity: 0, x: -14 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene3,
+              containerAnimation: tween,
+              start: 'left 60%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+    }
+
+    return () => {
+      if (horizontalTriggerInstance) {
+        horizontalTriggerInstance.kill();
+        horizontalTriggerInstance = null;
+      }
+      gsap.set(track, { clearProps: 'all' });
+      gsap.set(
+        document.querySelectorAll(
+          '.project-scene, .scene-title-inner, .scene-image-frame, .scene-image, .scene-stacked-lower, .scene-visual-column, .scene-editorial-column, .handoff-line, .scene-gallery-handoff'
+        ),
+        { clearProps: 'all' }
+      );
+    };
+  });
+
+  // Mobile Fallback (<= 768px): Natural Vertical Sequence
+  horizontalMM.add('(max-width: 768px)', () => {
+    gsap.set(track, { clearProps: 'all' });
+
+    const scenes = track.querySelectorAll('.project-scene');
+    scenes.forEach((scene) => {
+      const title = scene.querySelector('.scene-title-inner');
+      const img = scene.querySelector('.scene-image-frame');
+      const desc = scene.querySelector('.scene-project-description');
+
+      if (title) {
+        gsap.fromTo(
+          title,
+          { yPercent: 100 },
+          {
+            yPercent: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: scene,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      if (img) {
+        gsap.fromTo(
+          img,
+          { opacity: 0, y: 22 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      if (desc) {
+        gsap.fromTo(
+          desc,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: scene,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    });
+
+    return () => {
+      gsap.set(track, { clearProps: 'all' });
+    };
+  });
+}
+
+/**
+ * ============================================================================
+ * 4. TECHNICAL EXPERTISE, ABOUT & CONTACT VIEWPORT REVEALS
+ * ============================================================================
+ */
+function initScrollRevealMotion() {
+  if (isReducedMotion() || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
+  }
+
+  // --------------------------------------------------------------------------
+  // A. SECTION 4: THE ARCHITECTURAL INDEX (SKILLS)
+  // --------------------------------------------------------------------------
+  const indexHeader = document.querySelector('.index-intro-header');
+  if (indexHeader) {
+    const badge = indexHeader.querySelector('.index-badge');
+    const title = indexHeader.querySelector('.index-display-title');
+    const statement = indexHeader.querySelector('.index-statement-text');
+
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: contactSection,
-        start: 'top 80%',
+        trigger: indexHeader,
+        start: 'top 85%',
         toggleActions: 'play none none none',
       },
     });
 
-    if (textCol) {
-      contactTl.fromTo(
-        textCol,
-        { opacity: 0, y: 70 },
-        { opacity: 1, y: 0, duration: 1.35, ease: 'power4.out' },
+    if (badge) {
+      tl.fromTo(
+        badge,
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+        0
+      );
+    }
+    if (title) {
+      tl.fromTo(
+        title,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+        0.08
+      );
+    }
+    if (statement) {
+      tl.fromTo(
+        statement,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+        0.16
+      );
+    }
+  }
+
+  // Four Engineering Domains: vertical numeral masks, top accent lines & manifests
+  const domainColumns = document.querySelectorAll('.domain-column');
+  domainColumns.forEach((col, idx) => {
+    const numeral = col.querySelector('.domain-numeral');
+    const accentLine = col.querySelector('.domain-accent-line');
+    const title = col.querySelector('.domain-title');
+    const summary = col.querySelector('.domain-summary');
+    const items = col.querySelectorAll('.domain-tech-item');
+
+    const dtl = gsap.timeline({
+      scrollTrigger: {
+        trigger: col,
+        start: 'top 82%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    // Top accent line draws in
+    if (accentLine) {
+      dtl.fromTo(
+        accentLine,
+        { scaleX: 0, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 0.45, ease: 'power3.out' },
         0
       );
     }
 
-    if (dossierPanel) {
-      contactTl.fromTo(
-        dossierPanel,
-        { opacity: 0, y: 70 },
-        { opacity: 1, y: 0, duration: 1.35, ease: 'power4.out' },
+    // Large domain numeral vertical mask reveal
+    if (numeral) {
+      dtl.fromTo(
+        numeral,
+        { yPercent: 110 },
+        { yPercent: 0, duration: 0.65, ease: 'power4.out' },
+        0.06
+      );
+
+      // Subtle scroll-linked vertical parallax shift as user scrolls through the matrix
+      gsap.to(numeral, {
+        y: -16,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: col,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }
+
+    if (title) {
+      dtl.fromTo(
+        title,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+        0.14
+      );
+    }
+
+    if (summary) {
+      dtl.fromTo(
+        summary,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
         0.2
       );
     }
-  }
-}
 
-/**
- * ============================================================================
- * 4. GSAP-POWERED INTERACTIVE HOVER MOTION
- * High-mass micro-interactions with precise physics and deceleration
- * ============================================================================
- */
-function initInteractiveHovers() {
-  if (isReducedMotion() || typeof gsap === 'undefined') return;
-
-  // A. Directional Arrow Displacements & Button Lift
-  document.querySelectorAll('.action-editorial-btn').forEach((btn) => {
-    const arrow = btn.querySelector('.btn-arrow');
-
-    btn.addEventListener('mouseenter', () => {
-      if (arrow) gsap.to(arrow, { x: 7, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
-      gsap.to(btn, { y: -4, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      if (arrow) gsap.to(arrow, { x: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
-      gsap.to(btn, { y: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
-    });
+    if (items.length) {
+      dtl.fromTo(
+        items,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power2.out' },
+        0.24
+      );
+    }
   });
 
-  document.querySelectorAll('.action-editorial-link, .footer-link').forEach((link) => {
-    const arrow = link.querySelector('.link-arrow');
+  // --------------------------------------------------------------------------
+  // B. SECTION 5: ABOUT, EDUCATION & EXPERIENCE
+  // --------------------------------------------------------------------------
+  const aboutSection = document.getElementById('about');
+  if (aboutSection) {
+    const aboutHeader = aboutSection.querySelector('.about-intro-header');
+    const portraitFrame = aboutSection.querySelector('.about-portrait-frame');
+    const bioBlock = aboutSection.querySelector('.about-bio-block');
+    const ledgerSections = aboutSection.querySelectorAll('.about-ledger-section');
 
-    link.addEventListener('mouseenter', () => {
-      if (arrow) gsap.to(arrow, { x: 6, y: -6, duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
-    });
-
-    link.addEventListener('mouseleave', () => {
-      if (arrow) gsap.to(arrow, { x: 0, y: 0, duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
-    });
-  });
-
-  // B. Project Visual Hover Scale (Deep Smooth Mass)
-  document.querySelectorAll('.project-visual-side').forEach((wrapper) => {
-    const img = wrapper.querySelector('.project-dominant-image');
-    if (!img) return;
-
-    wrapper.addEventListener('mouseenter', () => {
-      gsap.to(img, { scale: 1.06, duration: 0.7, ease: 'power2.out', overwrite: 'auto' });
-    });
-
-    wrapper.addEventListener('mouseleave', () => {
-      gsap.to(img, { scale: 1.0, duration: 0.7, ease: 'power2.out', overwrite: 'auto' });
-    });
-  });
-
-  // C. Project Row Title Shift
-  document.querySelectorAll('.project-showcase-item').forEach((item) => {
-    const title = item.querySelector('.project-showcase-title');
-    if (!title) return;
-
-    item.addEventListener('mouseenter', () => {
-      gsap.to(title, { x: 12, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
-    });
-
-    item.addEventListener('mouseleave', () => {
-      gsap.to(title, { x: 0, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
-    });
-  });
-}
-
-
-/**
- * ============================================================================
- * 5B. ABOUT SECTION: SPECIFICATION MATRIX & PORTRAIT BADGE SYNC
- * Dynamic biometric status badge that updates as each spec row scrolls into view
- * ============================================================================
- */
-function initProfileSpecScrollTracker() {
-  const specRows = document.querySelectorAll('.profile-spec-row');
-  const badgeText = document.getElementById('portrait-badge-text');
-
-  if (!specRows.length || typeof ScrollTrigger === 'undefined') return;
-
-  specRows.forEach((row) => {
-    const statusMsg = row.getAttribute('data-profile-status');
-    if (!statusMsg) return;
-
-    ScrollTrigger.create({
-      trigger: row,
-      start: 'top 65%',
-      end: 'bottom 40%',
-      onEnter: () => {
-        specRows.forEach((r) => r.classList.remove('is-active'));
-        row.classList.add('is-active');
-        if (badgeText && typeof gsap !== 'undefined') {
-          gsap.to(badgeText, {
-            opacity: 0,
-            duration: 0.12,
-            onComplete: () => {
-              badgeText.innerText = statusMsg;
-              gsap.to(badgeText, { opacity: 1, duration: 0.2 });
-            },
-          });
-        }
-      },
-      onEnterBack: () => {
-        specRows.forEach((r) => r.classList.remove('is-active'));
-        row.classList.add('is-active');
-        if (badgeText && typeof gsap !== 'undefined') {
-          gsap.to(badgeText, {
-            opacity: 0,
-            duration: 0.12,
-            onComplete: () => {
-              badgeText.innerText = statusMsg;
-              gsap.to(badgeText, { opacity: 1, duration: 0.2 });
-            },
-          });
-        }
-      },
-    });
-  });
-}
-
-
-
-/**
- * ============================================================================
- * 5D. CONTACT DOSSIER 3D TACTILE PERSPECTIVE TILT
- * Physics-calibrated 3D mouse tracking on the contact dossier card
- * ============================================================================
- */
-function initContactCardTilt() {
-  const card = document.getElementById('contact-tilt-card');
-  if (!card || isReducedMotion()) return;
-
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -5;
-    const rotateY = ((x - centerX) / centerX) * 5;
-
-    if (typeof gsap !== 'undefined') {
-      gsap.to(card, {
-        rotateX: rotateX,
-        rotateY: rotateY,
-        transformPerspective: 1000,
-        duration: 0.3,
+    if (aboutHeader) {
+      gsap.from(aboutHeader, {
+        opacity: 0,
+        y: 24,
+        duration: 0.7,
         ease: 'power2.out',
-        overwrite: 'auto',
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: aboutSection,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
       });
     }
-  });
 
-  card.addEventListener('mouseleave', () => {
-    if (typeof gsap !== 'undefined') {
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.65,
-        ease: 'power3.out',
-        overwrite: 'auto',
+    // Portrait: clip-path / frame reveal, subtle scroll parallax, corner ticks
+    if (portraitFrame) {
+      const wrapper = portraitFrame.querySelector('.portrait-image-wrapper');
+      const photo = portraitFrame.querySelector('.about-portrait-photo');
+      const ticks = portraitFrame.querySelectorAll('.frame-tick-top-left, .frame-tick-bottom-right');
+      const caption = portraitFrame.querySelector('.about-portrait-caption');
+
+      const ptl = gsap.timeline({
+        scrollTrigger: {
+          trigger: portraitFrame,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
       });
+
+      if (wrapper) {
+        ptl.fromTo(
+          wrapper,
+          { clipPath: 'inset(0% 0% 100% 0%)' },
+          { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.85, ease: 'power3.inOut' },
+          0
+        );
+      }
+
+      if (ticks.length) {
+        ptl.fromTo(
+          ticks,
+          { scale: 0 },
+          { scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.5)' },
+          0.45
+        );
+      }
+
+      if (caption) {
+        ptl.fromTo(
+          caption,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          0.55
+        );
+      }
+
+      // Subtle scroll parallax on photo within frame
+      if (photo) {
+        gsap.fromTo(
+          photo,
+          { yPercent: -5 },
+          {
+            yPercent: 5,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: portraitFrame,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          }
+        );
+      }
     }
-  });
-}
 
-/**
- * ============================================================================
- * 6. GSAP MOBILE OVERLAY ANIMATION
- * ============================================================================
- */
-function initMobileNavMotion() {
-  const triggerBtn = document.getElementById('mobile-menu-trigger');
-  const overlay = document.getElementById('mobile-nav-overlay');
-  const menuText = document.getElementById('menu-text');
+    // Biography: masked heading and narrative
+    if (bioBlock) {
+      const bioHeadingInner = bioBlock.querySelector('.bio-heading-inner');
+      const bioText = bioBlock.querySelector('.about-bio-text p');
 
-  if (!triggerBtn || !overlay) return;
+      const bioTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: bioBlock,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
 
-  triggerBtn.addEventListener('click', () => {
-    const isOpen = overlay.classList.contains('is-open');
-    if (isOpen) {
-      closeMobileMenu();
-    } else {
-      openMobileMenu();
+      if (bioHeadingInner) {
+        bioTl.fromTo(
+          bioHeadingInner,
+          { yPercent: 110 },
+          { yPercent: 0, duration: 0.65, ease: 'power4.out' },
+          0
+        );
+      }
+
+      if (bioText) {
+        bioTl.fromTo(
+          bioText,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,transform' },
+          0.14
+        );
+      }
     }
-  });
 
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
-      closeMobileMenu();
-    }
-  });
-}
+    // Education & Experience ledgers: divider lines draw, records stagger
+    ledgerSections.forEach((sec) => {
+      const line = sec.querySelector('.ledger-line');
+      const entries = sec.querySelectorAll('.ledger-entry');
 
-function openMobileMenu() {
-  const triggerBtn = document.getElementById('mobile-menu-trigger');
-  const overlay = document.getElementById('mobile-nav-overlay');
-  const menuText = document.getElementById('menu-text');
+      const ltl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top 84%',
+          toggleActions: 'play none none none',
+        },
+      });
 
-  if (!triggerBtn || !overlay) return;
+      if (line) {
+        ltl.fromTo(
+          line,
+          { scaleX: 0, transformOrigin: 'left center' },
+          { scaleX: 1, duration: 0.55, ease: 'power3.out' },
+          0
+        );
+      }
 
-  triggerBtn.classList.add('is-open');
-  triggerBtn.setAttribute('aria-expanded', 'true');
-  if (menuText) menuText.innerText = 'Close';
-  overlay.classList.add('is-open');
-  overlay.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('drawer-open');
-
-  if (lenis) lenis.stop();
-
-  if (typeof gsap !== 'undefined' && !isReducedMotion()) {
-    const menuItems = overlay.querySelectorAll('.mobile-nav-item');
-    const menuFooter = overlay.querySelector('.mobile-overlay-footer');
-
-    gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
-    if (menuItems.length) {
-      gsap.fromTo(
-        menuItems,
-        { opacity: 0, y: 35 },
-        { opacity: 1, y: 0, duration: 0.65, stagger: 0.08, delay: 0.1, ease: 'power3.out' }
-      );
-    }
-    if (menuFooter) {
-      gsap.fromTo(
-        menuFooter,
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.55, delay: 0.35, ease: 'power3.out' }
-      );
-    }
+      if (entries.length) {
+        ltl.fromTo(
+          entries,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out',
+            clearProps: 'opacity,transform',
+          },
+          0.1
+        );
+      }
+    });
   }
-}
 
-function closeMobileMenu() {
-  const triggerBtn = document.getElementById('mobile-menu-trigger');
-  const overlay = document.getElementById('mobile-nav-overlay');
-  const menuText = document.getElementById('menu-text');
+  // --------------------------------------------------------------------------
+  // C. SECTION 6: CONTACT & FOOTER MONUMENT
+  // --------------------------------------------------------------------------
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    const contactBadge = contactSection.querySelector('.contact-badge');
+    const contactLineInners = contactSection.querySelectorAll('.contact-line-inner');
+    const contactSentence = contactSection.querySelector('.contact-supporting-sentence');
+    const contactActionCol = contactSection.querySelector('.contact-action-col');
 
-  if (!triggerBtn || !overlay) return;
-
-  triggerBtn.classList.remove('is-open');
-  triggerBtn.setAttribute('aria-expanded', 'false');
-  if (menuText) menuText.innerText = 'Menu';
-
-  if (lenis) lenis.start();
-
-  if (typeof gsap !== 'undefined' && !isReducedMotion()) {
-    gsap.to(overlay, {
-      opacity: 0,
-      duration: 0.35,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        overlay.classList.remove('is-open');
-        overlay.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('drawer-open');
+    const contactTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: contactSection,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
       },
     });
-  } else {
-    overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('drawer-open');
-  }
-}
 
-/**
- * ============================================================================
- * 7. HEADER SCROLL DETECTION & SCROLL SPY
- * ============================================================================
- */
-function initHeaderScroll() {
-  const header = document.getElementById('site-header');
-  if (!header) return;
-
-  const onScroll = () => {
-    if (window.scrollY > 24) {
-      header.classList.add('is-scrolled');
-    } else {
-      header.classList.remove('is-scrolled');
+    if (contactBadge) {
+      contactTl.from(
+        contactBadge,
+        { opacity: 0, x: -16, duration: 0.45, ease: 'power2.out', clearProps: 'opacity,transform' },
+        0
+      );
     }
-  };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
+    // Line-by-line reveal of LET'S BUILD / SOMETHING GOOD.
+    if (contactLineInners.length) {
+      contactTl.fromTo(
+        contactLineInners,
+        { yPercent: 110 },
+        {
+          yPercent: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power4.out',
+          clearProps: 'transform',
+        },
+        0.06
+      );
+    }
 
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+    if (contactSentence) {
+      contactTl.from(
+        contactSentence,
+        { opacity: 0, y: 18, duration: 0.65, ease: 'power2.out', clearProps: 'opacity,transform' },
+        0.18
+      );
+    }
 
-  if (!sections.length || !navLinks.length) return;
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '-25% 0px -65% 0px',
-    threshold: 0,
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach((link) => {
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach((section) => observer.observe(section));
-}
-
-/**
- * ============================================================================
- * 8. CLIPBOARD & NAVIGATION UTILITIES
- * ============================================================================
- */
-function showToast(message) {
-  let toast = document.getElementById('ui-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'ui-toast';
-    toast.className = 'ui-toast';
-    document.body.appendChild(toast);
-  }
-  toast.innerHTML = `<span class="toast-icon">✓</span><span>${message}</span>`;
-  toast.classList.add('is-visible');
-
-  clearTimeout(window._toastTimeout);
-  window._toastTimeout = setTimeout(() => {
-    toast.classList.remove('is-visible');
-  }, 2600);
-}
-
-function copyEmail() {
-  const email = 'ronittambe116@gmail.com';
-  const copyBtn = document.getElementById('btn-copy-email');
-
-  navigator.clipboard
-    .writeText(email)
-    .then(() => {
-      if (copyBtn) {
-        const originalText = copyBtn.innerText;
-        copyBtn.innerText = 'COPIED ✓';
-        copyBtn.style.color = '#059669';
-        copyBtn.style.borderColor = '#059669';
-
-        setTimeout(() => {
-          copyBtn.innerText = originalText;
-          copyBtn.style.color = '';
-          copyBtn.style.borderColor = '';
-        }, 2200);
-      }
-      showToast('Email address copied to clipboard');
-    })
-    .catch((err) => {
-      console.error('Failed to copy email:', err);
-    });
-}
-
-function scrollToTop() {
-  if (lenis) {
-    lenis.scrollTo(0, {
-      duration: 1.45,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
-  } else {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
-}
-
-/**
- * ============================================================================
- * 10. DYNAMIC FOOTER MONUMENT WORDMARK AUTO-SCALER
- * Automatically measures and sizes RONIT to fit 100% of viewport width
- * with 0 clipping on any resolution (mobile, tablet, desktop, ultra-wide)
- * ============================================================================
- */
-function initFooterMonumentScale() {
-  const stage = document.querySelector('.footer-monument-stage');
-  const text = document.querySelector('.footer-monument-text');
-  if (!stage || !text) return;
-
-  function fitMonument() {
-    text.style.fontSize = '';
-    const stageWidth = stage.clientWidth;
-    if (stageWidth <= 0) return;
-
-    // Available target width with 2vw total safety padding
-    const usableWidth = stageWidth * 0.98;
-    const currentTextWidth = text.scrollWidth;
-
-    if (currentTextWidth > usableWidth && currentTextWidth > 0) {
-      const currentFontSize = parseFloat(window.getComputedStyle(text).fontSize);
-      const scale = usableWidth / currentTextWidth;
-      const targetFontSize = Math.floor(currentFontSize * scale);
-      text.style.fontSize = `${targetFontSize}px`;
+    if (contactActionCol) {
+      contactTl.from(
+        contactActionCol,
+        { opacity: 0, y: 22, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,transform' },
+        0.22
+      );
     }
   }
 
-  window.addEventListener('resize', fitMonument);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(fitMonument);
+  // Footer metadata & monumental wordmark
+  const footerRow = document.querySelector('.footer-restrained-row');
+  if (footerRow) {
+    gsap.from(footerRow, {
+      opacity: 0,
+      y: 16,
+      duration: 0.65,
+      ease: 'power2.out',
+      clearProps: 'opacity,transform',
+      scrollTrigger: {
+        trigger: '.site-footer',
+        start: 'top 90%',
+        toggleActions: 'play none none none',
+      },
+    });
   }
-  setTimeout(fitMonument, 50);
-  setTimeout(fitMonument, 250);
-  setTimeout(fitMonument, 600);
-  fitMonument();
+
+  const wordmark = document.getElementById('footer-wordmark');
+  if (wordmark) {
+    gsap.fromTo(
+      wordmark,
+      { opacity: 0.15, y: 24, scale: 0.96 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.85,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform,scale',
+        scrollTrigger: {
+          trigger: '.footer-monument-stage',
+          start: 'top 92%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }
 }
 
-// Auto-initialize when document is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initFooterMonumentScale);
-} else {
-  initFooterMonumentScale();
-}
+/**
+ * ============================================================================
+ * 5. WINDOW RESIZE & MEDIA QUERY LISTENER
+ * ============================================================================
+ */
+let resizeTimeout = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    initHorizontalGallery();
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+  }, 150);
+});
