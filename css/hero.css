@@ -1,328 +1,635 @@
 /* ==========================================================================
-   REFINED HERO SECTION (MONUMENTAL EDITORIAL TYPOGRAPHY)
+   SCENE 1: HERO — EXACT SEBASTIÁN MARTÍNEZ EDITORIAL LANDING PAGE
+   Creative Direction: Exact aesthetic twin of Sebastián Martínez's portfolio
+   Palette: Background Radiant Vermilion #FE3C01 · Typography Solid Black #000000 · Portrait Box #0A0A0C
+   Fonts: Aeonik Black (Headlines & Stamps), Aeonik Bold (Tags, Meta, CTA), Aeonik Medium (Details)
    ========================================================================== */
-.hero-stage {
-  padding: 55px 0 110px;
+
+.seb-hero-stage {
   position: relative;
+  background-color: #FE3C01;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-@keyframes pulseStatus {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
+/* Radiant Vermilion Canvas (#FE3C01) */
+.seb-hero-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: clamp(28px, 4vh, 48px) clamp(32px, 4vw, 56px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* --- UPPER-RIGHT TYPOGRAPHIC SCULPTURE --- */
+.seb-hero-upper-cluster {
+  position: absolute;
+  top: clamp(28px, 4vh, 48px);
+  right: clamp(32px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(1px, 0.25vh, 4px);
+  z-index: 5;
+}
+
+/* Base Display Row */
+.seb-typo-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
+}
+
+.seb-display-line {
+  font-family: 'Aeonik Black', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5.0vw, 5.2rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.seb-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.seb-word-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Row 1: HI, WELCOME [sticker] HOME */
+.row-welcome {
+  align-items: center;
+}
+
+/* Avatar Sticker (between WELCOME and HOME) */
+.seb-avatar-sticker {
+  display: inline-block;
+  width: clamp(52px, 4.8vw, 76px);
+  height: clamp(52px, 4.8vw, 76px);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid #000000;
+  background-color: #000000;
+  flex-shrink: 0;
+  margin: 0 clamp(8px, 1.2vw, 16px);
+  transform: rotate(-8deg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  vertical-align: middle;
+}
+
+.seb-avatar-sticker:hover {
+  transform: rotate(0deg) scale(1.08);
+}
+
+.seb-avatar-sticker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: contrast(1.1) brightness(0.98);
+  display: block;
+}
+
+/* Row 2: IT'S ME — RONIT® */
+.row-itsme {
+  justify-content: flex-end;
+}
+
+.seb-registered-mark {
+  font-family: 'Aeonik Black', sans-serif;
+  font-size: 0.42em;
+  font-weight: 900;
+  color: #000000;
+  transform: translateY(-0.4em);
+  margin-left: 2px;
+  user-select: none;
+}
+
+/* Row 3: DIGITAL, + Micro Tag */
+.row-digital {
+  justify-content: flex-end;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 38px);
+}
+
+/* Row 4: BACKEND, + Micro Tag */
+.row-backend {
+  justify-content: flex-end;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 38px);
+}
+
+/* Row 5: DEVELOPER + Micro Tag */
+.row-developer {
+  justify-content: flex-end;
+  align-items: center;
+  gap: clamp(14px, 2.0vw, 30px);
+}
+
+/* Micro-Notes (Black uppercase sans-serif tags positioned around typography) */
+.seb-micro-tag {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Aeonik Bold', -apple-system, sans-serif;
+  font-size: clamp(9px, 0.68vw, 12px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000000;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.tag-top-right {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.tag-mid-left {
+  align-self: center;
+}
+
+.tag-bottom-right {
+  align-self: flex-end;
+  margin-bottom: 3px;
+}
+
+/* --- BOTTOM-RIGHT DOCKED CLUSTER: RONIT®—'25 & → Let’s talk ← --- */
+.seb-hero-bottom-cluster {
+  position: absolute;
+  bottom: clamp(24px, 3.5vh, 40px);
+  right: clamp(32px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(8px, 1.4vh, 16px);
+  z-index: 5;
+}
+
+.seb-year-stamp {
+  font-family: 'Aeonik Black', -apple-system, sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.4rem, 7.8vw, 8.2rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  color: #000000;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: baseline;
+  user-select: none;
+}
+
+.seb-stamp-reg {
+  font-size: 0.42em;
+  transform: translateY(-0.35em);
+  margin: 0 1px;
+  font-weight: 900;
+}
+
+.seb-stamp-dash {
+  margin: 0 1px;
+}
+
+.seb-talk-cta {
+  font-family: 'Aeonik Bold', -apple-system, sans-serif;
+  font-size: clamp(13px, 0.95vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #000000;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.seb-talk-cta:hover {
+  opacity: 0.7;
+  transform: translateX(3px);
+}
+
+/* --- BOTTOM-LEFT DOCKED BLACK PORTRAIT CARD --- */
+.seb-portrait-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: clamp(360px, 38vw, 540px);
+  height: clamp(420px, 62vh, 600px);
+  background-color: #0A0A0C;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 12px -8px 36px rgba(0, 0, 0, 0.16);
+}
+
+.seb-portrait-image-wrapper {
+  width: 100%;
+  height: calc(100% - 64px);
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.seb-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: contrast(1.1) brightness(0.95);
+  display: block;
+}
+
+.seb-portrait-meta {
+  height: 64px;
+  padding: 10px clamp(16px, 2vw, 24px);
+  background-color: #0A0A0C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Aeonik Bold', -apple-system, sans-serif;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.meta-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #FFFFFF;
+}
+
+.meta-name {
+  font-weight: 700;
+  color: #FFFFFF;
+  font-size: 13px;
+}
+
+.meta-copy {
+  color: #888888;
+  font-size: 11px;
+  font-family: 'Aeonik Medium', -apple-system, sans-serif;
+}
+
+.meta-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+
+.meta-col-right a {
+  color: #D0D0D8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.meta-col-right a:hover {
+  color: #FE3C01;
+}
+
+/* ADJACENT BOTTOM LINKS (On orange background directly next to black card) */
+.seb-adjacent-links {
+  position: absolute;
+  bottom: clamp(20px, 3vh, 32px);
+  left: calc(clamp(360px, 38vw, 540px) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Aeonik Bold', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  z-index: 5;
+}
+
+.seb-adjacent-link {
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.seb-adjacent-link:hover {
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTATIONS FOR TABLET & MOBILE
+   ========================================================================== */
+@media screen and (max-width: 991px) {
+  .seb-hero-stage {
+    height: auto;
+    min-height: 100vh;
   }
-  50% {
-    opacity: 0.4;
-    transform: scale(0.85);
+
+  .seb-hero-canvas {
+    padding: 24px 20px 32px;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .seb-hero-upper-cluster {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .seb-display-line {
+    font-size: clamp(1.8rem, 6.2vw, 3.2rem);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .row-welcome,
+  .row-itsme,
+  .row-digital,
+  .row-backend,
+  .row-developer {
+    justify-content: flex-start;
+  }
+
+  .seb-hero-bottom-cluster {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    align-items: flex-start;
+    margin: 20px 0;
+  }
+
+  .seb-year-stamp {
+    font-size: clamp(2.4rem, 9vw, 4.4rem);
+  }
+
+  .seb-portrait-card {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    max-width: 360px;
+    height: 420px;
+    margin: 24px 0 16px;
+  }
+
+  .seb-adjacent-links {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .seb-hero-canvas {
+    padding: 18px 16px 28px;
+  }
+
+  .seb-display-line {
+    font-size: clamp(1.4rem, 6.8vw, 2.0rem);
+  }
+
+  .seb-avatar-sticker {
+    width: 36px;
+    height: 36px;
+    margin: 0 4px;
+  }
+
+  .seb-micro-tag {
+    font-size: 9px;
+  }
+
+  .seb-portrait-card {
+    max-width: 100%;
+    height: 380px;
+  }
+
+  .seb-year-stamp {
+    font-size: clamp(2.0rem, 9.8vw, 2.8rem);
   }
 }
 
 /* ==========================================================================
-   HERO UPPER GRID & 3D CARTOON CHARACTER
+   SCENE 2: CINEMATIC EDITORIAL BRIDGE (HERO TO WORK)
+   Creative Direction: From Typography to Architecture
+   Palette: Background #0B0B0C · Text #F0EFEA / #898991 · Lines #29292D · Accent #E6533D
    ========================================================================== */
-.hero-upper-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 48px;
-  align-items: center;
-  margin: 16px 0 40px;
+
+.hero-transition-scene {
+  position: relative;
+  background-color: #FE3C01;
+  width: 100%;
 }
 
-.hero-title-canvas {
-  margin: 0;
+/* Progressive Enhancement: Desktop Layering only when JS animation engine is primed */
+@media screen and (min-width: 769px) {
+  .js-transition-ready .hero-transition-scene {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .js-transition-ready .hero-stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .js-transition-ready .editorial-bridge-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Editorial Bridge Section Base Presentation */
+.editorial-bridge-section {
+  position: relative;
+  background-color: var(--color-bg);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0;
 }
 
-/* 3D Cartoon Hero Character */
-.hero-character-stage {
+.bridge-structural-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border-hairline);
+  position: relative;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+.bridge-line-top {
+  border: none;
+}
+
+.bridge-line-bottom {
+  border: none;
+}
+
+.bridge-container {
+  padding-top: clamp(48px, 8vh, 96px);
+  padding-bottom: clamp(48px, 8vh, 96px);
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
-  position: relative;
-  padding-right: 12px;
+  text-align: center;
 }
 
-.hero-character-card {
-  position: relative;
-  width: 410px;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: heroCharacterFloat 5s ease-in-out infinite;
-  will-change: transform;
+.bridge-statement-wrap {
+  max-width: 1020px;
+  margin: 0 auto;
+  will-change: transform, opacity;
 }
 
-@keyframes heroCharacterFloat {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-14px) rotate(1deg);
-  }
-}
-
-.hero-character-img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 32px rgba(15, 16, 19, 0.08));
-  transition: transform var(--duration-normal) var(--ease-editorial),
-              filter var(--duration-normal) var(--ease-editorial);
-}
-
-.hero-character-card:hover .hero-character-img {
-  transform: scale(1.05) rotate(-2deg);
-  filter: drop-shadow(0 26px 40px rgba(15, 16, 19, 0.12));
-}
-
-.character-greeting-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border-subtle);
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: var(--type-mono-sm);
-  letter-spacing: 0.08em;
+/* Stage C — Editorial Statement Typography */
+.bridge-quote {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.1rem, 3.9vw, 3.75rem);
+  line-height: 1.32;
+  letter-spacing: -0.025em;
   color: var(--color-text-primary);
-  font-weight: 600;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  margin-bottom: 8px;
-  margin-top: 0;
-  z-index: 2;
-  transition: all var(--duration-fast);
-  user-select: none;
-}
-
-.hero-character-card:hover .character-greeting-tag {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0 8px 24px rgba(255, 62, 24, 0.15);
-  transform: translateY(-2px);
-}
-
-
-.hero-line-mask {
-  overflow: hidden;
-  line-height: 0.92;
-  padding-bottom: 6px;
+  margin: 0;
   display: block;
 }
 
-.hero-giant-word {
-  font-family: var(--font-display);
-  font-size: var(--type-hero-display);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
-  color: var(--color-text-primary);
+.quote-line {
+  display: block;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.quote-line-inner {
   display: block;
   will-change: transform, opacity;
 }
 
-.hero-line-mask:nth-child(1) .hero-giant-word {
-  color: var(--color-text-primary);
-}
-
-.hero-line-mask:nth-child(2) .hero-giant-word {
-  color: var(--color-text-primary);
-}
-
-.hero-line-mask:nth-child(3) .hero-giant-word {
-  color: var(--color-text-secondary);
-  font-weight: 700;
-}
-
-.hero-accent-period {
-  color: var(--color-accent);
-}
-
-/* 3. Bottom Asymmetric Narrative & Action Grid */
-.hero-lower-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 0.95fr;
-  gap: 64px;
-  align-items: start;
-  padding-top: 36px;
-  border-top: 1px solid var(--color-border-hairline);
-}
-
-.hero-narrative-col {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.hero-statement-text {
-  font-size: clamp(1.1rem, 2vw, 1.32rem);
-  color: var(--color-text-secondary);
-  line-height: 1.65;
-  max-width: 640px;
-}
-
-.hero-statement-text strong {
-  color: var(--color-text-primary);
-  font-weight: 600;
-}
-
-.hero-credentials-tag {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: var(--type-mono-sm);
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.hero-credentials-tag .sep {
-  color: var(--color-accent);
-}
-
-/* Editorial CTA Row */
-.hero-cta-ensemble {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: flex-start;
-}
-
-.hero-primary-actions {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-
-/* Minimal Action 1: View Work (Refined box with slide-fill and arrow displacement) */
-.action-editorial-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-mono);
-  font-size: var(--type-label);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--color-text-primary);
-  padding: 13px 24px;
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-medium);
-  position: relative;
-  overflow: hidden;
-  transition: border-color var(--duration-normal) var(--ease-editorial),
-              color var(--duration-normal) var(--ease-editorial),
-              transform var(--duration-normal) var(--ease-editorial);
-  z-index: 1;
-}
-
-.action-editorial-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--duration-normal) var(--ease-editorial);
-  z-index: -1;
-}
-
-.action-editorial-btn .btn-arrow {
-  display: inline-block;
-  font-family: var(--font-body);
+.serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
   font-weight: 400;
-  transition: transform var(--duration-normal) var(--ease-editorial);
-}
-
-.action-editorial-btn:hover {
+  letter-spacing: -0.01em;
   color: #ffffff;
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
+  padding: 0 0.06em;
+  background-color: #FE3C01;
 }
 
-.action-editorial-btn:hover::before {
-  transform: scaleX(1);
-}
-
-.action-editorial-btn:hover .btn-arrow {
-  transform: translateY(3px);
-}
-
-/* Minimal Action 2: Get In Touch (Editorial underline with diagonal displacement) */
-.action-editorial-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: var(--type-label);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--color-text-secondary);
-  position: relative;
-  padding-bottom: 4px;
-  transition: color var(--duration-fast) var(--ease-standard);
-}
-
-.action-editorial-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1.5px;
-  background-color: var(--color-border-medium);
-  transition: background-color var(--duration-fast) var(--ease-standard),
-              transform var(--duration-fast) var(--ease-standard);
-  transform-origin: left;
-}
-
-.action-editorial-link .link-arrow {
-  display: inline-block;
-  font-family: var(--font-body);
-  transition: transform var(--duration-fast) var(--ease-standard);
-}
-
-.action-editorial-link:hover {
-  color: var(--color-accent);
-}
-
-.action-editorial-link:hover::after {
-  background-color: var(--color-accent);
-}
-
-.action-editorial-link:hover .link-arrow {
-  transform: translate(3px, -3px);
-}
-
-/* Aux links strip */
-.hero-aux-links {
+/* Stage D — Architectural Bridge toward Selected Work */
+.bridge-forward-lead {
+  margin-top: clamp(44px, 6.5vh, 76px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 14px;
+  will-change: transform, opacity;
+}
+
+.forward-axis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.axis-line {
+  width: 1px;
+  height: 36px;
+  background-color: var(--color-border-hairline);
+  display: block;
+  will-change: transform;
+  transform-origin: top center;
+}
+
+.axis-node {
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  margin-top: -2px;
+}
+
+.forward-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   font-family: var(--font-mono);
-  font-size: var(--type-mono-sm);
-  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.hero-aux-links a {
+.forward-index {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.forward-separator {
+  color: var(--color-border-hairline);
+}
+
+.forward-label {
   color: var(--color-text-secondary);
-  transition: color var(--duration-fast) var(--ease-standard);
+  font-weight: 500;
 }
 
-.hero-aux-links a:hover {
-  color: var(--color-text-primary);
+.forward-arrow {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  display: inline-block;
+  animation: bridgeGuidePulse 2.4s ease-in-out infinite;
 }
 
-.hero-aux-links .dot-sep {
-  color: var(--color-border-medium);
+@keyframes bridgeGuidePulse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
 }
