@@ -1,1052 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO & Metadata -->
-    <title>Ronit Tambe — Full-Stack &amp; Backend Software Developer</title>
-    <meta
-      name="description"
-      content="Software Developer specializing in Full-Stack and Backend Engineering with Java, Spring Boot, REST APIs, Microservices, React, Next.js, and SQL databases."
-    />
-    <meta name="author" content="Ronit Tambe" />
-    <meta name="theme-color" content="#090a0d" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ronit Tambe — Full-Stack &amp; Backend Software Developer" />
-    <meta
-      property="og:description"
-      content="Engineering portfolio, architecture case studies, and full-stack software built by Ronit Tambe. Java, Spring Boot, REST APIs, MySQL, React."
-    />
+  <!-- SEO & Metadata -->
+  <title>Ronit Tambe — Full Stack Developer</title>
+  <meta name="description"
+    content="Full Stack Developer specializing in Java, Spring Boot, React.js, MySQL, REST APIs, and modern web applications. Based in Pune, India." />
+  <meta name="author" content="Ronit Tambe" />
+  <meta name="theme-color" content="#0B0B0C" />
 
-    <!-- Favicon & Typography -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ronit Tambe — Full Stack Developer" />
+  <meta property="og:description"
+    content="Portfolio and software projects built by Ronit Tambe. Specializing in Java, Spring Boot, React.js, and full-stack development." />
 
-    <!-- Modular Stylesheets -->
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/cursor.css" />
-    <link rel="stylesheet" href="css/preloader.css?v=2.9" />
-    <link rel="stylesheet" href="css/hero.css" />
-    <link rel="stylesheet" href="css/projects.css" />
-    <link rel="stylesheet" href="css/skills.css" />
-    <link rel="stylesheet" href="css/about.css" />
-    <link rel="stylesheet" href="css/contact.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-  </head>
-  <body>
-    <!-- ==========================================================================
-         FLUID INVERSION / DIFFERENCE STENCIL CURSOR
+  <!-- Favicon & Typography -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="css/base.css?v=2" />
+  <link rel="stylesheet" href="css/cursor.css?v=2" />
+  <link rel="stylesheet" href="css/hero.css?v=2" />
+  <link rel="stylesheet" href="css/projects.css?v=2" />
+  <link rel="stylesheet" href="css/skills.css?v=2" />
+  <link rel="stylesheet" href="css/about.css?v=2" />
+  <link rel="stylesheet" href="css/contact.css?v=2" />
+  <link rel="stylesheet" href="css/responsive.css?v=2" />
+</head>
+
+<body>
+  <!-- Keyboard Accessibility: Skip to Primary Content -->
+  <a href="#work" class="skip-to-content">Skip to content</a>
+  <!-- ==========================================================================
+         PRECISION RETICLE CURSOR
          ========================================================================== -->
-    <div class="cursor-stencil" id="cursor-stencil" aria-hidden="true"></div>
-    <div class="cursor-stencil-dot" id="cursor-stencil-dot" aria-hidden="true"></div>
+  <div class="cursor-stencil" id="cursor-stencil" aria-hidden="true"></div>
+  <div class="cursor-stencil-dot" id="cursor-stencil-dot" aria-hidden="true"></div>
 
-    <!-- ==========================================================================
-         SWISS EDITORIAL LOADING EXPERIENCE (TWO-PANEL CURTAIN & IDENTITY REVEAL)
+  <!-- ==========================================================================
+         PERSISTENT EDITORIAL NAVBAR
          ========================================================================== -->
-    <div id="preloader-overlay" class="editorial-preloader" aria-hidden="false">
-      <!-- Two-Panel Warm-White Curtain (#F7F7F2) -->
-      <div class="curtain-panel curtain-left" id="curtain-left"></div>
-      <div class="curtain-panel curtain-right" id="curtain-right"></div>
+  <header class="site-header" id="site-header">
+    <div class="container navbar">
+      <a href="#hero" class="nav-brand" aria-label="Ronit Tambe — Full Stack Developer">
+        <span>Ronit Tambe</span>
+      </a>
 
-      <!-- Centered Minimalist Identity Composition -->
-      <div class="editorial-identity-stage" id="identity-stage">
-        <!-- Stage 1: Monogram (Space Grotesk, Bold, Cobalt Blue) -->
-        <div class="monogram-wrapper" id="monogram-wrapper">
-          <span class="editorial-monogram">RT.</span>
-        </div>
-
-        <!-- Stage 2: Typographic Name Reveal (Behind invisible clipping boundary) -->
-        <div class="identity-name-mask">
-          <h1 class="editorial-identity-name" id="identity-name">RONIT TAMBE</h1>
-        </div>
-
-        <!-- Cobalt Blue Horizontal Divider Line -->
-        <div class="identity-divider-track">
-          <div class="identity-divider-line" id="identity-line"></div>
-        </div>
-
-        <!-- Role Subtitle (Masked vertical reveal) -->
-        <div class="identity-role-mask">
-          <span class="editorial-identity-role" id="identity-role">FULL STACK DEVELOPER</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==========================================================================
-         MINIMAL EDITORIAL NAVBAR
-         ========================================================================== -->
-    <header class="site-header" id="site-header">
-      <div class="container navbar">
-        <a href="#hero" class="nav-brand" aria-label="Ronit Tambe Homepage">
-          <span class="nav-brand-dot"></span>
-          <span>Ronit Tambe</span>
-        </a>
-
-        <!-- Desktop Navigation Menu -->
-        <nav class="nav-menu" aria-label="Main Navigation">
-          <a href="#projects" class="nav-link">Work</a>
-          <a href="#about" class="nav-link">About</a>
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#contact" class="nav-link">Contact</a>
-        </nav>
-
-        <!-- Right Action & Mobile Trigger -->
-        <div class="nav-actions">
-          <a
-            href="./assets/resume-example.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="nav-cv-btn"
-          >
-            CV ↗
-          </a>
-
-          <button
-            class="mobile-menu-trigger"
-            id="mobile-menu-trigger"
-            aria-label="Toggle Navigation Menu"
-            aria-expanded="false"
-          >
-            <span id="menu-text">Menu</span>
-            <div class="mobile-menu-icon">
-              <span></span>
-              <span></span>
-            </div>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Fullscreen Editorial Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true">
-      <nav class="mobile-nav-links">
-        <a href="#projects" class="mobile-nav-item" onclick="closeMobileMenu()">
-          <span>01</span> Work
-        </a>
-        <a href="#about" class="mobile-nav-item" onclick="closeMobileMenu()">
-          <span>02</span> About
-        </a>
-        <a href="#skills" class="mobile-nav-item" onclick="closeMobileMenu()">
-          <span>03</span> Skills
-        </a>
-        <a href="#contact" class="mobile-nav-item" onclick="closeMobileMenu()">
-          <span>04</span> Contact
-        </a>
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
-      <div class="mobile-overlay-footer">
-        <div>Pune, India · Available for roles</div>
-        <div class="mobile-overlay-socials">
-          <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-          <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">CV (PDF) ↗</a>
-        </div>
+      <!-- Right Action & Mobile Trigger -->
+      <div class="nav-actions">
+        <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv-btn">
+          CV ↗
+        </a>
+
+        <button class="mobile-menu-trigger" id="mobile-menu-trigger" aria-label="Toggle Navigation Menu"
+          aria-expanded="false">
+          <span id="menu-text">Menu</span>
+          <div class="mobile-menu-icon">
+            <span></span>
+            <span></span>
+          </div>
+        </button>
       </div>
     </div>
+  </header>
 
-    <!-- MAIN CONTENT -->
-    <main>
-      <!-- ==========================================================================
-           HERO SECTION (MONUMENTAL EDITORIAL TYPOGRAPHY)
+  <!-- Fullscreen Editorial Mobile Navigation Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true">
+    <nav class="mobile-nav-links">
+      <a href="#work" class="mobile-nav-item" onclick="closeMobileMenu()">
+        <span>01</span> Work
+      </a>
+      <a href="#skills" class="mobile-nav-item" onclick="closeMobileMenu()">
+        <span>02</span> Skills
+      </a>
+      <a href="#about" class="mobile-nav-item" onclick="closeMobileMenu()">
+        <span>03</span> About
+      </a>
+      <a href="#contact" class="mobile-nav-item" onclick="closeMobileMenu()">
+        <span>04</span> Contact
+      </a>
+    </nav>
+
+    <div class="mobile-overlay-footer">
+      <div>Pune, India · Available for roles</div>
+      <div class="mobile-overlay-socials">
+        <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn
+          ↗</a>
+        <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">CV (PDF) ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- ==========================================================================
+           CINEMATIC HERO-TO-WORK TRANSITION STAGE
+           Creative Direction: From Typography to Architecture
+           Stages A-D: Receding Hero -> Typographic Transformation -> Editorial Statement -> Bridge to Work
            ========================================================================== -->
-      <section id="hero" class="hero-stage">
-        <div class="container">
-          <!-- Hero Upper Grid: Typography on Left, Character on Right -->
-          <div class="hero-upper-grid">
-            <div class="hero-title-canvas">
-              <div class="hero-line-mask">
-                <h1 class="hero-giant-word hero-name">
-                  RONIT TAMBE
-                </h1>
-              </div>
-              <div class="hero-line-mask">
-                <span class="hero-giant-word hero-role-line1">
-                  FULL-STACK
+    <div class="hero-transition-scene" id="hero-transition-scene">
+      <!-- ==========================================================================
+             SCENE 1: HERO — TYPE AS ARCHITECTURE
+             ========================================================================== -->
+      <!-- ==========================================================================
+             SCENE 1: HERO — EXACT SEBASTIÁN MARTÍNEZ EDITORIAL ARCHITECTURE
+             ========================================================================== -->
+      <section id="hero" class="hero-stage seb-hero-stage">
+        <!-- Main Radiant Vermilion Editorial Canvas (#FE3C01) -->
+        <div class="seb-hero-canvas">
+
+          <!-- UPPER-RIGHT TYPOGRAPHIC SCULPTURE -->
+          <div class="seb-hero-upper-cluster">
+
+            <!-- Row 1: HI, WELCOME [sticker] HOME -->
+            <div class="seb-typo-row row-welcome">
+              <h1 class="seb-display-line">
+                <span class="seb-word-mask"><span class="seb-word-inner">HI, WELCOME</span></span>
+                <span class="seb-avatar-sticker" aria-hidden="true">
+                  <img src="./assets/profile-pic.webp" alt="Ronit" />
                 </span>
-              </div>
-              <div class="hero-line-mask">
-                <span class="hero-giant-word hero-role-line2">
-                  DEVELOPER<span class="hero-accent-period">.</span>
-                </span>
+                <span class="seb-word-mask"><span class="seb-word-inner">HOME</span></span>
+              </h1>
+            </div>
+
+            <!-- Row 2: IT'S ME — RONIT® -->
+            <div class="seb-typo-row row-itsme">
+              <div class="seb-display-line">
+                <span class="seb-word-mask"><span class="seb-word-inner">IT’S ME — RONIT</span></span>
+                <span class="seb-registered-mark">®</span>
               </div>
             </div>
 
-            <div class="hero-character-stage">
-              <div class="hero-character-card">
-                <div class="character-greeting-tag">
-                  <span class="greeting-text">HI, I'M RONIT </span>
-                </div>
-                <img
-                  src="./assets/hero-character.webp"
-                  alt="Cute 3D Cartoon Developer Character Waving Hi"
-                  class="hero-character-img"
-                  loading="eager"
-                />
+            <!-- Row 3: DIGITAL, + Top-Right Micro Tag -->
+            <div class="seb-typo-row row-digital">
+              <div class="seb-micro-tag tag-top-right">
+                <span>JAVA, SPRING BOOT</span>
+                <span>MICROSERVICES, APIS</span>
+              </div>
+              <div class="seb-display-line">
+                <span class="seb-word-mask"><span class="seb-word-inner">JAVA,</span></span>
+              </div>
+            </div>
+
+            <!-- Row 4: BACKEND, + Mid-Left Micro Tag -->
+            <div class="seb-typo-row row-backend">
+              <div class="seb-micro-tag tag-mid-left">
+                <span>REACT, NEXT.JS</span>
+                <span>MYSQL, DOCKER</span>
+              </div>
+              <div class="seb-display-line">
+                <span class="seb-word-mask"><span class="seb-word-inner">BACKEND,</span></span>
+              </div>
+            </div>
+
+            <!-- Row 5: DEVELOPER + Bottom-Right Micro Tag -->
+            <div class="seb-typo-row row-developer">
+              <div class="seb-display-line">
+                <span class="seb-word-mask"><span class="seb-word-inner">DEVELOPER</span></span>
+              </div>
+              <div class="seb-micro-tag tag-bottom-right">
+                <span>IN THE END, I’M</span>
+                <span>JUST A DEVELOPER</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BOTTOM-RIGHT DOCKED CLUSTER: RONIT®—'25 & → Let’s talk ← -->
+          <div class="seb-hero-bottom-cluster">
+            <div class="seb-year-stamp">
+              <span class="seb-stamp-text">RONIT</span>
+              <span class="seb-stamp-reg">®</span>
+              <span class="seb-stamp-dash">—</span>
+              <span class="seb-stamp-year">’25</span>
+            </div>
+            <a href="#contact" class="seb-talk-cta">
+              → Let’s talk ←
+            </a>
+          </div>
+
+          <!-- BOTTOM-LEFT DOCKED BLACK PORTRAIT CARD -->
+          <div class="seb-portrait-card">
+            <div class="seb-portrait-image-wrapper">
+              <img src="./assets/profile-pic.webp" alt="Ronit Tambe — Full Stack Developer based in Pune, India"
+                class="seb-portrait-img" width="600" height="600" loading="eager" />
+            </div>
+            <div class="seb-portrait-meta">
+              <div class="meta-col-left">
+                <span class="meta-name">Ronit Tambe — 25</span>
+                <span class="meta-copy">@Copyright 2025</span>
+              </div>
+              <div class="meta-col-right">
+                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank"
+                  rel="noopener noreferrer">LinkedIn</a>
               </div>
             </div>
           </div>
 
-          <!-- 3. Asymmetric Narrative Spread & Refined Actions -->
-          <div class="hero-lower-grid">
-            <div class="hero-narrative-col">
-              <p class="hero-statement-text">
-                I build web applications, backend systems, and APIs with <strong>Java, Spring Boot, MySQL</strong>, and <strong>React / modern web technologies</strong> — engineered for scalability, transactional safety, and performance.
+          <!-- ADJACENT BOTTOM LINKS (Directly on orange floor next to black card) -->
+          <div class="seb-adjacent-links">
+            <a href="mailto:ronittambe116@gmail.com" class="seb-adjacent-link">Email</a>
+            <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer" class="seb-adjacent-link">CV
+              / Resume</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+             SCENE 2: EDITORIAL TRANSITION STATEMENT
+             Stage C: Editorial Statement Emerges
+             Stage D: Bridge toward Selected Work
+             ========================================================================== -->
+      <section class="editorial-bridge-section" id="editorial-bridge" aria-label="Editorial Statement">
+        <!-- Top Bridge Framing Line -->
+        <div class="hero-structural-line bridge-line-top" aria-hidden="true"></div>
+
+        <div class="container bridge-container">
+          <div class="bridge-statement-wrap">
+            <blockquote class="bridge-quote">
+              <span class="quote-line quote-line-1"><span class="quote-line-inner">Focused on <span
+                    class="serif-italic">clean
+                    architecture</span>,</span></span>
+              <span class="quote-line quote-line-2"><span class="quote-line-inner">reliable database
+                  design,</span></span>
+              <span class="quote-line quote-line-3"><span class="quote-line-inner">and <span
+                    class="serif-italic">intuitive user
+                    interfaces</span>.</span></span>
+            </blockquote>
+          </div>
+
+          <!-- Bottom Bridge Framing Line -->
+          <!-- <div class="hero-structural-line bridge-line-bottom" aria-hidden="true"></div> -->
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+           SCENE 3: THE ENGINEERING GALLERY (SELECTED WORK / 01—03)
+           Creative Direction: An Editorial Exhibition of Software
+           Desktop: Pinned Horizontal Journey · Mobile: Natural Vertical Sequence
+           ========================================================================== -->
+    <section id="work" class="section horizontal-gallery-section" aria-label="The Engineering Gallery">
+      <!-- Restrained Gallery Identifier Bar -->
+      <div class="gallery-exhibition-header">
+        <div class="gallery-header-left">
+          <h2 class="gallery-identifier">SELECTED WORK / 01—03</h2>
+        </div>
+      </div>
+
+      <!-- Horizontal Project Track Viewport -->
+      <div class="horizontal-gallery-viewport">
+        <div class="horizontal-track" id="horizontal-track">
+
+          <!-- ================================================================
+                 PROJECT SCENE 01: FREELANCE MARKETPLACE
+                 Composition Rhythm: Asymmetric Lateral Architecture
+                 ================================================================ -->
+          <article class="project-scene scene-freelance" data-project="freelance-marketplace"
+            aria-labelledby="project-title-01">
+            <div class="scene-inner scene-layout-split">
+              <!-- Textual Architecture Column -->
+              <div class="scene-editorial-column">
+                <div class="scene-meta-header">
+                  <span class="scene-index">01</span>
+                  <span class="scene-category">FULL-STACK PLATFORM</span>
+                </div>
+
+                <h3 class="scene-project-title" id="project-title-01">
+                  <span class="scene-title-mask"><span class="scene-title-inner">Freelance Marketplace</span></span>
+                </h3>
+
+                <p class="scene-project-description">
+                  A multi-role service platform connecting clients and independent developers. Supports gig discovery,
+                  client proposal workflows, direct order management, a simulated wallet transaction system, and two-way
+                  client reviews. Built with a modular Spring Boot backend, Spring Security with stateless JWT
+                  role-based access control, relational database schema in MySQL managed via Hibernate, and a responsive
+                  React client interface.
+                </p>
+
+                <div class="scene-tech-manifest">
+                  <span class="tech-manifest-label">TECHNOLOGY /</span>
+                  <span class="tech-manifest-items">Java 17 · Spring Boot 3 · Spring Security · JWT · MySQL · Hibernate
+                    · Docker · React</span>
+                </div>
+
+                <div class="scene-actions-strip">
+                  <a href="https://github.com/ronit1161/Freelance-Marketplace" target="_blank" rel="noopener noreferrer"
+                    class="scene-action-link" aria-label="View Freelance Marketplace repository on GitHub">
+                    <span>GitHub Repository</span>
+                    <span class="action-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Visual Architecture Column -->
+              <div class="scene-visual-column">
+                <div class="scene-image-frame">
+                  <img src="./assets/freelance.webp"
+                    alt="Freelance Marketplace platform interface and gig order workflow" loading="lazy" width="1919"
+                    height="948" class="scene-image" />
+                  <div class="frame-tick-top-left" aria-hidden="true"></div>
+                  <div class="frame-tick-bottom-right" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================================================================
+                 PROJECT SCENE 02: FOOD ORDERING PLATFORM
+                 Composition Rhythm: Inverted Rhythm / Wide Monolith Frame
+                 ================================================================ -->
+          <article class="project-scene scene-food" data-project="food-ordering" aria-labelledby="project-title-02">
+            <div class="scene-inner scene-layout-stacked">
+              <!-- Visual Architecture Monolith -->
+              <div class="scene-visual-monolith">
+                <div class="scene-image-frame">
+                  <img src="./assets/food ordering.webp"
+                    alt="Food Ordering Platform culinary commerce interface and checkout" loading="lazy" width="1895"
+                    height="927" class="scene-image" />
+                  <div class="frame-tick-top-left" aria-hidden="true"></div>
+                  <div class="frame-tick-bottom-right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Dual-Column Lower Foundation -->
+              <div class="scene-stacked-lower">
+                <div class="stacked-heading-col">
+                  <div class="scene-meta-header">
+                    <span class="scene-index">02</span>
+                    <span class="scene-category">FULL-STACK COMMERCE</span>
+                  </div>
+                  <h3 class="scene-project-title" id="project-title-02">
+                    <span class="scene-title-mask"><span class="scene-title-inner">Food Ordering Platform</span></span>
+                  </h3>
+                  <div class="scene-actions-strip">
+                    <a href="https://food-ordering-app-roan.vercel.app/" target="_blank" rel="noopener noreferrer"
+                      class="scene-action-btn" aria-label="Launch Food Ordering Platform live application">
+                      <span>Live Demo</span>
+                      <span class="action-arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <a href="https://github.com/ronit1161/food-ordering" target="_blank" rel="noopener noreferrer"
+                      class="scene-action-link" aria-label="View Food Ordering Platform repository on GitHub">
+                      <span>GitHub Repository</span>
+                      <span class="action-arrow" aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="stacked-details-col">
+                  <p class="scene-project-description">
+                    A full-stack culinary commerce web platform built with Next.js and React. Integrates NextAuth for
+                    session authentication with protected user account routes, dynamic food category navigation,
+                    persistent shopping cart state management, and online payment processing via Razorpay.
+                  </p>
+                  <div class="scene-tech-manifest">
+                    <span class="tech-manifest-label">TECHNOLOGY /</span>
+                    <span class="tech-manifest-items">Next.js 14 · React · MongoDB · NextAuth · Razorpay · Tailwind
+                      CSS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================================================================
+                 PROJECT SCENE 03: EXPENSE TRACKER
+                 Composition Rhythm: Editorial Conclusion & Architectural Handoff
+                 ================================================================ -->
+          <article class="project-scene scene-expense" data-project="expense-tracker"
+            aria-labelledby="project-title-03">
+            <div class="scene-inner scene-layout-concluding">
+              <!-- Visual Architecture Dominant Column -->
+              <div class="scene-visual-column">
+                <div class="scene-image-frame">
+                  <img src="./assets/expense tracker.webp"
+                    alt="Expense Tracker financial metrics dashboard and transaction logs" loading="lazy" width="1898"
+                    height="934" class="scene-image" />
+                  <div class="frame-tick-top-left" aria-hidden="true"></div>
+                  <div class="frame-tick-bottom-right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Architectural Handoff & Editorial Details Column -->
+              <div class="scene-editorial-column">
+                <div class="scene-meta-header">
+                  <span class="scene-index">03</span>
+                  <span class="scene-category">PERSONAL FINANCE &amp; REST APIS</span>
+                </div>
+
+                <h3 class="scene-project-title" id="project-title-03">
+                  <span class="scene-title-mask"><span class="scene-title-inner">Expense Tracker</span></span>
+                </h3>
+
+                <p class="scene-project-description">
+                  A personal finance dashboard pairing a structured Express REST backend with a normalized MySQL
+                  database. Implements transaction logging, debit/credit categorization, flexible date filtering, and
+                  reactive client-side spending breakdowns on a fast React + Vite interface.
+                </p>
+
+                <div class="scene-tech-manifest">
+                  <span class="tech-manifest-label">TECHNOLOGY /</span>
+                  <span class="tech-manifest-items">React · Vite · Node.js · Express · MySQL · REST APIs · Tailwind
+                    CSS</span>
+                </div>
+
+                <div class="scene-actions-strip">
+                  <a href="https://expense-tracker-react-sage.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    class="scene-action-btn" aria-label="Launch Expense Tracker live application">
+                    <span>Live Demo</span>
+                    <span class="action-arrow" aria-hidden="true">↗</span>
+                  </a>
+                  <a href="https://github.com/ronit1161/expense-tracker-react" target="_blank" rel="noopener noreferrer"
+                    class="scene-action-link" aria-label="View Expense Tracker repository on GitHub">
+                    <span>GitHub Repository</span>
+                    <span class="action-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+
+                <!-- Architectural Forward Transition to Next Section -->
+                <div class="scene-gallery-handoff" aria-hidden="true">
+                  <span class="handoff-line"></span>
+                  <span class="handoff-text">NEXT: TECHNICAL EXPERTISE</span>
+                  <span class="handoff-arrow">→</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+           SCENE 4: TECHNICAL EXPERTISE MATRIX (SKILLS)
+           ========================================================================== -->
+    <!-- ==========================================================================
+           SCENE 4: THE ARCHITECTURAL INDEX
+           Creative Direction: Technical Expertise as an Editorial System
+           ========================================================================== -->
+    <section id="skills" class="section architectural-index-section" aria-label="The Architectural Index">
+      <!-- Top Structural Framing Line -->
+      <div class="index-structural-line" aria-hidden="true"></div>
+
+      <div class="container index-container">
+        <!-- Level A: Section Introduction -->
+        <div class="index-intro-header">
+          <div class="index-heading-block">
+            <span class="index-badge">02 / EXPERTISE</span>
+            <h2 class="index-display-title">THE ARCHITECTURAL INDEX</h2>
+          </div>
+          <div class="index-statement-block">
+            <p class="index-statement-text">
+              Tools and technologies I use to design, build, and connect modern web applications.
+            </p>
+          </div>
+        </div>
+
+        <!-- Level B: Four Engineering Domains Grid -->
+        <div class="index-domains-grid" role="region" aria-label="Engineering Domains Matrix">
+
+          <!-- Domain 01: Backend Engineering -->
+          <article class="domain-column" tabindex="0" aria-labelledby="domain-title-01">
+            <div class="domain-accent-line" aria-hidden="true"></div>
+            <div class="domain-header">
+              <div class="domain-numeral-mask"><span class="domain-numeral">01</span></div>
+              <h3 class="domain-title" id="domain-title-01">Backend Engineering</h3>
+              <p class="domain-summary">
+                Building application logic, secure APIs, and maintainable backend services.
               </p>
-              <div class="hero-credentials-tag">
-                <span>CDAC PG-DAC (Sunbeam)</span>
-                <span class="sep">/</span>
-                <span>B.E. Electronics &amp; Telecommunication</span>
+            </div>
+            <div class="domain-tech-manifest">
+              <ul class="domain-tech-list" aria-label="Backend technologies">
+                <li class="domain-tech-item"><span class="tech-item-name">Java</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Spring Boot</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Spring Security</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Spring Data JPA</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Hibernate</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">REST APIs</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Microservices</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">C#</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">ASP.NET Core</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Domain 02: Data & Persistence -->
+          <article class="domain-column" tabindex="0" aria-labelledby="domain-title-02">
+            <div class="domain-accent-line" aria-hidden="true"></div>
+            <div class="domain-header">
+              <div class="domain-numeral-mask"><span class="domain-numeral">02</span></div>
+              <h3 class="domain-title" id="domain-title-02">Data &amp; Persistence</h3>
+              <p class="domain-summary">
+                Designing data structures and persistence layers for reliable applications.
+              </p>
+            </div>
+            <div class="domain-tech-manifest">
+              <ul class="domain-tech-list" aria-label="Data technologies">
+                <li class="domain-tech-item"><span class="tech-item-name">MySQL</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">MongoDB</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">SQL</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Database Design</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Data Modeling</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">AWS S3</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Cloudinary</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Domain 03: Frontend Engineering -->
+          <article class="domain-column" tabindex="0" aria-labelledby="domain-title-03">
+            <div class="domain-accent-line" aria-hidden="true"></div>
+            <div class="domain-header">
+              <div class="domain-numeral-mask"><span class="domain-numeral">03</span></div>
+              <h3 class="domain-title" id="domain-title-03">Frontend Engineering</h3>
+              <p class="domain-summary">
+                Creating responsive interfaces with attention to usability, composition, and performance.
+              </p>
+            </div>
+            <div class="domain-tech-manifest">
+              <ul class="domain-tech-list" aria-label="Frontend technologies">
+                <li class="domain-tech-item"><span class="tech-item-name">JavaScript</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">React</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Next.js</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">HTML5</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">CSS3</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Tailwind CSS</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Bootstrap</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Domain 04: Tools & Delivery -->
+          <article class="domain-column" tabindex="0" aria-labelledby="domain-title-04">
+            <div class="domain-accent-line" aria-hidden="true"></div>
+            <div class="domain-header">
+              <div class="domain-numeral-mask"><span class="domain-numeral">04</span></div>
+              <h3 class="domain-title" id="domain-title-04">Tools &amp; Delivery</h3>
+              <p class="domain-summary">
+                Managing development workflows, containers, API testing, and application deployment.
+              </p>
+            </div>
+            <div class="domain-tech-manifest">
+              <ul class="domain-tech-list" aria-label="Tools and delivery technologies">
+                <li class="domain-tech-item"><span class="tech-item-name">Git</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">GitHub</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Docker</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Docker Compose</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Maven</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Postman</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">Vercel</span></li>
+                <li class="domain-tech-item"><span class="tech-item-name">AWS EC2</span></li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Bottom Structural Framing Line -->
+      <div class="index-structural-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- ==========================================================================
+           SCENE 5: FACTUAL PROFILE & BACKGROUND (ABOUT)
+           ========================================================================== -->
+    <!-- ==========================================================================
+           SCENE 5: ABOUT, EDUCATION & EXPERIENCE
+           Creative Direction: The Human Side of Engineering
+           ========================================================================== -->
+    <section id="about" class="section editorial-about-section" aria-label="About, Education & Experience">
+      <!-- Top Structural Framing Line -->
+      <div class="about-structural-line" aria-hidden="true"></div>
+
+      <div class="container about-container">
+        <!-- Level A: Section Introduction -->
+        <div class="about-intro-header">
+          <div class="about-heading-block">
+            <span class="about-badge">03 / ABOUT</span>
+            <h2 class="about-display-title">A LITTLE ABOUT ME</h2>
+          </div>
+          <div class="about-statement-block">
+            <p class="about-statement-text">
+              An engineering background, a focus on software, and a constant drive to build things that work well.
+            </p>
+          </div>
+        </div>
+
+        <!-- Level B: Asymmetric Two-Column Composition -->
+        <div class="about-editorial-grid">
+          <!-- Left Column: Portrait -->
+          <div class="about-portrait-column">
+            <div class="about-portrait-frame">
+              <div class="portrait-image-wrapper">
+                <img src="./assets/profile-pic.webp"
+                  alt="Portrait of Ronit Tambe, Full Stack Developer based in Pune, India" loading="lazy" width="3119"
+                  height="2863" class="about-portrait-photo" />
+                <div class="frame-tick-top-left" aria-hidden="true"></div>
+                <div class="frame-tick-bottom-right" aria-hidden="true"></div>
+              </div>
+              <div class="about-portrait-caption">
+                <span class="caption-name">RONIT TAMBE</span>
+                <span class="caption-separator" aria-hidden="true">/</span>
+                <span class="caption-location">PUNE, INDIA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Biography, Education & Experience -->
+          <div class="about-content-column">
+            <!-- Biography -->
+            <div class="about-bio-block">
+              <h3 class="about-bio-heading">
+                <span class="bio-heading-mask"><span class="bio-heading-inner">A DEVELOPER, STILL
+                    BUILDING.</span></span>
+              </h3>
+              <div class="about-bio-text">
+                <p>
+                  I'm a full stack developer with an engineering background and a focus on building practical web
+                  applications. My work brings together backend development, database design, and responsive interfaces.
+                  I enjoy understanding how the pieces fit together and turning that understanding into software people
+                  can use.
+                </p>
               </div>
             </div>
 
-            <div class="hero-cta-ensemble">
-              <div class="hero-primary-actions">
-                <a href="#projects" class="action-editorial-btn" id="hero-cta-work">
-                  <span class="btn-text">View Work</span>
-                  <span class="btn-arrow" aria-hidden="true">↓</span>
+            <!-- Education Subsection -->
+            <div class="about-ledger-section">
+              <div class="ledger-header">
+                <span class="ledger-title">EDUCATION</span>
+                <span class="ledger-line" aria-hidden="true"></span>
+              </div>
+
+              <div class="ledger-entries">
+                <!-- Education Entry 01 -->
+                <article class="ledger-entry">
+                  <div class="entry-meta">
+                    <span class="entry-index">01</span>
+                  </div>
+                  <div class="entry-main">
+                    <h4 class="entry-qualification">
+                      Post Graduate Diploma in Advanced Computing (PG-DAC)
+                    </h4>
+                    <p class="entry-institution">
+                      Sunbeam Institute of Information Technology, Pune
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Education Entry 02 -->
+                <article class="ledger-entry">
+                  <div class="entry-meta">
+                    <span class="entry-index">02</span>
+                  </div>
+                  <div class="entry-main">
+                    <h4 class="entry-qualification">
+                      Bachelor of Engineering (B.E.) — Electronics &amp; Telecommunication Engineering
+                    </h4>
+                    <p class="entry-institution">
+                      Finolex Academy of Management and Technology (FAMT)
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Experience Subsection -->
+            <div class="about-ledger-section">
+              <div class="ledger-header">
+                <span class="ledger-title">EXPERIENCE</span>
+                <span class="ledger-line" aria-hidden="true"></span>
+              </div>
+
+              <div class="ledger-entries">
+                <!-- Experience Entry 01 -->
+                <article class="ledger-entry">
+                  <div class="entry-meta">
+                    <span class="entry-index">01</span>
+                  </div>
+                  <div class="entry-main">
+                    <div class="entry-title-row">
+                      <h4 class="entry-role">Data Annotator</h4>
+                      <span class="entry-duration">~1.5 years</span>
+                    </div>
+                    <p class="entry-institution">
+                      ValuPitch Pvt. Ltd.
+                    </p>
+                    <p class="entry-description">
+                      Worked on data annotation and quality-focused tasks requiring consistency, attention to detail,
+                      and adherence to defined guidelines.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Structural Framing Line -->
+      <div class="about-structural-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- ==========================================================================
+           SCENE 6: CONTACT & MONUMENTAL CONCLUSION
+           Creative Direction: The Final Composition
+           ========================================================================== -->
+    <section id="contact" class="section editorial-contact-section" aria-label="Contact">
+      <!-- Top Structural Framing Line -->
+      <div class="contact-structural-line" aria-hidden="true"></div>
+
+      <div class="container contact-container">
+        <!-- Level A: Section Meta -->
+        <div class="contact-meta-header">
+          <span class="contact-badge">04 / CONTACT</span>
+        </div>
+
+        <!-- Level B: Asymmetric Contact Composition -->
+        <div class="contact-editorial-layout">
+          <!-- Left Editorial Text Column -->
+          <div class="contact-statement-col">
+            <h2 class="contact-display-heading">
+              <span class="contact-line-mask"><span class="contact-line-inner">LET'S BUILD</span></span>
+              <span class="contact-line-mask"><span class="contact-line-inner">SOMETHING GOOD.</span></span>
+            </h2>
+            <p class="contact-supporting-sentence">
+              I'm open to opportunities where I can build useful products, solve engineering problems, and continue
+              growing as a developer.
+            </p>
+          </div>
+
+          <!-- Right Direct Action Column -->
+          <div class="contact-action-col">
+            <!-- Primary Email Display & Direct Actions -->
+            <div class="contact-action-block">
+              <span class="action-block-label">DIRECT EMAIL</span>
+              <div class="email-display-wrap">
+                <span class="email-address-text" id="email-address-val">ronittambe116@gmail.com</span>
+              </div>
+              <div class="contact-button-row">
+                <button type="button" class="contact-action-btn btn-copy" id="btn-copy-email" onclick="copyEmail()"
+                  aria-label="Copy email address to clipboard">
+                  <span class="btn-copy-label">Copy Email</span>
+                  <span class="btn-copy-icon" aria-hidden="true">⎘</span>
+                </button>
+                <a href="mailto:ronittambe116@gmail.com" class="contact-action-btn btn-send"
+                  aria-label="Send an email to ronittambe116@gmail.com">
+                  <span>Send an Email</span>
+                  <span class="btn-arrow" aria-hidden="true">↗</span>
                 </a>
-                <a href="#contact" class="action-editorial-link" id="hero-cta-contact">
-                  <span class="link-text">Get In Touch</span>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="contact-social-block">
+              <span class="action-block-label">NETWORK</span>
+              <div class="contact-social-links">
+                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer"
+                  class="contact-social-link" aria-label="Ronit Tambe on GitHub (opens in new tab)">
+                  <span>GitHub</span>
+                  <span class="link-arrow" aria-hidden="true">↗</span>
+                </a>
+                <span class="social-divider" aria-hidden="true">/</span>
+                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer"
+                  class="contact-social-link" aria-label="Ronit Tambe on LinkedIn (opens in new tab)">
+                  <span>LinkedIn</span>
                   <span class="link-arrow" aria-hidden="true">↗</span>
                 </a>
               </div>
-
-              <div class="hero-aux-links">
-                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-                <span class="dot-sep">·</span>
-                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                <span class="dot-sep">·</span>
-                <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer">Resume (PDF) ↗</a>
-              </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- ==========================================================================
-           SECTION 01: SELECTED WORK (EDITORIAL PROJECT SHOWCASE)
-           ========================================================================== -->
-      <section id="projects" class="section work-editorial-section">
-        <div class="container">
-          <!-- Section Header -->
-          <div class="section-header">
-            <span class="section-index">01 / SELECTED WORK</span>
-            <div class="section-title-group">
-              <h2 class="section-title">Selected Projects</h2>
-              <p class="section-subtitle">
-                A selection of applications and systems I've built with an emphasis on backend architecture, data integrity, and performant user interfaces.
-              </p>
-            </div>
-          </div>
-
-          <div class="projects-editorial-feed">
-            <!-- ==================================================================
-                 PROJECT 01: FREELANCE MARKETPLACE
-                 ================================================================== -->
-            <article class="project-showcase-item" data-project="freelance-marketplace">
-              <div class="project-info-side">
-                <div class="project-meta-strip">
-                  <span class="project-index-num">01</span>
-                  <span class="project-domain-tag">SYSTEM ARCHITECTURE &amp; BACKEND</span>
-                  <span class="project-year-badge">2026</span>
-                </div>
-
-                <h3 class="project-showcase-title">
-                  Freelance Marketplace Platform
-                </h3>
-
-                <p class="project-showcase-desc">
-                  A multi-party freelance platform engineered with a Spring Boot modular monolith backend, Spring Security stateless JWT RBAC, and an ACID-compliant escrow wallet state machine for secure milestone transactions.
-                </p>
-
-                <ul class="project-highlights-list">
-                  <li>Domain-isolated modules communicating via clean service interfaces</li>
-                  <li>ACID virtual escrow ledger preventing race conditions during fund release</li>
-                </ul>
-
-                <div class="project-stack-pills">
-                  <span class="tech-pill">Java</span>
-                  <span class="tech-pill">Spring Boot</span>
-                  <span class="tech-pill">Spring Security</span>
-                  <span class="tech-pill">JWT</span>
-                  <span class="tech-pill">MySQL</span>
-                  <span class="tech-pill">Hibernate</span>
-                  <span class="tech-pill">Docker</span>
-                  <span class="tech-pill">React</span>
-                </div>
-
-                <div class="project-actions-row">
-                  <a
-                    href="https://github.com/ronit1161"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="action-editorial-btn"
-                  >
-                    <span>GitHub Source</span>
-                    <span class="btn-arrow">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <div class="project-visual-side">
-                <a
-                  href="https://github.com/ronit1161"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-image-clipper"
-                  aria-label="Open Freelance Marketplace GitHub Source"
-                >
-                  <img
-                    src="./assets/freelance.webp"
-                    alt="Freelance Marketplace Architecture & System Schematic"
-                    loading="lazy"
-                    class="project-dominant-image"
-                  />
-                  <div class="visual-hover-badge">
-                    <span>GITHUB SOURCE ↗</span>
-                  </div>
-                </a>
-              </div>
-            </article>
-
-            <!-- ==================================================================
-                 PROJECT 02: FOOD ORDERING PLATFORM
-                 ================================================================== -->
-            <article class="project-showcase-item" data-project="food-ordering">
-              <div class="project-info-side">
-                <div class="project-meta-strip">
-                  <span class="project-index-num">02</span>
-                  <span class="project-domain-tag">FULL-STACK &amp; COMMERCE</span>
-                  <span class="project-year-badge">2025</span>
-                </div>
-
-                <h3 class="project-showcase-title">
-                  Food Ordering Web Application
-                </h3>
-
-                <p class="project-showcase-desc">
-                  Full-stack culinary platform built with Next.js and React. Features NextAuth session authentication, real-time shopping cart state synchronization, Razorpay payment processing with server-side HMAC-SHA256 signature verification, and Cloudinary media optimization.
-                </p>
-
-                <ul class="project-highlights-list">
-                  <li>Server-side payment signature verification preventing transaction spoofing</li>
-                  <li>Cloudinary media transformation pipeline for automated WebP image delivery</li>
-                </ul>
-
-                <div class="project-stack-pills">
-                  <span class="tech-pill">Next.js</span>
-                  <span class="tech-pill">React</span>
-                  <span class="tech-pill">MongoDB</span>
-                  <span class="tech-pill">NextAuth</span>
-                  <span class="tech-pill">Razorpay</span>
-                  <span class="tech-pill">Cloudinary</span>
-                  <span class="tech-pill">Tailwind CSS</span>
-                </div>
-
-                <div class="project-actions-row">
-                  <a
-                    href="https://food-ordering-app-roan.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="action-editorial-btn"
-                  >
-                    <span>Live Application</span>
-                    <span class="btn-arrow">↗</span>
-                  </a>
-                  <a
-                    href="https://github.com/ronit1161/food-ordering"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="action-editorial-link"
-                  >
-                    <span>GitHub</span>
-                    <span class="link-arrow">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <div class="project-visual-side">
-                <a
-                  href="https://food-ordering-app-roan.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-image-clipper"
-                  aria-label="Open Food Ordering Live Application"
-                >
-                  <img
-                    src="./assets/food ordering.webp"
-                    alt="Food Ordering Application Interface Preview"
-                    loading="lazy"
-                    class="project-dominant-image"
-                  />
-                  <div class="visual-hover-badge">
-                    <span>LIVE DEMO ↗</span>
-                  </div>
-                </a>
-              </div>
-            </article>
-
-            <!-- ==================================================================
-                 PROJECT 03: EXPENSEWISE FINANCIAL TRACKER
-                 ================================================================== -->
-            <article class="project-showcase-item" data-project="expense-tracker">
-              <div class="project-info-side">
-                <div class="project-meta-strip">
-                  <span class="project-index-num">03</span>
-                  <span class="project-domain-tag">FINANCE &amp; REST SERVICES</span>
-                  <span class="project-year-badge">2025</span>
-                </div>
-
-                <h3 class="project-showcase-title">
-                  ExpenseWise Financial Tracker
-                </h3>
-
-                <p class="project-showcase-desc">
-                  Personal financial analytics application pairing an Express REST API with a normalized MySQL database. Engineered with indexed date-range SQL queries for low latency and a fast React + Vite frontend dashboard for instant cash flow computation.
-                </p>
-
-                <ul class="project-highlights-list">
-                  <li>Compound indexing on transaction dates ensuring sub-millisecond query latency</li>
-                  <li>Client-side reactive state pipelines for real-time category spending computation</li>
-                </ul>
-
-                <div class="project-stack-pills">
-                  <span class="tech-pill">React</span>
-                  <span class="tech-pill">Vite</span>
-                  <span class="tech-pill">Node.js</span>
-                  <span class="tech-pill">Express</span>
-                  <span class="tech-pill">MySQL</span>
-                  <span class="tech-pill">REST APIs</span>
-                  <span class="tech-pill">Tailwind CSS</span>
-                </div>
-
-                <div class="project-actions-row">
-                  <a
-                    href="https://expense-tracker-react-sage.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="action-editorial-btn"
-                  >
-                    <span>Live Application</span>
-                    <span class="btn-arrow">↗</span>
-                  </a>
-                  <a
-                    href="https://github.com/ronit1161/expense-tracker-react"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="action-editorial-link"
-                  >
-                    <span>GitHub</span>
-                    <span class="link-arrow">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <div class="project-visual-side">
-                <a
-                  href="https://expense-tracker-react-sage.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-image-clipper"
-                  aria-label="Open ExpenseWise Live Application"
-                >
-                  <img
-                    src="./assets/expense tracker.webp"
-                    alt="ExpenseWise Financial Dashboard Preview"
-                    loading="lazy"
-                    class="project-dominant-image"
-                  />
-                  <div class="visual-hover-badge">
-                    <span>LIVE DEMO ↗</span>
-                  </div>
-                </a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================================================
-           SECTION 02: EDITORIAL PROFILE (ABOUT)
-           ========================================================================== -->
-      <section id="about" class="section editorial-profile-section">
-        <div class="container">
-          <!-- Section Header -->
-          <div class="section-header">
-            <span class="section-index">02 / ABOUT</span>
-            <div class="section-title-group">
-              <h2 class="section-title">Profile &amp; Discipline</h2>
-            </div>
-          </div>
-
-          <div class="profile-layout-grid">
-            <!-- Left Side: Sticky Editorial Portrait Pillar -->
-            <div class="profile-primary-column">
-              <div class="profile-portrait-frame">
-                <div class="portrait-image-wrapper">
-                  <img
-                    src="./assets/profile-pic.webp"
-                    alt="Ronit Tambe — Full-Stack & Backend Developer"
-                    loading="lazy"
-                    class="profile-editorial-photo"
-                  />
-                </div>
-                <div class="portrait-caption-bar">
-                  <span class="caption-idx">[ PROFILE // 2026 ]</span>
-                  <div class="portrait-status-badge" id="portrait-status-badge">
-                    <span class="badge-dot"></span>
-                    <span class="badge-text" id="portrait-badge-text">STATUS: ACTIVE</span>
-                  </div>
-                  <span class="caption-location">RONIT TAMBE · PUNE, IN</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right Side: Statement Headline, Narrative Foundation & Factual Specification Matrix -->
-            <div class="profile-spec-column">
-              <div class="profile-statement-wrap">
-                <h3 class="profile-statement-text">
-                  "I build software with a focus on backend systems, APIs and full-stack applications."
-                </h3>
-              </div>
-
-              <div class="profile-bio-narrative">
-                <p>
-                  My engineering foundation bridges rigorous computer science specialization from the <strong>CDAC Post Graduate Diploma (Sunbeam Institute)</strong> with a Bachelor's degree in <strong>Electronics &amp; Telecommunication Engineering</strong> from Finolex Academy.
-                </p>
-                <p>
-                  I emphasize architectural resilience, transactional safety, database normalization, and type-safe API contracts — building software that is clear, scalable, and maintainable.
-                </p>
-              </div>
-
-              <div class="profile-spec-row" data-profile-status="SPEC: LOCATION // PUNE, IN">
-                <div class="spec-label">
-                  <span class="spec-num">01</span>
-                  <span>LOCATION</span>
-                </div>
-                <div class="spec-content">
-                  <span class="spec-pill">CURRENT BASE</span>
-                  <h4 class="spec-title">Pune, Maharashtra, India</h4>
-                  <p class="spec-desc">Open to full-time engineering roles, hybrid, and remote software developer opportunities.</p>
-                </div>
-              </div>
-
-              <div class="profile-spec-row" data-profile-status="SPEC: FORMATION // CDAC + BE">
-                <div class="spec-label">
-                  <span class="spec-num">02</span>
-                  <span>EDUCATION</span>
-                </div>
-                <div class="spec-content">
-                  <div class="spec-subgroup">
-                    <span class="spec-pill">POST-GRADUATE DIPLOMA</span>
-                    <h4 class="spec-title">CDAC — PG-DAC</h4>
-                    <span class="spec-sub">Sunbeam Institute of Information Technology, Pune</span>
-                    <p class="spec-desc">Intensive post-graduate specialization in Java, Spring Boot, Data Structures, Relational Database Design, and Enterprise Software Systems.</p>
-                  </div>
-                  <div class="spec-subgroup">
-                    <span class="spec-pill">BACHELOR'S DEGREE</span>
-                    <h4 class="spec-title">Bachelor of Engineering (B.E.)</h4>
-                    <span class="spec-sub">Electronics &amp; Telecommunication Engineering · FAMT</span>
-                    <p class="spec-desc">Core engineering curriculum covering microprocessors, digital logic, systems architecture, signals, and algorithmic programming.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="profile-spec-row" data-profile-status="SPEC: PRACTICE // DATA & QA">
-                <div class="spec-label">
-                  <span class="spec-num">03</span>
-                  <span>EXPERIENCE</span>
-                </div>
-                <div class="spec-content">
-                  <div class="spec-subgroup">
-                    <span class="spec-pill">INDUSTRY PRACTICE // ~1.5 YEARS</span>
-                    <h4 class="spec-title">ValuPitch Pvt. Ltd.</h4>
-                    <span class="spec-sub">Data Quality &amp; Systems Annotation</span>
-                    <p class="spec-desc">
-                      Conducted precision data annotation, structured schema validation, and dataset curation according to rigorous quality benchmarks — instilling disciplined handling of structured data, type safety, and system inputs.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="profile-spec-row" data-profile-status="SPEC: ARCHITECTURE // JAVA & SPRING">
-                <div class="spec-label">
-                  <span class="spec-num">04</span>
-                  <span>CURRENT FOCUS</span>
-                </div>
-                <div class="spec-content">
-                  <span class="spec-pill">CORE SPECIALIZATION</span>
-                  <h4 class="spec-title">Backend Architecture &amp; REST APIs</h4>
-                  <p class="spec-desc">
-                    Designing modular monoliths, transactional escrow engines, and RESTful microservices with Java 17+, Spring Boot 3, Spring Security, MySQL, Docker, and React.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================================================
-           SECTION 03: CONTINUOUS HORIZONTAL SKILLS MARQUEE
-           ========================================================================== -->
-      <section id="skills" class="section marquee-skills-section">
-        <div class="container">
-          <!-- Section Header -->
-          <div class="section-header">
-            <span class="section-index">03 / TECHNOLOGIES</span>
-            <div class="section-title-group">
-              <h2 class="section-title">Technical Disciplines</h2>
-              <p class="section-subtitle">
-                A continuously moving marquee of backend systems, databases, interfaces, and infrastructure tools I leverage in production.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Full-Width Infinite Marquee Canvas -->
-        <div class="marquee-showcase-container">
-
-          <!-- Track 01: Backend & Data Systems (Flows Left) -->
-          <div class="marquee-row-wrapper">
-            <div class="marquee-track marquee-track-left">
-              <!-- Set 1 -->
-              <div class="marquee-tech-card" data-tech="java">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Java</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="spring">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Spring Boot</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="spring-sec">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Security" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Spring Security</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="hibernate">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" alt="Hibernate JPA" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Spring Data JPA</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="rest">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="REST APIs" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">RESTful APIs</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="csharp">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# .NET" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">C# &amp; ASP.NET Core</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="mysql">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">MySQL (InnoDB)</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="sql">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">SQL &amp; Query Tuning</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="mongodb">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">MongoDB</span>
-              </div>
-
-              <!-- Duplicated Set 1 for Infinite Seamless Flow -->
-              <div class="marquee-tech-card" data-tech="java" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Java</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="spring" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Spring Boot</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="spring-sec" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Security" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Spring Security</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="hibernate" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" alt="Hibernate JPA" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Spring Data JPA</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="rest" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="REST APIs" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">RESTful APIs</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="csharp" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# .NET" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">C# &amp; ASP.NET Core</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="mysql" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">MySQL (InnoDB)</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="sql" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">SQL &amp; Query Tuning</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="mongodb" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">MongoDB</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Track 02: Frontend, Cloud & DevOps (Flows Right) -->
-          <div class="marquee-row-wrapper">
-            <div class="marquee-track marquee-track-right">
-              <!-- Set 2 -->
-              <div class="marquee-tech-card" data-tech="react">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">React.js</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="nextjs">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Next.js</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="javascript">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">JavaScript</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="html-css">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 & CSS3" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">HTML5 &amp; CSS3</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="tailwind">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Tailwind CSS</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="docker">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Docker</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="git">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git & GitHub" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Git &amp; GitHub</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="aws">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">AWS (EC2 &amp; S3)</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="postman">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Postman</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="maven">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Apache Maven</span>
-              </div>
-
-              <!-- Duplicated Set 2 for Infinite Seamless Flow -->
-              <div class="marquee-tech-card" data-tech="react" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">React.js</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="nextjs" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Next.js</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="javascript" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">JavaScript</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="html-css" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 & CSS3" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">HTML5 &amp; CSS3</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="tailwind" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Tailwind CSS</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="docker" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Docker</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="git" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git & GitHub" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Git &amp; GitHub</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="aws" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">AWS (EC2 &amp; S3)</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="postman" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Postman</span>
-              </div>
-
-              <div class="marquee-tech-card" data-tech="maven" aria-hidden="true">
-                <div class="marquee-icon-pod">
-                  <img class="marquee-card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven" loading="lazy" />
-                </div>
-                <span class="marquee-card-name">Apache Maven</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ==========================================================================
-           SECTION 04: CONTACT SECTION
-           ========================================================================== -->
-      <section id="contact" class="section contact-section-wrapper">
-        <div class="container contact-layout-split">
-          <div class="contact-text-col">
-            <div class="hero-eyebrow-row">
-              <span>// 04 · GET IN TOUCH</span>
-            </div>
-            <h2 class="contact-hero-statement">Let's Build Together.</h2>
-            <p class="contact-sub-copy">
-              I am actively seeking software engineering, backend developer, and full-stack opportunities. Feel free to reach out directly via email or connect on LinkedIn.
-            </p>
-          </div>
-
-          <div class="contact-dossier-panel" id="contact-tilt-card">
-            <div class="contact-slot">
-              <span class="contact-slot-label">Direct Email</span>
-              <div class="email-copy-bar">
-                <span class="contact-slot-val" id="email-text">ronittambe116@gmail.com</span>
-                <button class="btn-copy-action" id="btn-copy-email" onclick="copyEmail()">Copy</button>
-              </div>
-            </div>
-
-            <div class="contact-slot">
-              <span class="contact-slot-label">LinkedIn</span>
-              <span class="contact-slot-val">
-                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer">
-                  linkedin.com/in/ronit-tambe-781a09204 ↗
-                </a>
-              </span>
-            </div>
-
-            <div class="contact-slot">
-              <span class="contact-slot-label">GitHub</span>
-              <span class="contact-slot-val">
-                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer">
-                  github.com/ronit1161 ↗
-                </a>
-              </span>
-            </div>
-
-            <div class="contact-slot">
-              <span class="contact-slot-label">Location</span>
-              <span class="contact-slot-val">Pune, Maharashtra, India</span>
-            </div>
-
-            <a
-              href="mailto:ronittambe116@gmail.com"
-              class="btn btn-primary"
-              style="margin-top: 12px; justify-content: center;"
-            >
-              Send Direct Email ↗
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ==========================================================================
-         MONUMENTAL EDITORIAL FOOTER (COSMOS-INSPIRED)
+      </div>
+
+      <!-- Bottom Structural Framing Line -->
+      <div class="contact-structural-line" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+         MONUMENTAL FOOTER
+         Creative Direction: The Final Typographic Resolution
          ========================================================================== -->
-    <footer class="site-footer">
-      <div class="container footer-container">
-        <!-- Top Editorial & Multi-Column Navigation -->
-        <div class="footer-top-grid">
-          <div class="footer-brand-column">
-            <div class="footer-cluster-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="2" r="1.8"/>
-                <circle cx="19.07" cy="4.93" r="1.8"/>
-                <circle cx="22" cy="12" r="1.8"/>
-                <circle cx="19.07" cy="19.07" r="1.8"/>
-                <circle cx="12" cy="22" r="1.8"/>
-                <circle cx="4.93" cy="19.07" r="1.8"/>
-                <circle cx="2" cy="12" r="1.8"/>
-                <circle cx="4.93" cy="4.93" r="1.8"/>
-              </svg>
-            </div>
-            <p class="footer-brand-statement">
-              Engineering scalable backend systems, APIs &amp; distributed software.
-            </p>
-            <div class="footer-status-indicator">
-              <span class="status-pulse-dot"></span>
-              <span>Pune, India · Available for roles</span>
-            </div>
+  <footer class="site-footer" role="contentinfo" aria-label="Site Footer">
+    <div class="footer-inner">
+      <!-- Restrained Footer Row -->
+      <div class="container footer-meta-container">
+        <div class="footer-restrained-row">
+          <div class="footer-author-col">
+            <span class="footer-author-name">RONIT TAMBE</span>
+            <span class="footer-author-dot" aria-hidden="true">·</span>
+            <span class="footer-copyright-text">
+              © <span id="current-year"></span> ALL RIGHTS RESERVED
+            </span>
           </div>
 
-          <div class="footer-columns-group">
-            <div class="footer-col">
-              <span class="footer-col-title">NAVIGATION</span>
-              <nav class="footer-nav-list" aria-label="Footer Navigation">
-                <a href="#projects" class="footer-nav-link">Work</a>
-                <a href="#about" class="footer-nav-link">About</a>
-                <a href="#skills" class="footer-nav-link">Skills</a>
-                <a href="#contact" class="footer-nav-link">Contact</a>
-              </nav>
-            </div>
-
-            <div class="footer-col">
-              <span class="footer-col-title">CONNECT</span>
-              <nav class="footer-nav-list" aria-label="Social Profiles">
-                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
-                  GitHub ↗
-                </a>
-                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
-                  LinkedIn ↗
-                </a>
-                <a href="mailto:ronittambe116@gmail.com" class="footer-nav-link">
-                  Email ↗
-                </a>
-                <a href="./assets/resume-example.pdf" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
-                  Resume ↗
-                </a>
-              </nav>
-            </div>
-
-            <div class="footer-col">
-              <span class="footer-col-title">DETAILS</span>
-              <div class="footer-nav-list">
-                <span class="footer-static-item">CDAC PG-DAC</span>
-                <span class="footer-static-item">B.E. Telecomm</span>
-                <span class="footer-static-item">Java &amp; Spring Boot</span>
-                <button class="footer-back-to-top" onclick="scrollToTop()" aria-label="Back to top">
-                  <span>Back to top</span>
-                  <span class="arrow-up">↑</span>
-                </button>
-              </div>
-            </div>
+          <div class="footer-action-col">
+            <button type="button" class="footer-back-to-top" onclick="scrollToTop()"
+              aria-label="Scroll back to top of page">
+              <span>BACK TO TOP</span>
+              <span class="arrow-up" aria-hidden="true">↑</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Monumental Edge-to-Edge Typography: RONIT -->
-      <div class="footer-monument-stage">
+      <!-- Monumental Wordmark: Only RONIT at Complete Bottom (0 padding) -->
+      <div class="footer-monument-stage" aria-hidden="true">
         <div class="footer-monument-row">
-          <span class="footer-monument-text">RONIT</span>
+          <span class="footer-monument-text" id="footer-wordmark">RONIT</span>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <!-- Core Vendor Animation Engines -->
-    <script src="assets/lenis.min.js"></script>
-    <script src="assets/gsap.min.js"></script>
-    <script src="assets/ScrollTrigger.min.js"></script>
+  <!-- Core Vendor Animation Engines (Native GSAP + ScrollTrigger) -->
+  <script src="assets/gsap.min.js"></script>
+  <script src="assets/ScrollTrigger.min.js"></script>
 
-    <!-- Modular Application Logic -->
-    <script src="js/cursor.js?v=2.9"></script>
-    <script src="js/preloader.js?v=2.9"></script>
-    <script src="js/marquee.js?v=2.9"></script>
-    <script src="js/animations.js?v=2.9"></script>
-    <script src="js/main.js?v=2.9"></script>
-  </body>
+  <!-- Application Interaction Engines -->
+  <script src="js/cursor.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
 </html>
