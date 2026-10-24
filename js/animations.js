@@ -240,25 +240,39 @@ function initHeroToWorkTransition() {
     });
 
     // ------------------------------------------------------------------------
-    // STAGE A: Hero elements recede & Background transitions from Orange to White (0.00 -> 0.25)
+    // STAGE A: Hero elements recede & Background transitions from Orange to White
+    // "when user scroll 1px change the background" -> tight timing at immediate scroll onset (0.00 -> 0.02)
     // ------------------------------------------------------------------------
-    if (heroCanvas) {
+    const bgTargets = [heroCanvas, heroStage, container].filter(Boolean);
+    if (bgTargets.length) {
       tl.to(
-        heroCanvas,
-        { backgroundColor: '#FFFFFF', duration: 0.25, ease: 'power1.inOut' },
+        bgTargets,
+        { backgroundColor: '#FFFFFF', duration: 0.02, ease: 'power2.out' },
         0
       );
     }
-    tl.to(
-      heroStage,
-      { backgroundColor: '#FFFFFF', duration: 0.25, ease: 'power1.inOut' },
-      0
-    );
-    tl.to(
-      container,
-      { backgroundColor: '#FFFFFF', duration: 0.25, ease: 'power1.inOut' },
-      0
-    );
+
+    // Immediate 1px ScrollTrigger: changes background to white as soon as scrollY >= 1px
+    const instantBgTrigger = ScrollTrigger.create({
+      trigger: document.documentElement,
+      start: '1px top',
+      onEnter: () => {
+        gsap.to(bgTargets, {
+          backgroundColor: '#FFFFFF',
+          duration: 0.22,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to(bgTargets, {
+          backgroundColor: '#FE3C01',
+          duration: 0.22,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      },
+    });
 
     if (upperCluster) {
       tl.to(
@@ -401,6 +415,7 @@ function initHeroToWorkTransition() {
 
     // Teardown
     return () => {
+      instantBgTrigger.kill();
       document.documentElement.classList.remove('js-transition-ready');
       gsap.set([heroStage, bridgeSection, container, heroCanvas].filter(Boolean), { clearProps: 'all' });
       const allSub = [
@@ -425,6 +440,28 @@ function initHeroToWorkTransition() {
   heroTransitionMM.add('(max-width: 768px)', () => {
     document.documentElement.classList.remove('js-transition-ready');
     gsap.set([heroStage, bridgeSection], { clearProps: 'all' });
+
+    const bgTargetsMobile = [heroStage, container].filter(Boolean);
+    const instantBgTriggerMobile = ScrollTrigger.create({
+      trigger: document.documentElement,
+      start: '1px top',
+      onEnter: () => {
+        gsap.to(bgTargetsMobile, {
+          backgroundColor: '#FFFFFF',
+          duration: 0.22,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to(bgTargetsMobile, {
+          backgroundColor: '#FE3C01',
+          duration: 0.22,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      },
+    });
 
     const quoteInners = bridgeSection.querySelectorAll('.quote-line-inner');
     const lead = bridgeSection.querySelector('.bridge-forward-lead');
@@ -483,7 +520,8 @@ function initHeroToWorkTransition() {
     }
 
     return () => {
-      gsap.set([heroStage, bridgeSection, ...quoteInners, lead].filter(Boolean), {
+      instantBgTriggerMobile.kill();
+      gsap.set([heroStage, bridgeSection, container, ...quoteInners, lead].filter(Boolean), {
         clearProps: 'all',
       });
     };
