@@ -226,12 +226,12 @@ function initHeroToWorkTransition() {
       gsap.set(axisNode, { scale: 0 });
     }
 
-    // Master Scrubbed Timeline
+    // Master Scrubbed Timeline with extended scroll distance for spacious reading
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'top top',
-        end: '+=140%',
+        end: '+=240%',
         pin: true,
         scrub: 0.8,
         anticipatePin: 1,
@@ -240,30 +240,30 @@ function initHeroToWorkTransition() {
     });
 
     // ------------------------------------------------------------------------
-    // STAGE A: Hero elements recede & Background transitions from Orange to White (0.00 -> 0.35)
+    // STAGE A: Hero elements recede & Background transitions from Orange to White (0.00 -> 0.25)
     // ------------------------------------------------------------------------
     if (heroCanvas) {
       tl.to(
         heroCanvas,
-        { backgroundColor: '#FFFFFF', duration: 0.35, ease: 'power1.inOut' },
+        { backgroundColor: '#FFFFFF', duration: 0.25, ease: 'power1.inOut' },
         0
       );
     }
     tl.to(
       heroStage,
-      { backgroundColor: '#FFFFFF', duration: 0.35, ease: 'power1.inOut' },
+      { backgroundColor: '#FFFFFF', duration: 0.25, ease: 'power1.inOut' },
       0
     );
     tl.to(
       container,
-      { backgroundColor: '#FFFFFF', duration: 0.35, ease: 'power1.inOut' },
+      { backgroundColor: '#FFFFFF', duration: 0.25, ease: 'power1.inOut' },
       0
     );
 
     if (upperCluster) {
       tl.to(
         upperCluster,
-        { yPercent: -22, scale: 0.94, duration: 0.32, ease: 'power1.inOut' },
+        { yPercent: -22, scale: 0.94, duration: 0.22, ease: 'power1.inOut' },
         0
       );
     }
@@ -272,100 +272,143 @@ function initHeroToWorkTransition() {
         const xOffset = index % 2 === 0 ? -15 : 20;
         tl.to(
           line,
-          { xPercent: xOffset, duration: 0.3, ease: 'power1.inOut' },
-          0.02 * index
+          { xPercent: xOffset, duration: 0.22, ease: 'power1.inOut' },
+          0.015 * index
         );
       });
     }
     if (portraitCard) {
-      tl.to(portraitCard, { yPercent: 40, opacity: 0, duration: 0.28, ease: 'power1.out' }, 0.02);
+      tl.to(portraitCard, { yPercent: 40, opacity: 0, duration: 0.22, ease: 'power1.out' }, 0.02);
     }
     if (adjacentLinks) {
-      tl.to(adjacentLinks, { opacity: 0, y: 15, duration: 0.2, ease: 'power1.out' }, 0);
+      tl.to(adjacentLinks, { opacity: 0, y: 15, duration: 0.18, ease: 'power1.out' }, 0);
     }
     if (bottomCluster) {
-      tl.to(bottomCluster, { opacity: 0, x: 40, duration: 0.25, ease: 'power1.out' }, 0.02);
+      tl.to(bottomCluster, { opacity: 0, x: 40, duration: 0.2, ease: 'power1.out' }, 0.02);
     }
 
     // ------------------------------------------------------------------------
-    // STAGE B: Hero fades & Hero stage exits (0.28 -> 0.48)
+    // STAGE B: Hero fades & Hero stage exits (0.20 -> 0.30)
     // ------------------------------------------------------------------------
     if (upperCluster) {
       tl.to(
         upperCluster,
-        { yPercent: -50, opacity: 0, scale: 0.88, duration: 0.2, ease: 'power2.in' },
-        0.28
+        { yPercent: -50, opacity: 0, scale: 0.88, duration: 0.18, ease: 'power2.in' },
+        0.20
       );
     }
-    tl.to(heroStage, { opacity: 0, pointerEvents: 'none', duration: 0.16 }, 0.34);
+    tl.to(heroStage, { opacity: 0, pointerEvents: 'none', duration: 0.14 }, 0.24);
 
     // ------------------------------------------------------------------------
-    // STAGE C: Editorial statement emerges with line-by-line reveals (0.42 -> 0.82)
+    // STAGE C: Editorial statement emerges with line-by-line reveals (0.28 -> 0.56)
+    // "add some more time in that animation"
     // ------------------------------------------------------------------------
-    tl.to(bridgeSection, { opacity: 1, pointerEvents: 'auto', duration: 0.16 }, 0.42);
+    tl.to(bridgeSection, { opacity: 1, pointerEvents: 'auto', duration: 0.14 }, 0.28);
 
     if (bridgeLines.length) {
       tl.to(
         bridgeLines,
-        { scaleX: 1, opacity: 1, duration: 0.26, ease: 'power2.out' },
-        0.44
+        { scaleX: 1, opacity: 1, duration: 0.24, ease: 'power2.out' },
+        0.30
       );
     }
 
-    // Line-by-line masked reveals
+    // Line-by-line masked reveals — generous duration for graceful entrance
     if (quoteInners.length) {
       quoteInners.forEach((inner, idx) => {
         tl.to(
           inner,
-          { yPercent: 0, opacity: 1, duration: 0.22, ease: 'power3.out' },
-          0.48 + idx * 0.07
+          { yPercent: 0, opacity: 1, duration: 0.24, ease: 'power3.out' },
+          0.32 + idx * 0.07
         );
       });
     }
 
-    // Restrained emphasis / subtle scale on selected italic words
+    // Restrained emphasis on selected italic words
     if (italicWords.length) {
       tl.to(
         italicWords,
-        { scale: 1.04, duration: 0.24, ease: 'power1.out' },
-        0.62
+        { scale: 1.05, duration: 0.2, ease: 'power1.out' },
+        0.48
       );
     }
 
-    // ------------------------------------------------------------------------
-    // STAGE D: Visual bridge toward Work Gallery (0.74 -> 1.00)
-    // ------------------------------------------------------------------------
+    // Forward indicator enters
     if (axisLine) {
-      tl.to(axisLine, { scaleY: 1, duration: 0.18, ease: 'power2.out' }, 0.74);
+      tl.to(axisLine, { scaleY: 1, duration: 0.18, ease: 'power2.out' }, 0.50);
     }
     if (axisNode) {
-      tl.to(axisNode, { scale: 1, duration: 0.15, ease: 'back.out(2)' }, 0.78);
+      tl.to(axisNode, { scale: 1, duration: 0.15, ease: 'back.out(2)' }, 0.54);
     }
     if (forwardLead) {
-      tl.to(forwardLead, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }, 0.78);
+      tl.to(forwardLead, { opacity: 1, y: 0, duration: 0.18, ease: 'power2.out' }, 0.54);
     }
+
+    // ------------------------------------------------------------------------
+    // STAGE D: Stationary Reading Plateau (0.56 -> 0.74)
+    // Generous breathing window: text remains static in center as user scrolls
+    // ------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------
+    // STAGE E: Upward exit as user scrolls down to next section (0.74 -> 0.98)
+    // "after scrolling down to next section make the text go upward opposite like it was coming up initially"
+    // ------------------------------------------------------------------------
+    if (quoteInners.length) {
+      quoteInners.forEach((inner, idx) => {
+        tl.to(
+          inner,
+          { yPercent: -130, opacity: 0, duration: 0.22, ease: 'power2.in' },
+          0.74 + idx * 0.06
+        );
+      });
+    }
+
+    if (italicWords.length) {
+      tl.to(
+        italicWords,
+        { scale: 1, duration: 0.16, ease: 'power1.in' },
+        0.74
+      );
+    }
+
     if (quoteWrap) {
-      tl.to(quoteWrap, { y: -20, duration: 0.24, ease: 'power1.out' }, 0.76);
+      tl.to(
+        quoteWrap,
+        { y: -36, duration: 0.24, ease: 'power2.in' },
+        0.76
+      );
     }
+
+    if (forwardLead) {
+      tl.to(forwardLead, { opacity: 0, y: -24, duration: 0.16, ease: 'power2.in' }, 0.76);
+    }
+    if (axisLine) {
+      tl.to(axisLine, { scaleY: 0, transformOrigin: 'top center', duration: 0.16, ease: 'power2.in' }, 0.76);
+    }
+    if (axisNode) {
+      tl.to(axisNode, { scale: 0, duration: 0.12, ease: 'power2.in' }, 0.78);
+    }
+
+    if (bridgeLines.length) {
+      tl.to(
+        bridgeLines,
+        { scaleX: 0.6, opacity: 0, duration: 0.18, ease: 'power2.in' },
+        0.82
+      );
+    }
+
+    tl.to(bridgeSection, { opacity: 0, pointerEvents: 'none', duration: 0.12 }, 0.90);
 
     // Teardown
     return () => {
       document.documentElement.classList.remove('js-transition-ready');
       gsap.set([heroStage, bridgeSection, container, heroCanvas].filter(Boolean), { clearProps: 'all' });
       const allSub = [
-        wordRonit,
-        wordTambe,
-        wordFullstack,
-        wordDeveloper,
-        registeredTag,
-        statementBlock,
+        upperCluster,
+        bottomCluster,
         portraitCard,
-        metaBar,
-        eyebrowRow,
-        ...annotations,
-        actionBar,
-        stamp,
-        lineBottom,
+        adjacentLinks,
+        ...displayLines,
         quoteWrap,
         ...quoteInners,
         ...italicWords,
@@ -387,22 +430,37 @@ function initHeroToWorkTransition() {
     const lead = bridgeSection.querySelector('.bridge-forward-lead');
 
     if (quoteInners.length) {
+      // Opening with more time
       gsap.fromTo(
         quoteInners,
         { yPercent: 100, opacity: 0 },
         {
           yPercent: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.12,
+          duration: 0.9,
+          stagger: 0.14,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: bridgeSection,
-            start: 'top 85%',
+            start: 'top 80%',
             toggleActions: 'play none none none',
           },
         }
       );
+
+      // Upward exit when scrolling down to next section
+      gsap.to(quoteInners, {
+        yPercent: -120,
+        opacity: 0,
+        stagger: 0.08,
+        ease: 'power2.in',
+        scrollTrigger: {
+          trigger: bridgeSection,
+          start: 'bottom 60%',
+          end: 'bottom 15%',
+          scrub: true,
+        },
+      });
     }
 
     if (lead) {
@@ -412,12 +470,12 @@ function initHeroToWorkTransition() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          delay: 0.2,
+          duration: 0.7,
+          delay: 0.25,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: bridgeSection,
-            start: 'top 80%',
+            start: 'top 75%',
             toggleActions: 'play none none none',
           },
         }
@@ -1031,14 +1089,27 @@ function initScrollRevealMotion() {
     if (aboutHeader) {
       gsap.from(aboutHeader, {
         opacity: 0,
-        y: 24,
-        duration: 0.7,
+        y: 28,
+        duration: 0.95,
         ease: 'power2.out',
         clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: aboutSection,
           start: 'top 85%',
           toggleActions: 'play none none none',
+        },
+      });
+
+      // On scroll down to next section, glide header upward
+      gsap.to(aboutHeader, {
+        y: -30,
+        opacity: 0.25,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: aboutSection,
+          start: 'bottom 65%',
+          end: 'bottom 15%',
+          scrub: true,
         },
       });
     }
@@ -1104,7 +1175,7 @@ function initScrollRevealMotion() {
       }
     }
 
-    // Biography: masked heading and narrative
+    // Biography: masked heading and narrative with extended duration & upward scroll exit
     if (bioBlock) {
       const bioHeadingInner = bioBlock.querySelector('.bio-heading-inner');
       const bioText = bioBlock.querySelector('.about-bio-text p');
@@ -1121,17 +1192,30 @@ function initScrollRevealMotion() {
         bioTl.fromTo(
           bioHeadingInner,
           { yPercent: 110 },
-          { yPercent: 0, duration: 0.65, ease: 'power4.out' },
+          { yPercent: 0, duration: 0.9, ease: 'power3.out' },
           0
         );
+
+        // When scrolling down to next section (contact), make bio heading glide upward opposite
+        gsap.to(bioHeadingInner, {
+          yPercent: -100,
+          opacity: 0,
+          ease: 'power2.in',
+          scrollTrigger: {
+            trigger: aboutSection,
+            start: 'bottom 60%',
+            end: 'bottom 15%',
+            scrub: true,
+          },
+        });
       }
 
       if (bioText) {
         bioTl.fromTo(
           bioText,
           { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,transform' },
-          0.14
+          { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out', clearProps: 'opacity,transform' },
+          0.16
         );
       }
     }
