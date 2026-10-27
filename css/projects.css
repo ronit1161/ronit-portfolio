@@ -153,3 +153,34 @@
 }
 
 /* Middle Column: Tech & Keyword Pills */
+.editorial-project-row .row-middle {
+  flex: 1 1 34%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.project-pills-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.project-pill {
+  font-family: 'Aeonik Bold', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(0.68rem, 0.76vw, 0.74rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 15px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #555562;
+  background-color: rgba(0, 0, 0, 0.035);
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Right Column: Arrow & Quick Actions */
