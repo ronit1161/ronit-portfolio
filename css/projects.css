@@ -267,3 +267,36 @@
    ACTIVE & HOVER ROW INTERACTIONS
    ========================================================================== */
 
+/* Active Row Highlighting (Matching reference Weirdo.is accent glow) */
+.editorial-project-row.is-active {
+  background: linear-gradient(90deg, rgba(254, 60, 1, 0.06) 0%, rgba(0, 0, 0, 0.015) 100%);
+  border-color: rgba(254, 60, 1, 0.4);
+}
+
+.editorial-project-row.is-active .project-title {
+  color: var(--color-accent);
+  transform: translateX(4px);
+}
+
+.editorial-project-row.is-active .project-subtitle {
+  color: rgba(254, 60, 1, 0.85);
+}
+
+.editorial-project-row.is-active .row-arrow-wrap {
+  color: var(--color-accent);
+  transform: translate(6px, -6px);
+}
+
+.editorial-project-row.is-active .project-pill {
+  border-color: rgba(254, 60, 1, 0.35);
+  color: #FE3C01;
+  background-color: rgba(254, 60, 1, 0.08);
+}
+
+/* Sibling Dimming on Desktop */
+@media (hover: hover) and (min-width: 769px) {
+  .editorial-projects-list.has-active-row .editorial-project-row:not(.is-active) {
+    opacity: 0.35;
+  }
+}
+
