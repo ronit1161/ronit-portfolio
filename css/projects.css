@@ -184,3 +184,86 @@
 }
 
 /* Right Column: Arrow & Quick Actions */
+.editorial-project-row .row-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(16px, 2.2vw, 28px);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Aeonik Bold', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #383842;
+  background-color: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 6px;
+  padding: 7px 15px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.row-action-link:hover {
+  color: #FFFFFF;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.row-action-link.action-live {
+  background-color: rgba(254, 60, 1, 0.1);
+  border-color: rgba(254, 60, 1, 0.35);
+  color: #FE3C01;
+}
+
+.row-action-link.action-live:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.row-action-link .action-arrow {
+  display: inline-block;
+  font-size: 0.85em;
+  transition: transform 0.25s ease;
+}
+
+.row-action-link:hover .action-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Distinctive Monumental Arrow (Matching Weirdo.is design scale) */
+.row-arrow-wrap {
+  width: clamp(48px, 4.2vw, 64px);
+  height: clamp(48px, 4.2vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A0A0C;
+  flex-shrink: 0;
+  transition: color 0.32s ease, transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.row-arrow-icon {
+  width: 200%;
+  height: 200%;
+  stroke: currentColor;
+}
+
+/* ==========================================================================
+   ACTIVE & HOVER ROW INTERACTIONS
+   ========================================================================== */
+
