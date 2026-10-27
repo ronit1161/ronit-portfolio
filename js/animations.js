@@ -364,15 +364,15 @@ function initHeroToWorkTransition() {
     // ------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------
-    // STAGE E: Upward exit as user scrolls down to next section (0.74 -> 0.98)
+    // STAGE E: Upward exit as user scrolls down to next section (0.70 -> 0.86)
     // "after scrolling down to next section make the text go upward opposite like it was coming up initially"
     // ------------------------------------------------------------------------
     if (quoteInners.length) {
       quoteInners.forEach((inner, idx) => {
         tl.to(
           inner,
-          { yPercent: -130, opacity: 0, duration: 0.22, ease: 'power2.in' },
-          0.74 + idx * 0.06
+          { yPercent: -130, opacity: 0, duration: 0.16, ease: 'power2.in' },
+          0.70 + idx * 0.04
         );
       });
     }
@@ -380,44 +380,66 @@ function initHeroToWorkTransition() {
     if (italicWords.length) {
       tl.to(
         italicWords,
-        { scale: 1, duration: 0.16, ease: 'power1.in' },
-        0.74
+        { scale: 1, duration: 0.14, ease: 'power1.in' },
+        0.70
       );
     }
 
     if (quoteWrap) {
       tl.to(
         quoteWrap,
-        { y: -36, duration: 0.24, ease: 'power2.in' },
-        0.76
+        { y: -40, duration: 0.18, ease: 'power2.in' },
+        0.72
       );
     }
 
     if (forwardLead) {
-      tl.to(forwardLead, { opacity: 0, y: -24, duration: 0.16, ease: 'power2.in' }, 0.76);
+      tl.to(forwardLead, { opacity: 0, y: -24, duration: 0.14, ease: 'power2.in' }, 0.70);
     }
     if (axisLine) {
-      tl.to(axisLine, { scaleY: 0, transformOrigin: 'top center', duration: 0.16, ease: 'power2.in' }, 0.76);
+      tl.to(axisLine, { scaleY: 0, transformOrigin: 'top center', duration: 0.14, ease: 'power2.in' }, 0.70);
     }
     if (axisNode) {
-      tl.to(axisNode, { scale: 0, duration: 0.12, ease: 'power2.in' }, 0.78);
+      tl.to(axisNode, { scale: 0, duration: 0.10, ease: 'power2.in' }, 0.72);
     }
+
+    const workSection = document.getElementById('work');
+    const whiteCanvasTargets = [
+      container,
+      bridgeSection,
+      document.body,
+      document.documentElement,
+      workSection,
+    ].filter(Boolean);
+
+    // Maintain consistent white background throughout
+    gsap.set(whiteCanvasTargets, { backgroundColor: '#FFFFFF' });
 
     if (bridgeLines.length) {
       tl.to(
         bridgeLines,
-        { scaleX: 0.6, opacity: 0, duration: 0.18, ease: 'power2.in' },
-        0.82
+        {
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          scaleX: 0.6,
+          opacity: 0,
+          duration: 0.16,
+          ease: 'power2.in',
+        },
+        0.76
       );
     }
 
-    tl.to(bridgeSection, { opacity: 0, pointerEvents: 'none', duration: 0.12 }, 0.90);
+    tl.set(bridgeSection, { pointerEvents: 'none' }, 0.90);
 
     // Teardown
     return () => {
       instantBgTrigger.kill();
+      if (siteHeader) siteHeader.classList.remove('is-dark');
       document.documentElement.classList.remove('js-transition-ready');
-      gsap.set([heroStage, bridgeSection, container, heroCanvas].filter(Boolean), { clearProps: 'all' });
+      gsap.set(
+        [heroStage, bridgeSection, container, heroCanvas, document.body, document.documentElement, workSection].filter(Boolean),
+        { clearProps: 'all' }
+      );
       const allSub = [
         upperCluster,
         bottomCluster,
@@ -521,896 +543,16 @@ function initHeroToWorkTransition() {
 
     return () => {
       instantBgTriggerMobile.kill();
-      gsap.set([heroStage, bridgeSection, container, ...quoteInners, lead].filter(Boolean), {
-        clearProps: 'all',
-      });
-    };
-  });
-}
-
-let horizontalTriggerInstance = null;
-let horizontalMM = null;
-
-/**
- * ============================================================================
- * 3. PROJECT GALLERY: THREE ANIMATED CHAPTERS
- * ============================================================================
- * Primary driver: Desktop pinned horizontal track tween.
- * Child scroll effects: containerAnimation coordinates child scene timelines.
- * - Scene 01: Title overflow mask, image controlled directional translation,
- *             staggered manifest, deliberate exit transition.
- * - Scene 02: Restrained panoramic image expansion, coordinated title/manifest,
- *             internal parallax shift.
- * - Scene 03: Opposing directions reveal, divider line draw, handoff indicator.
- */
-function initHorizontalGallery() {
-  const section = document.querySelector('.horizontal-gallery-section');
-  const track = document.getElementById('horizontal-track');
-
-  if (
-    !section ||
-    !track ||
-    typeof gsap === 'undefined' ||
-    typeof ScrollTrigger === 'undefined'
-  ) {
-    return;
-  }
-
-  // Clean up existing instances
-  if (horizontalTriggerInstance) {
-    horizontalTriggerInstance.kill();
-    horizontalTriggerInstance = null;
-  }
-  if (horizontalMM) {
-    horizontalMM.revert();
-  }
-  gsap.set(track, { clearProps: 'all' });
-
-  // Reduced motion guard: keep clean vertical layout
-  if (isReducedMotion()) {
-    gsap.set(track, { clearProps: 'all' });
-    return;
-  }
-
-  horizontalMM = gsap.matchMedia();
-
-  // Desktop Pinned Horizontal Scroll (> 768px)
-  horizontalMM.add('(min-width: 769px)', () => {
-    // Exact travel distance: track scroll width minus visible viewport width
-    const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
-
-    const tween = gsap.to(track, {
-      x: () => -getDistance(),
-      ease: 'none',
-    });
-
-    horizontalTriggerInstance = ScrollTrigger.create({
-      trigger: section,
-      pin: true,
-      start: 'top top',
-      end: () => `+=${getDistance()}`,
-      scrub: 0.8,
-      invalidateOnRefresh: true,
-      animation: tween,
-      anticipatePin: 1,
-    });
-
-    // ------------------------------------------------------------------------
-    // SCENE 01: FREELANCE MARKETPLACE
-    // ------------------------------------------------------------------------
-    const scene1 = track.querySelector('.scene-freelance');
-    const scene2 = track.querySelector('.scene-food');
-    const scene3 = track.querySelector('.scene-expense');
-
-    const childTriggers = [];
-
-    if (scene1) {
-      const s1Title = scene1.querySelector('.scene-title-inner');
-      const s1ImageFrame = scene1.querySelector('.scene-image-frame');
-      const s1Desc = scene1.querySelector('.scene-project-description');
-      const s1Manifest = scene1.querySelector('.scene-tech-manifest');
-      const s1Actions = scene1.querySelector('.scene-actions-strip');
-
-      // Title masked reveal
-      if (s1Title) {
-        gsap.fromTo(
-          s1Title,
-          { yPercent: 105 },
-          {
-            yPercent: 0,
-            duration: 0.65,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: scene1,
-              containerAnimation: tween,
-              start: 'left center',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // Controlled directional translation & subtle scale
-      if (s1ImageFrame) {
-        gsap.fromTo(
-          s1ImageFrame,
-          { x: 36, scale: 1.04 },
-          {
-            x: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene1,
-              containerAnimation: tween,
-              start: 'left center',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // Description & manifest stagger
-      const s1Items = [s1Desc, s1Manifest, s1Actions].filter(Boolean);
-      if (s1Items.length) {
-        gsap.fromTo(
-          s1Items,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene1,
-              containerAnimation: tween,
-              start: 'left center',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // Deliberate exit transition as track scrolls to Scene 02
-      if (scene2) {
-        gsap.to(scene1, {
-          opacity: 0.38,
-          scale: 0.985,
-          ease: 'power1.inOut',
-          scrollTrigger: {
-            trigger: scene2,
-            containerAnimation: tween,
-            start: 'left 85%',
-            end: 'left 25%',
-            scrub: true,
-          },
-        });
-      }
-    }
-
-    // ------------------------------------------------------------------------
-    // SCENE 02: FOOD ORDERING PLATFORM
-    // ------------------------------------------------------------------------
-    if (scene2) {
-      const s2ImageFrame = scene2.querySelector('.scene-visual-monolith .scene-image-frame');
-      const s2Image = scene2.querySelector('.scene-visual-monolith .scene-image');
-      const s2Title = scene2.querySelector('.scene-title-inner');
-      const s2StackedLower = scene2.querySelector('.scene-stacked-lower');
-
-      // Panoramic monolith image expansion
-      if (s2ImageFrame) {
-        gsap.fromTo(
-          s2ImageFrame,
-          { scale: 0.94, opacity: 0.85 },
-          {
-            scale: 1,
-            opacity: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene2,
-              containerAnimation: tween,
-              start: 'left 90%',
-              end: 'left 35%',
-              scrub: true,
-            },
-          }
-        );
-      }
-
-      // Internal subtle parallax within panoramic frame
-      if (s2Image) {
-        gsap.fromTo(
-          s2Image,
-          { xPercent: -5 },
-          {
-            xPercent: 4,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: scene2,
-              containerAnimation: tween,
-              start: 'left right',
-              end: 'right left',
-              scrub: true,
-            },
-          }
-        );
-      }
-
-      // Coordinated reveal of title and lower dual-column manifest
-      if (s2Title) {
-        gsap.fromTo(
-          s2Title,
-          { yPercent: 105 },
-          {
-            yPercent: 0,
-            duration: 0.65,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: scene2,
-              containerAnimation: tween,
-              start: 'left 70%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      if (s2StackedLower) {
-        gsap.fromTo(
-          s2StackedLower,
-          { opacity: 0, y: 22 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene2,
-              containerAnimation: tween,
-              start: 'left 65%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // Smooth departure as Scene 03 arrives
-      if (scene3) {
-        gsap.to(scene2, {
-          opacity: 0.4,
-          scale: 0.985,
-          ease: 'power1.inOut',
-          scrollTrigger: {
-            trigger: scene3,
-            containerAnimation: tween,
-            start: 'left 85%',
-            end: 'left 25%',
-            scrub: true,
-          },
-        });
-      }
-    }
-
-    // ------------------------------------------------------------------------
-    // SCENE 03: EXPENSE TRACKER
-    // ------------------------------------------------------------------------
-    if (scene3) {
-      const s3Visual = scene3.querySelector('.scene-visual-column');
-      const s3Editorial = scene3.querySelector('.scene-editorial-column');
-      const s3Title = scene3.querySelector('.scene-title-inner');
-      const handoffLine = scene3.querySelector('.handoff-line');
-      const handoffWrap = scene3.querySelector('.scene-gallery-handoff');
-
-      // Opposing directions reveal: visual from right, editorial from left
-      if (s3Visual) {
-        gsap.fromTo(
-          s3Visual,
-          { x: 44, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.75,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: scene3,
-              containerAnimation: tween,
-              start: 'left 75%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      if (s3Editorial) {
-        gsap.fromTo(
-          s3Editorial,
-          { x: -36, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.75,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: scene3,
-              containerAnimation: tween,
-              start: 'left 75%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      if (s3Title) {
-        gsap.fromTo(
-          s3Title,
-          { yPercent: 105 },
-          {
-            yPercent: 0,
-            duration: 0.65,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: scene3,
-              containerAnimation: tween,
-              start: 'left 70%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // Draw handoff divider line and reveal indicator
-      if (handoffLine) {
-        gsap.fromTo(
-          handoffLine,
-          { scaleX: 0, transformOrigin: 'left center' },
-          {
-            scaleX: 1,
-            duration: 0.55,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene3,
-              containerAnimation: tween,
-              start: 'left 60%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      if (handoffWrap) {
-        gsap.fromTo(
-          handoffWrap,
-          { opacity: 0, x: -14 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene3,
-              containerAnimation: tween,
-              start: 'left 60%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-    }
-
-    return () => {
-      if (horizontalTriggerInstance) {
-        horizontalTriggerInstance.kill();
-        horizontalTriggerInstance = null;
-      }
-      gsap.set(track, { clearProps: 'all' });
+      if (siteHeaderMobile) siteHeaderMobile.classList.remove('is-dark');
       gsap.set(
-        document.querySelectorAll(
-          '.project-scene, .scene-title-inner, .scene-image-frame, .scene-image, .scene-stacked-lower, .scene-visual-column, .scene-editorial-column, .handoff-line, .scene-gallery-handoff'
-        ),
+        [heroStage, bridgeSection, container, document.body, document.documentElement, workSectionMobile, ...quoteInners, lead].filter(Boolean),
         { clearProps: 'all' }
       );
     };
   });
-
-  // Mobile Fallback (<= 768px): Natural Vertical Sequence
-  horizontalMM.add('(max-width: 768px)', () => {
-    gsap.set(track, { clearProps: 'all' });
-
-    const scenes = track.querySelectorAll('.project-scene');
-    scenes.forEach((scene) => {
-      const title = scene.querySelector('.scene-title-inner');
-      const img = scene.querySelector('.scene-image-frame');
-      const desc = scene.querySelector('.scene-project-description');
-
-      if (title) {
-        gsap.fromTo(
-          title,
-          { yPercent: 100 },
-          {
-            yPercent: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: scene,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      if (img) {
-        gsap.fromTo(
-          img,
-          { opacity: 0, y: 22 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene,
-              start: 'top 82%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      if (desc) {
-        gsap.fromTo(
-          desc,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            delay: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene,
-              start: 'top 80%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-    });
-
-    return () => {
-      gsap.set(track, { clearProps: 'all' });
-    };
-  });
 }
 
 /**
- * ============================================================================
- * 4. TECHNICAL EXPERTISE, ABOUT & CONTACT VIEWPORT REVEALS
- * ============================================================================
- */
-function initScrollRevealMotion() {
-  if (isReducedMotion() || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    return;
-  }
-
-  // --------------------------------------------------------------------------
-  // A. SECTION 4: THE ARCHITECTURAL INDEX (SKILLS)
-  // --------------------------------------------------------------------------
-  const indexHeader = document.querySelector('.index-intro-header');
-  if (indexHeader) {
-    const badge = indexHeader.querySelector('.index-badge');
-    const title = indexHeader.querySelector('.index-display-title');
-    const statement = indexHeader.querySelector('.index-statement-text');
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: indexHeader,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    if (badge) {
-      tl.fromTo(
-        badge,
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
-        0
-      );
-    }
-    if (title) {
-      tl.fromTo(
-        title,
-        { opacity: 0, y: 28 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
-        0.08
-      );
-    }
-    if (statement) {
-      tl.fromTo(
-        statement,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-        0.16
-      );
-    }
-  }
-
-  // Four Engineering Domains: vertical numeral masks, top accent lines & manifests
-  const domainColumns = document.querySelectorAll('.domain-column');
-  domainColumns.forEach((col, idx) => {
-    const numeral = col.querySelector('.domain-numeral');
-    const accentLine = col.querySelector('.domain-accent-line');
-    const title = col.querySelector('.domain-title');
-    const summary = col.querySelector('.domain-summary');
-    const items = col.querySelectorAll('.domain-tech-item');
-
-    const dtl = gsap.timeline({
-      scrollTrigger: {
-        trigger: col,
-        start: 'top 82%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    // Top accent line draws in
-    if (accentLine) {
-      dtl.fromTo(
-        accentLine,
-        { scaleX: 0, transformOrigin: 'left center' },
-        { scaleX: 1, duration: 0.45, ease: 'power3.out' },
-        0
-      );
-    }
-
-    // Large domain numeral vertical mask reveal
-    if (numeral) {
-      dtl.fromTo(
-        numeral,
-        { yPercent: 110 },
-        { yPercent: 0, duration: 0.65, ease: 'power4.out' },
-        0.06
-      );
-
-      // Subtle scroll-linked vertical parallax shift as user scrolls through the matrix
-      gsap.to(numeral, {
-        y: -16,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: col,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }
-
-    if (title) {
-      dtl.fromTo(
-        title,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        0.14
-      );
-    }
-
-    if (summary) {
-      dtl.fromTo(
-        summary,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        0.2
-      );
-    }
-
-    if (items.length) {
-      dtl.fromTo(
-        items,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power2.out' },
-        0.24
-      );
-    }
-  });
-
-  // --------------------------------------------------------------------------
-  // B. SECTION 5: ABOUT, EDUCATION & EXPERIENCE
-  // --------------------------------------------------------------------------
-  const aboutSection = document.getElementById('about');
-  if (aboutSection) {
-    const aboutHeader = aboutSection.querySelector('.about-intro-header');
-    const portraitFrame = aboutSection.querySelector('.about-portrait-frame');
-    const bioBlock = aboutSection.querySelector('.about-bio-block');
-    const ledgerSections = aboutSection.querySelectorAll('.about-ledger-section');
-
-    if (aboutHeader) {
-      gsap.from(aboutHeader, {
-        opacity: 0,
-        y: 28,
-        duration: 0.95,
-        ease: 'power2.out',
-        clearProps: 'opacity,transform',
-        scrollTrigger: {
-          trigger: aboutSection,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      // On scroll down to next section, glide header upward
-      gsap.to(aboutHeader, {
-        y: -30,
-        opacity: 0.25,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: aboutSection,
-          start: 'bottom 65%',
-          end: 'bottom 15%',
-          scrub: true,
-        },
-      });
-    }
-
-    // Portrait: clip-path / frame reveal, subtle scroll parallax, corner ticks
-    if (portraitFrame) {
-      const wrapper = portraitFrame.querySelector('.portrait-image-wrapper');
-      const photo = portraitFrame.querySelector('.about-portrait-photo');
-      const ticks = portraitFrame.querySelectorAll('.frame-tick-top-left, .frame-tick-bottom-right');
-      const caption = portraitFrame.querySelector('.about-portrait-caption');
-
-      const ptl = gsap.timeline({
-        scrollTrigger: {
-          trigger: portraitFrame,
-          start: 'top 82%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      if (wrapper) {
-        ptl.fromTo(
-          wrapper,
-          { clipPath: 'inset(0% 0% 100% 0%)' },
-          { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.85, ease: 'power3.inOut' },
-          0
-        );
-      }
-
-      if (ticks.length) {
-        ptl.fromTo(
-          ticks,
-          { scale: 0 },
-          { scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.5)' },
-          0.45
-        );
-      }
-
-      if (caption) {
-        ptl.fromTo(
-          caption,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-          0.55
-        );
-      }
-
-      // Subtle scroll parallax on photo within frame
-      if (photo) {
-        gsap.fromTo(
-          photo,
-          { yPercent: -5 },
-          {
-            yPercent: 5,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: portraitFrame,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
-            },
-          }
-        );
-      }
-    }
-
-    // Biography: masked heading and narrative with extended duration & upward scroll exit
-    if (bioBlock) {
-      const bioHeadingInner = bioBlock.querySelector('.bio-heading-inner');
-      const bioText = bioBlock.querySelector('.about-bio-text p');
-
-      const bioTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: bioBlock,
-          start: 'top 82%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      if (bioHeadingInner) {
-        bioTl.fromTo(
-          bioHeadingInner,
-          { yPercent: 110 },
-          { yPercent: 0, duration: 0.9, ease: 'power3.out' },
-          0
-        );
-
-        // When scrolling down to next section (contact), make bio heading glide upward opposite
-        gsap.to(bioHeadingInner, {
-          yPercent: -100,
-          opacity: 0,
-          ease: 'power2.in',
-          scrollTrigger: {
-            trigger: aboutSection,
-            start: 'bottom 60%',
-            end: 'bottom 15%',
-            scrub: true,
-          },
-        });
-      }
-
-      if (bioText) {
-        bioTl.fromTo(
-          bioText,
-          { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out', clearProps: 'opacity,transform' },
-          0.16
-        );
-      }
-    }
-
-    // Education & Experience ledgers: divider lines draw, records stagger
-    ledgerSections.forEach((sec) => {
-      const line = sec.querySelector('.ledger-line');
-      const entries = sec.querySelectorAll('.ledger-entry');
-
-      const ltl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sec,
-          start: 'top 84%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      if (line) {
-        ltl.fromTo(
-          line,
-          { scaleX: 0, transformOrigin: 'left center' },
-          { scaleX: 1, duration: 0.55, ease: 'power3.out' },
-          0
-        );
-      }
-
-      if (entries.length) {
-        ltl.fromTo(
-          entries,
-          { opacity: 0, y: 18 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power2.out',
-            clearProps: 'opacity,transform',
-          },
-          0.1
-        );
-      }
-    });
-  }
-
-  // --------------------------------------------------------------------------
-  // C. SECTION 6: CONTACT & FOOTER MONUMENT
-  // --------------------------------------------------------------------------
-  const contactSection = document.getElementById('contact');
-  if (contactSection) {
-    const contactBadge = contactSection.querySelector('.contact-badge');
-    const contactLineInners = contactSection.querySelectorAll('.contact-line-inner');
-    const contactSentence = contactSection.querySelector('.contact-supporting-sentence');
-    const contactActionCol = contactSection.querySelector('.contact-action-col');
-
-    const contactTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: contactSection,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    if (contactBadge) {
-      contactTl.from(
-        contactBadge,
-        { opacity: 0, x: -16, duration: 0.45, ease: 'power2.out', clearProps: 'opacity,transform' },
-        0
-      );
-    }
-
-    // Line-by-line reveal of LET'S BUILD / SOMETHING GOOD.
-    if (contactLineInners.length) {
-      contactTl.fromTo(
-        contactLineInners,
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: 'power4.out',
-          clearProps: 'transform',
-        },
-        0.06
-      );
-    }
-
-    if (contactSentence) {
-      contactTl.from(
-        contactSentence,
-        { opacity: 0, y: 18, duration: 0.65, ease: 'power2.out', clearProps: 'opacity,transform' },
-        0.18
-      );
-    }
-
-    if (contactActionCol) {
-      contactTl.from(
-        contactActionCol,
-        { opacity: 0, y: 22, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,transform' },
-        0.22
-      );
-    }
-  }
-
-  // Footer metadata & monumental wordmark
-  const footerRow = document.querySelector('.footer-restrained-row');
-  if (footerRow) {
-    gsap.from(footerRow, {
-      opacity: 0,
-      y: 16,
-      duration: 0.65,
-      ease: 'power2.out',
-      clearProps: 'opacity,transform',
-      scrollTrigger: {
-        trigger: '.site-footer',
-        start: 'top 90%',
-        toggleActions: 'play none none none',
-      },
-    });
-  }
-
-  const wordmark = document.getElementById('footer-wordmark');
-  if (wordmark) {
-    gsap.fromTo(
-      wordmark,
-      { opacity: 0.15, y: 24, scale: 0.96 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.85,
-        ease: 'power2.out',
-        clearProps: 'opacity,transform,scale',
-        scrollTrigger: {
-          trigger: '.footer-monument-stage',
-          start: 'top 92%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-  }
-}
-
-/**
- * ============================================================================
- * 5. WINDOW RESIZE & MEDIA QUERY LISTENER
- * ============================================================================
- */
-let resizeTimeout = null;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
-    initHorizontalGallery();
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.refresh();
-    }
-  }, 150);
-});/**
  * ============================================================================
  * 3. PROJECT SECTION: EDITORIAL DIRECTORY & FLOATING CURSOR PREVIEW
  * ============================================================================
@@ -1678,7 +820,92 @@ window.initHorizontalGallery = initEditorialProjects;
 
 /**
  * ============================================================================
- * 4. TECHNICAL EXPERTISE, ABOUT & CONTACT VIEWPORT REVEALS
+ * 4. SKILLS SECTION: CINEMATIC HORIZONTAL MARQUEE STRIPS
+ * ============================================================================
+ * Creative Direction:
+ * - 3 horizontal rows of monumental Aeonik skill text (Java / Spring Boot /
+ *   Microservices | React.js / Next.js / JavaScript | MySQL / REST APIs / Docker)
+ * - Each row's track translates LEFT as the user scrolls through the section.
+ * - Each row has a different parallax speed for depth/overlap feel.
+ * - NO section pinning — user scrolls freely through without stopping.
+ * - Smooth background transition from dark (#0A0A0C, from #work) to white
+ *   (#FFFFFF, for #skills), fully scrubbed and bi-directional.
+ * - Header reverts from dark mode back to frosted light mode in sync.
+ */
+function initSkillsMarquee() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const section = document.getElementById('skills');
+  if (!section) return;
+
+  const track1 = document.getElementById('skills-track-1');
+  const track2 = document.getElementById('skills-track-2');
+  const track3 = document.getElementById('skills-track-3');
+  const siteHeader = document.getElementById('site-header');
+  const workSection = document.getElementById('work');
+
+  // ── Unified Pristine White Canvas ─────────────────────────────────────────
+  // Both #work and #skills share a seamless white canvas — no jarring seams or cuts.
+  gsap.set([document.body, document.documentElement, section, workSection].filter(Boolean), {
+    backgroundColor: '#FFFFFF',
+  });
+
+  if (isReducedMotion()) return;
+
+  // ── Horizontal Marquee Scroll Motion ─────────────────────────────────────
+  // Each track moves left proportionally as the section scrolls through viewport.
+  // The scrub amount and travel distance differ per row for a layered parallax.
+  // Using section as the trigger (no pin), so the user scrolls naturally through.
+
+  const isMobile = window.innerWidth <= 768;
+  const travelBase = isMobile ? -30 : -42; // vw units of leftward travel
+
+  if (track1) {
+    gsap.to(track1, {
+      xPercent: travelBase * 1.0, // Row 1: base speed
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
+
+  if (track2) {
+    gsap.to(track2, {
+      xPercent: travelBase * 1.4, // Row 2: 40% faster (deeper parallax)
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
+
+  if (track3) {
+    gsap.to(track3, {
+      xPercent: travelBase * 0.7, // Row 3: 30% slower (near-plane)
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
+}
+
+/**
+ * ============================================================================
+ * 5. ABOUT & CONTACT VIEWPORT REVEALS
  * ============================================================================
  */
 function initScrollRevealMotion() {
@@ -1687,7 +914,7 @@ function initScrollRevealMotion() {
   }
 
   // --------------------------------------------------------------------------
-  // A. SECTION 4: THE ARCHITECTURAL INDEX (SKILLS)
+  // A. SECTION 4: THE ARCHITECTURAL INDEX (SKILLS) — now replaced, skip
   // --------------------------------------------------------------------------
   const indexHeader = document.querySelector('.index-intro-header');
   if (indexHeader) {
