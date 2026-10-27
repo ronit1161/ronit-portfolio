@@ -260,190 +260,171 @@
            Creative Direction: An Editorial Exhibition of Software
            Desktop: Pinned Horizontal Journey · Mobile: Natural Vertical Sequence
            ========================================================================== -->
-    <section id="work" class="section horizontal-gallery-section" aria-label="The Engineering Gallery">
-      <!-- Restrained Gallery Identifier Bar -->
-      <div class="gallery-exhibition-header">
-        <div class="gallery-header-left">
-          <h2 class="gallery-identifier">SELECTED WORK / 01—03</h2>
+    <section id="work" class="section editorial-projects-section" aria-label="Selected Projects">
+      <!-- Floating Cursor Preview (Desktop Smooth Follower) -->
+      <div class="project-floating-preview" id="project-floating-preview" aria-hidden="true">
+        <div class="preview-inner">
+          <div class="preview-card" data-preview-index="0">
+            <img src="./assets/freelance.webp" alt="Freelance Marketplace interface preview" class="preview-img"
+              loading="eager" />
+          </div>
+          <div class="preview-card" data-preview-index="1">
+            <img src="./assets/food ordering.webp" alt="Food Ordering App interface preview" class="preview-img"
+              loading="eager" />
+          </div>
+          <div class="preview-card" data-preview-index="2">
+            <img src="./assets/expense tracker.webp" alt="Expense Tracker dashboard preview" class="preview-img"
+              loading="eager" />
+          </div>
         </div>
       </div>
 
-      <!-- Horizontal Project Track Viewport -->
-      <div class="horizontal-gallery-viewport">
-        <div class="horizontal-track" id="horizontal-track">
+      <div class="container editorial-projects-container">
+        <!-- Section Header -->
+        <header class="editorial-projects-header">
+          <div class="header-left">
+            <h2 class="projects-heading">WORK</h2>
+          </div>
+          <div class="header-right">
+            <p class="projects-subtext">
+              Selected systems engineered with clean architectures, robust backend logic, and responsive interfaces.
+            </p>
+          </div>
+        </header>
 
-          <!-- ================================================================
-                 PROJECT SCENE 01: FREELANCE MARKETPLACE
-                 Composition Rhythm: Asymmetric Lateral Architecture
-                 ================================================================ -->
-          <article class="project-scene scene-freelance" data-project="freelance-marketplace"
-            aria-labelledby="project-title-01">
-            <div class="scene-inner scene-layout-split">
-              <!-- Textual Architecture Column -->
-              <div class="scene-editorial-column">
-                <div class="scene-meta-header">
-                  <span class="scene-index">01</span>
-                  <span class="scene-category">FULL-STACK PLATFORM</span>
-                </div>
+        <!-- Project Editorial Directory List -->
+        <div class="editorial-projects-list" id="editorial-projects-list" role="list">
 
-                <h3 class="scene-project-title" id="project-title-01">
-                  <span class="scene-title-mask"><span class="scene-title-inner">Freelance Marketplace</span></span>
-                </h3>
+          <!-- PROJECT 01: FREELANCE MARKETPLACE -->
+          <article class="editorial-project-row" data-index="0" data-project="freelance" role="listitem" tabindex="0"
+            aria-label="Freelance Marketplace project details">
+            <div class="row-left">
+              <h3 class="project-title">
+                <span class="title-word">FREELANCE</span>
+                <span class="title-word">MARKETPLACE</span>
+              </h3>
+              <span class="project-subtitle">ENTERPRISE TALENT & GIG PLATFORM</span>
+            </div>
 
-                <p class="scene-project-description">
-                  A multi-role service platform connecting clients and independent developers. Supports gig discovery,
-                  client proposal workflows, direct order management, a simulated wallet transaction system, and two-way
-                  client reviews. Built with a modular Spring Boot backend, Spring Security with stateless JWT
-                  role-based access control, relational database schema in MySQL managed via Hibernate, and a responsive
-                  React client interface.
-                </p>
-
-                <div class="scene-tech-manifest">
-                  <span class="tech-manifest-label">TECHNOLOGY /</span>
-                  <span class="tech-manifest-items">Java 17 · Spring Boot 3 · Spring Security · JWT · MySQL · Hibernate
-                    · Docker · React</span>
-                </div>
-
-                <div class="scene-actions-strip">
-                  <a href="https://github.com/ronit1161/Freelance-Marketplace" target="_blank" rel="noopener noreferrer"
-                    class="scene-action-link" aria-label="View Freelance Marketplace repository on GitHub">
-                    <span>GitHub Repository</span>
-                    <span class="action-arrow" aria-hidden="true">↗</span>
-                  </a>
-                </div>
+            <div class="row-middle">
+              <div class="project-pills-list">
+                <span class="project-pill">Java</span>
+                <span class="project-pill">Spring Boot</span>
+                <span class="project-pill">React</span>
+                <span class="project-pill">MySQL</span>
+                <span class="project-pill">Docker</span>
               </div>
+            </div>
 
-              <!-- Visual Architecture Column -->
-              <div class="scene-visual-column">
-                <div class="scene-image-frame">
-                  <img src="./assets/freelance.webp"
-                    alt="Freelance Marketplace platform interface and gig order workflow" loading="lazy" width="1919"
-                    height="948" class="scene-image" />
-                  <div class="frame-tick-top-left" aria-hidden="true"></div>
-                  <div class="frame-tick-bottom-right" aria-hidden="true"></div>
-                </div>
+            <div class="row-right">
+              <div class="row-actions">
+                <a href="https://github.com/ronit1161/Freelance-Marketplace" target="_blank" rel="noopener noreferrer"
+                  aria-label="View Freelance Marketplace source code on GitHub" onclick="event.stopPropagation()">
+                </a>
               </div>
+              <div class="row-arrow-wrap" aria-hidden="true">
+                <svg class="row-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Mobile Inline Media (visible on touch devices / small screens) -->
+            <div class="mobile-project-media" aria-hidden="true">
+              <img src="./assets/freelance.webp" alt="Freelance Marketplace preview" loading="lazy" />
             </div>
           </article>
 
-          <!-- ================================================================
-                 PROJECT SCENE 02: FOOD ORDERING PLATFORM
-                 Composition Rhythm: Inverted Rhythm / Wide Monolith Frame
-                 ================================================================ -->
-          <article class="project-scene scene-food" data-project="food-ordering" aria-labelledby="project-title-02">
-            <div class="scene-inner scene-layout-stacked">
-              <!-- Visual Architecture Monolith -->
-              <div class="scene-visual-monolith">
-                <div class="scene-image-frame">
-                  <img src="./assets/food ordering.webp"
-                    alt="Food Ordering Platform culinary commerce interface and checkout" loading="lazy" width="1895"
-                    height="927" class="scene-image" />
-                  <div class="frame-tick-top-left" aria-hidden="true"></div>
-                  <div class="frame-tick-bottom-right" aria-hidden="true"></div>
-                </div>
-              </div>
+          <!-- PROJECT 02: FOOD ORDERING APP -->
+          <article class="editorial-project-row" data-index="1" data-project="food-ordering" role="listitem"
+            tabindex="0" aria-label="Food Ordering App project details">
+            <div class="row-left">
+              <h3 class="project-title">
+                <span class="title-word">FOOD</span>
+                <span class="title-word">ORDERING</span>
+                <span class="title-word">APP</span>
+              </h3>
+              <span class="project-subtitle">COMMERCE & REAL-TIME CART ENGINE</span>
+            </div>
 
-              <!-- Dual-Column Lower Foundation -->
-              <div class="scene-stacked-lower">
-                <div class="stacked-heading-col">
-                  <div class="scene-meta-header">
-                    <span class="scene-index">02</span>
-                    <span class="scene-category">FULL-STACK COMMERCE</span>
-                  </div>
-                  <h3 class="scene-project-title" id="project-title-02">
-                    <span class="scene-title-mask"><span class="scene-title-inner">Food Ordering Platform</span></span>
-                  </h3>
-                  <div class="scene-actions-strip">
-                    <a href="https://food-ordering-app-roan.vercel.app/" target="_blank" rel="noopener noreferrer"
-                      class="scene-action-btn" aria-label="Launch Food Ordering Platform live application">
-                      <span>Live Demo</span>
-                      <span class="action-arrow" aria-hidden="true">↗</span>
-                    </a>
-                    <a href="https://github.com/ronit1161/food-ordering" target="_blank" rel="noopener noreferrer"
-                      class="scene-action-link" aria-label="View Food Ordering Platform repository on GitHub">
-                      <span>GitHub Repository</span>
-                      <span class="action-arrow" aria-hidden="true">↗</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="stacked-details-col">
-                  <p class="scene-project-description">
-                    A full-stack culinary commerce web platform built with Next.js and React. Integrates NextAuth for
-                    session authentication with protected user account routes, dynamic food category navigation,
-                    persistent shopping cart state management, and online payment processing via Razorpay.
-                  </p>
-                  <div class="scene-tech-manifest">
-                    <span class="tech-manifest-label">TECHNOLOGY /</span>
-                    <span class="tech-manifest-items">Next.js 14 · React · MongoDB · NextAuth · Razorpay · Tailwind
-                      CSS</span>
-                  </div>
-                </div>
+            <div class="row-middle">
+              <div class="project-pills-list">
+                <span class="project-pill">Next.js</span>
+                <span class="project-pill">React</span>
+                <span class="project-pill">MongoDB</span>
+                <span class="project-pill">NextAuth</span>
+                <span class="project-pill">Razorpay</span>
               </div>
+            </div>
+
+            <div class="row-right">
+              <div class="row-actions">
+                <a href="https://food-ordering-app-roan.vercel.app/" target="_blank" rel="noopener noreferrer"
+                  aria-label="Launch Food Ordering live application" onclick="event.stopPropagation()">
+                </a>
+                <a href="https://github.com/ronit1161/food-ordering" target="_blank" rel="noopener noreferrer"
+                  aria-label="View Food Ordering source code on GitHub" onclick="event.stopPropagation()">
+                </a>
+              </div>
+              <div class="row-arrow-wrap" aria-hidden="true">
+                <svg class="row-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Mobile Inline Media -->
+            <div class="mobile-project-media" aria-hidden="true">
+              <img src="./assets/food ordering.webp" alt="Food Ordering App preview" loading="lazy" />
             </div>
           </article>
 
-          <!-- ================================================================
-                 PROJECT SCENE 03: EXPENSE TRACKER
-                 Composition Rhythm: Editorial Conclusion & Architectural Handoff
-                 ================================================================ -->
-          <article class="project-scene scene-expense" data-project="expense-tracker"
-            aria-labelledby="project-title-03">
-            <div class="scene-inner scene-layout-concluding">
-              <!-- Visual Architecture Dominant Column -->
-              <div class="scene-visual-column">
-                <div class="scene-image-frame">
-                  <img src="./assets/expense tracker.webp"
-                    alt="Expense Tracker financial metrics dashboard and transaction logs" loading="lazy" width="1898"
-                    height="934" class="scene-image" />
-                  <div class="frame-tick-top-left" aria-hidden="true"></div>
-                  <div class="frame-tick-bottom-right" aria-hidden="true"></div>
-                </div>
+          <!-- PROJECT 03: EXPENSE TRACKER -->
+          <article class="editorial-project-row" data-index="2" data-project="expense-tracker" role="listitem"
+            tabindex="0" aria-label="Expense Tracker project details">
+            <div class="row-left">
+              <h3 class="project-title">
+                <span class="title-word">EXPENSE</span>
+                <span class="title-word">TRACKER</span>
+              </h3>
+              <span class="project-subtitle">PERSONAL FINANCE & BUDGET ANALYTICS</span>
+            </div>
+
+            <div class="row-middle">
+              <div class="project-pills-list">
+                <span class="project-pill">React</span>
+                <span class="project-pill">Vite</span>
+                <span class="project-pill">Express</span>
+                <span class="project-pill">MySQL</span>
+                <span class="project-pill">REST APIs</span>
               </div>
+            </div>
 
-              <!-- Architectural Handoff & Editorial Details Column -->
-              <div class="scene-editorial-column">
-                <div class="scene-meta-header">
-                  <span class="scene-index">03</span>
-                  <span class="scene-category">PERSONAL FINANCE &amp; REST APIS</span>
-                </div>
-
-                <h3 class="scene-project-title" id="project-title-03">
-                  <span class="scene-title-mask"><span class="scene-title-inner">Expense Tracker</span></span>
-                </h3>
-
-                <p class="scene-project-description">
-                  A personal finance dashboard pairing a structured Express REST backend with a normalized MySQL
-                  database. Implements transaction logging, debit/credit categorization, flexible date filtering, and
-                  reactive client-side spending breakdowns on a fast React + Vite interface.
-                </p>
-
-                <div class="scene-tech-manifest">
-                  <span class="tech-manifest-label">TECHNOLOGY /</span>
-                  <span class="tech-manifest-items">React · Vite · Node.js · Express · MySQL · REST APIs · Tailwind
-                    CSS</span>
-                </div>
-
-                <div class="scene-actions-strip">
-                  <a href="https://expense-tracker-react-sage.vercel.app/" target="_blank" rel="noopener noreferrer"
-                    class="scene-action-btn" aria-label="Launch Expense Tracker live application">
-                    <span>Live Demo</span>
-                    <span class="action-arrow" aria-hidden="true">↗</span>
-                  </a>
-                  <a href="https://github.com/ronit1161/expense-tracker-react" target="_blank" rel="noopener noreferrer"
-                    class="scene-action-link" aria-label="View Expense Tracker repository on GitHub">
-                    <span>GitHub Repository</span>
-                    <span class="action-arrow" aria-hidden="true">↗</span>
-                  </a>
-                </div>
-
-                <!-- Architectural Forward Transition to Next Section -->
-                <div class="scene-gallery-handoff" aria-hidden="true">
-                  <span class="handoff-line"></span>
-                  <span class="handoff-text">NEXT: TECHNICAL EXPERTISE</span>
-                  <span class="handoff-arrow">→</span>
-                </div>
+            <div class="row-right">
+              <div class="row-actions">
+                <a href="https://expense-tracker-react-sage.vercel.app/" target="_blank" rel="noopener noreferrer"
+                  aria-label="Launch Expense Tracker live application" onclick="event.stopPropagation()">
+                </a>
+                <a href="https://github.com/ronit1161/expense-tracker-react" target="_blank" rel="noopener noreferrer"
+                  aria-label="View Expense Tracker source code on GitHub" onclick="event.stopPropagation()">
+                </a>
               </div>
+              <div class="row-arrow-wrap" aria-hidden="true">
+                <svg class="row-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Mobile Inline Media -->
+            <div class="mobile-project-media" aria-hidden="true">
+              <img src="./assets/expense tracker.webp" alt="Expense Tracker preview" loading="lazy" />
             </div>
           </article>
 
