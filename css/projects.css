@@ -352,3 +352,216 @@
   display: block;
 }
 
+/* Mobile Inline Media (hidden on desktop) */
+.mobile-project-media {
+  display: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (<= 1024px TABLET)
+   ========================================================================== */
+
+@media screen and (max-width: 1024px) {
+  .editorial-project-row {
+    gap: 24px;
+    padding: 34px 10px;
+  }
+
+  .editorial-project-row .row-left {
+    flex: 1 1 45%;
+    max-width: 48%;
+  }
+
+  .editorial-project-row .project-title {
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  }
+
+  .row-arrow-wrap {
+    width: 42px;
+    height: 42px;
+  }
+
+  .project-floating-preview {
+    width: clamp(280px, 32vw, 380px);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (<= 768px MOBILE & TOUCH ADAPTATION)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+  .project-floating-preview {
+    display: none !important;
+  }
+
+  .editorial-projects-section {
+    padding-top: calc(var(--header-height, 64px) + 24px);
+    padding-bottom: 70px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .editorial-projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 20px;
+  }
+
+  .editorial-project-row {
+    flex-wrap: wrap;
+    padding: 24px 8px;
+    gap: 14px;
+  }
+
+  .editorial-project-row .row-left {
+    flex: 1 1 75%;
+    max-width: 80%;
+  }
+
+  .editorial-project-row .row-right {
+    flex: 0 0 auto;
+  }
+
+  .editorial-project-row .row-middle {
+    flex: 1 1 100%;
+    margin-top: 2px;
+  }
+
+  .editorial-project-row .project-title {
+    font-size: clamp(1.4rem, 6.2vw, 1.95rem);
+  }
+
+  .editorial-project-row .project-subtitle {
+    font-size: 0.72rem;
+    margin-top: 6px;
+  }
+
+  .row-arrow-wrap {
+    width: 34px;
+    height: 34px;
+  }
+
+  .editorial-project-row.is-active .project-title {
+    transform: none;
+  }
+
+  .editorial-project-row.is-active .row-arrow-wrap {
+    transform: rotate(45deg);
+  }
+
+  .row-actions {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .row-action-link {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.72rem;
+  }
+
+  /* Mobile Inline Media Reveal on Tap */
+  .mobile-project-media {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #F4F4F6;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.35s ease,
+      margin 0.35s ease;
+    margin-top: 0;
+  }
+
+  .editorial-project-row.is-active .mobile-project-media {
+    max-height: 240px;
+    opacity: 1;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .mobile-project-media img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .editorial-project-row,
+  .project-title,
+  .project-subtitle,
+  .row-arrow-wrap,
+  .project-pill,
+  .project-floating-preview,
+  .preview-card {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   HEADER DARK THEME INTEGRATION FOR EDITORIAL PROJECTS
+   ========================================================================== */
+
+.site-header {
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform var(--duration-normal) var(--ease-editorial);
+}
+
+.site-header .nav-brand,
+.site-header .nav-link,
+.site-header .nav-cv-btn,
+.site-header .mobile-menu-trigger span {
+  transition: color 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.site-header.is-dark {
+  background-color: rgba(10, 10, 12, 0.88) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.site-header.is-dark .nav-brand {
+  color: #FFFFFF !important;
+}
+
+.site-header.is-dark .nav-link {
+  color: #A0A0AC !important;
+}
+
+.site-header.is-dark .nav-link:hover,
+.site-header.is-dark .nav-link.active {
+  color: #FFFFFF !important;
+}
+
+.site-header.is-dark .nav-cv-btn {
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.site-header.is-dark .nav-cv-btn:hover {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #FFFFFF !important;
+}
+
+.site-header.is-dark .mobile-menu-trigger span {
+  background-color: #FFFFFF !important;
+}
