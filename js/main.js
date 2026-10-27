@@ -25,12 +25,24 @@ function initApp() {
     initHeroToWorkTransition();
   }
 
-  if (typeof initHorizontalGallery === 'function') {
+  // Phase 3: Editorial Interactive Directory & Cursor Follower
+  if (typeof initEditorialProjects === 'function') {
+    initEditorialProjects();
+  } else if (typeof initProjectStripsAnimation === 'function') {
+    initProjectStripsAnimation();
+  } else if (typeof initProjectStackAnimation === 'function') {
+    initProjectStackAnimation();
+  } else if (typeof initHorizontalGallery === 'function') {
     initHorizontalGallery();
   }
 
   if (typeof initScrollRevealMotion === 'function') {
     initScrollRevealMotion();
+  }
+
+  // Phase 4: Skills Cinematic Marquee + dark→white transition
+  if (typeof initSkillsMarquee === 'function') {
+    initSkillsMarquee();
   }
 
   // Utilities & Listeners
