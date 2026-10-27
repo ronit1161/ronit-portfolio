@@ -1410,4 +1410,696 @@ window.addEventListener('resize', () => {
       ScrollTrigger.refresh();
     }
   }, 150);
+});/**
+ * ============================================================================
+ * 3. PROJECT SECTION: EDITORIAL DIRECTORY & FLOATING CURSOR PREVIEW
+ * ============================================================================
+ * Creative Direction:
+ * - Minimal, spacious, typography-driven list with thin separators.
+ * - Left: Monumental project name with category subtitle.
+ * - Middle: Subtle keyword / technology pill tags.
+ * - Right: Large distinctive diagonal arrow + direct action links.
+ * - Hover Interaction: Floating screenshot container smoothly follows cursor
+ *   with GSAP quickTo physics, velocity-based rotation tilt, and scale entrance.
+ * - Active Row: Typography & arrow shift to signature accent, sibling rows dim.
+ * - Transitions: Fluid GSAP animations across rows.
+ * - Mobile / Touch: Cursor-following disabled, tap toggles active state & reveals preview.
+ */
+function initEditorialProjects() {
+  const section = document.getElementById('work');
+  const list = document.getElementById('editorial-projects-list');
+  const preview = document.getElementById('project-floating-preview');
+  const rows = section ? Array.from(section.querySelectorAll('.editorial-project-row')) : [];
+  const previewCards = preview ? Array.from(preview.querySelectorAll('.preview-card')) : [];
+
+  if (!section || !list || rows.length === 0 || typeof gsap === 'undefined') {
+    return;
+  }
+
+  // Handle Touch Devices (<= 768px or no hover capability)
+  const isTouchDevice = () => window.matchMedia('(hover: none), (max-width: 768px)').matches;
+
+  rows.forEach((row) => {
+    // Click handling:
+    // If user clicked directly on a link inside the row, let browser follow the link.
+    // On touch device: tapping row toggles its active state and inline media.
+    // On desktop: clicking row navigates to the primary project URL.
+    row.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+
+      if (isTouchDevice()) {
+        const isCurrentActive = row.classList.contains('is-active');
+        rows.forEach((r) => r.classList.remove('is-active'));
+        if (!isCurrentActive) {
+          row.classList.add('is-active');
+        }
+      } else {
+        const primaryLink = row.querySelector('.row-actions a');
+        if (primaryLink && primaryLink.href) {
+          window.open(primaryLink.href, '_blank', 'noopener,noreferrer');
+        }
+      }
+    });
+
+    // Keyboard accessibility
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const primaryLink = row.querySelector('.row-actions a');
+        if (primaryLink && primaryLink.href) {
+          window.open(primaryLink.href, '_blank', 'noopener,noreferrer');
+        }
+      }
+    });
+  });
+
+  if (!preview || previewCards.length === 0) return;
+
+  // Floating Cursor Follower Logic (Desktop)
+  let isVisible = false;
+  let activeIndex = -1;
+  let prevMouseX = 0;
+  let prevMouseY = 0;
+  let velocityX = 0;
+  let rotTween = null;
+  let scaleTween = null;
+
+  // Center preview on cursor anchor
+  gsap.set(preview, {
+    xPercent: -50,
+    yPercent: -50,
+    transformOrigin: 'center center',
+    opacity: 0,
+    scale: 0.82,
+    rotation: 0,
+    pointerEvents: 'none',
+  });
+
+  // GSAP quickTo creates high-performance 60fps springs
+  const setX = gsap.quickTo(preview, 'x', { duration: 0.38, ease: 'power3.out' });
+  const setY = gsap.quickTo(preview, 'y', { duration: 0.38, ease: 'power3.out' });
+
+  function onMouseMove(e) {
+    if (isTouchDevice()) return;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    setX(mouseX);
+    setY(mouseY);
+
+    velocityX = mouseX - prevMouseX;
+    prevMouseX = mouseX;
+    prevMouseY = mouseY;
+
+    // Fluid subtle tilt based on horizontal velocity (clamped between -7deg and 7deg)
+    const targetRot = gsap.utils.clamp(-7, 7, velocityX * 0.32);
+    if (rotTween) rotTween.kill();
+    rotTween = gsap.to(preview, {
+      rotation: targetRot,
+      duration: 0.38,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    });
+  }
+
+  function setActiveRow(index) {
+    if (isTouchDevice()) return;
+    if (index === activeIndex) return;
+
+    activeIndex = index;
+    list.classList.add('has-active-row');
+
+    rows.forEach((row, idx) => {
+      if (idx === index) {
+        row.classList.add('is-active');
+        row.setAttribute('aria-selected', 'true');
+      } else {
+        row.classList.remove('is-active');
+        row.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    previewCards.forEach((card, idx) => {
+      if (idx === index) {
+        card.classList.add('is-active');
+        const img = card.querySelector('.preview-img');
+        if (img) {
+          gsap.fromTo(
+            img,
+            { scale: 1.08 },
+            { scale: 1, duration: 0.45, ease: 'power2.out', overwrite: 'auto' }
+          );
+        }
+      } else {
+        card.classList.remove('is-active');
+      }
+    });
+
+    if (!isVisible) {
+      isVisible = true;
+      if (scaleTween) scaleTween.kill();
+      scaleTween = gsap.to(preview, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.35,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    } else {
+      // Elegant micro-pulse when sliding between rows
+      if (scaleTween) scaleTween.kill();
+      scaleTween = gsap.fromTo(
+        preview,
+        { scale: 0.95 },
+        { scale: 1, duration: 0.32, ease: 'power2.out', overwrite: 'auto' }
+      );
+    }
+  }
+
+  function clearActive() {
+    if (isTouchDevice()) return;
+
+    activeIndex = -1;
+    list.classList.remove('has-active-row');
+    rows.forEach((row) => {
+      row.classList.remove('is-active');
+      row.setAttribute('aria-selected', 'false');
+    });
+    previewCards.forEach((card) => card.classList.remove('is-active'));
+
+    if (isVisible) {
+      isVisible = false;
+      if (scaleTween) scaleTween.kill();
+      scaleTween = gsap.to(preview, {
+        opacity: 0,
+        scale: 0.82,
+        rotation: 0,
+        duration: 0.28,
+        ease: 'power2.inOut',
+        overwrite: 'auto',
+      });
+    }
+  }
+
+  // Row Hover Listeners
+  const handleRowEnter = (idx, e) => {
+    if (isTouchDevice()) return;
+    if (!isVisible) {
+      const clientX = e?.clientX ?? (window.innerWidth / 2);
+      const clientY = e?.clientY ?? (window.innerHeight / 2);
+      gsap.set(preview, { x: clientX, y: clientY });
+      prevMouseX = clientX;
+      prevMouseY = clientY;
+    }
+    setActiveRow(idx);
+  };
+
+  rows.forEach((row, idx) => {
+    row.addEventListener('mouseenter', (e) => handleRowEnter(idx, e));
+    row.addEventListener('pointerenter', (e) => handleRowEnter(idx, e));
+  });
+
+  // Delegated pointerover on list for ultra-responsive hover detection
+  list.addEventListener('pointerover', (e) => {
+    if (isTouchDevice()) return;
+    const targetRow = e.target.closest('.editorial-project-row');
+    if (targetRow) {
+      const idx = rows.indexOf(targetRow);
+      if (idx !== -1 && idx !== activeIndex) {
+        handleRowEnter(idx, e);
+      }
+    }
+  });
+
+  // Track cursor across the entire section
+  section.addEventListener('mousemove', onMouseMove, { passive: true });
+  section.addEventListener('pointermove', onMouseMove, { passive: true });
+  section.addEventListener('mouseleave', clearActive);
+  list.addEventListener('mouseleave', clearActive);
+
+  // Scroll Entrance Reveal Animation for Editorial Rows
+  if (typeof ScrollTrigger !== 'undefined' && !isReducedMotion()) {
+    gsap.fromTo(
+      rows,
+      { y: 35, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power2.out',
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: list,
+          start: 'top 88%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }
+}
+
+// Backward-compatibility aliases & Global Window Exposure
+function initProjectStripsAnimation() {
+  initEditorialProjects();
+}
+function initProjectStackAnimation() {
+  initEditorialProjects();
+}
+function initHorizontalGallery() {
+  initEditorialProjects();
+}
+
+window.initEditorialProjects = initEditorialProjects;
+window.initProjectStripsAnimation = initEditorialProjects;
+window.initProjectStackAnimation = initEditorialProjects;
+window.initHorizontalGallery = initEditorialProjects;
+
+/**
+ * ============================================================================
+ * 4. TECHNICAL EXPERTISE, ABOUT & CONTACT VIEWPORT REVEALS
+ * ============================================================================
+ */
+function initScrollRevealMotion() {
+  if (isReducedMotion() || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
+  }
+
+  // --------------------------------------------------------------------------
+  // A. SECTION 4: THE ARCHITECTURAL INDEX (SKILLS)
+  // --------------------------------------------------------------------------
+  const indexHeader = document.querySelector('.index-intro-header');
+  if (indexHeader) {
+    const badge = indexHeader.querySelector('.index-badge');
+    const title = indexHeader.querySelector('.index-display-title');
+    const statement = indexHeader.querySelector('.index-statement-text');
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: indexHeader,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    if (badge) {
+      tl.fromTo(
+        badge,
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+        0
+      );
+    }
+    if (title) {
+      tl.fromTo(
+        title,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+        0.08
+      );
+    }
+    if (statement) {
+      tl.fromTo(
+        statement,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+        0.16
+      );
+    }
+  }
+
+  // Four Engineering Domains: vertical numeral masks, top accent lines & manifests
+  const domainColumns = document.querySelectorAll('.domain-column');
+  domainColumns.forEach((col, idx) => {
+    const numeral = col.querySelector('.domain-numeral');
+    const accentLine = col.querySelector('.domain-accent-line');
+    const title = col.querySelector('.domain-title');
+    const summary = col.querySelector('.domain-summary');
+    const items = col.querySelectorAll('.domain-tech-item');
+
+    const dtl = gsap.timeline({
+      scrollTrigger: {
+        trigger: col,
+        start: 'top 82%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    // Top accent line draws in
+    if (accentLine) {
+      dtl.fromTo(
+        accentLine,
+        { scaleX: 0, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 0.45, ease: 'power3.out' },
+        0
+      );
+    }
+
+    // Large domain numeral vertical mask reveal
+    if (numeral) {
+      dtl.fromTo(
+        numeral,
+        { yPercent: 110 },
+        { yPercent: 0, duration: 0.65, ease: 'power4.out' },
+        0.06
+      );
+
+      // Subtle scroll-linked vertical parallax shift as user scrolls through the matrix
+      gsap.to(numeral, {
+        y: -16,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: col,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }
+
+    if (title) {
+      dtl.fromTo(
+        title,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+        0.14
+      );
+    }
+
+    if (summary) {
+      dtl.fromTo(
+        summary,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+        0.2
+      );
+    }
+
+    if (items.length) {
+      dtl.fromTo(
+        items,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power2.out' },
+        0.24
+      );
+    }
+  });
+
+  // --------------------------------------------------------------------------
+  // B. SECTION 5: ABOUT, EDUCATION & EXPERIENCE
+  // --------------------------------------------------------------------------
+  const aboutSection = document.getElementById('about');
+  if (aboutSection) {
+    const aboutHeader = aboutSection.querySelector('.about-intro-header');
+    const portraitFrame = aboutSection.querySelector('.about-portrait-frame');
+    const bioBlock = aboutSection.querySelector('.about-bio-block');
+    const ledgerSections = aboutSection.querySelectorAll('.about-ledger-section');
+
+    if (aboutHeader) {
+      gsap.from(aboutHeader, {
+        opacity: 0,
+        y: 28,
+        duration: 0.95,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: aboutSection,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      // On scroll down to next section, glide header upward
+      gsap.to(aboutHeader, {
+        y: -30,
+        opacity: 0.25,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: aboutSection,
+          start: 'bottom 65%',
+          end: 'bottom 15%',
+          scrub: true,
+        },
+      });
+    }
+
+    // Portrait: clip-path / frame reveal, subtle scroll parallax, corner ticks
+    if (portraitFrame) {
+      const wrapper = portraitFrame.querySelector('.portrait-image-wrapper');
+      const photo = portraitFrame.querySelector('.about-portrait-photo');
+      const ticks = portraitFrame.querySelectorAll('.frame-tick-top-left, .frame-tick-bottom-right');
+      const caption = portraitFrame.querySelector('.about-portrait-caption');
+
+      const ptl = gsap.timeline({
+        scrollTrigger: {
+          trigger: portraitFrame,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      if (wrapper) {
+        ptl.fromTo(
+          wrapper,
+          { clipPath: 'inset(0% 0% 100% 0%)' },
+          { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.85, ease: 'power3.inOut' },
+          0
+        );
+      }
+
+      if (ticks.length) {
+        ptl.fromTo(
+          ticks,
+          { scale: 0 },
+          { scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.5)' },
+          0.45
+        );
+      }
+
+      if (caption) {
+        ptl.fromTo(
+          caption,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          0.55
+        );
+      }
+
+      // Subtle scroll parallax on photo within frame
+      if (photo) {
+        gsap.fromTo(
+          photo,
+          { yPercent: -5 },
+          {
+            yPercent: 5,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: portraitFrame,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          }
+        );
+      }
+    }
+
+    // Biography: masked heading and narrative with extended duration & upward scroll exit
+    if (bioBlock) {
+      const bioHeadingInner = bioBlock.querySelector('.bio-heading-inner');
+      const bioText = bioBlock.querySelector('.about-bio-text p');
+
+      const bioTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: bioBlock,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      if (bioHeadingInner) {
+        bioTl.fromTo(
+          bioHeadingInner,
+          { yPercent: 110 },
+          { yPercent: 0, duration: 0.9, ease: 'power3.out' },
+          0
+        );
+
+        // When scrolling down to next section (contact), make bio heading glide upward opposite
+        gsap.to(bioHeadingInner, {
+          yPercent: -100,
+          opacity: 0,
+          ease: 'power2.in',
+          scrollTrigger: {
+            trigger: aboutSection,
+            start: 'bottom 60%',
+            end: 'bottom 15%',
+            scrub: true,
+          },
+        });
+      }
+
+      if (bioText) {
+        bioTl.fromTo(
+          bioText,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out', clearProps: 'opacity,transform' },
+          0.16
+        );
+      }
+    }
+
+    // Education & Experience ledgers: divider lines draw, records stagger
+    ledgerSections.forEach((sec) => {
+      const line = sec.querySelector('.ledger-line');
+      const entries = sec.querySelectorAll('.ledger-entry');
+
+      const ltl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top 84%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      if (line) {
+        ltl.fromTo(
+          line,
+          { scaleX: 0, transformOrigin: 'left center' },
+          { scaleX: 1, duration: 0.55, ease: 'power3.out' },
+          0
+        );
+      }
+
+      if (entries.length) {
+        ltl.fromTo(
+          entries,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out',
+            clearProps: 'opacity,transform',
+          },
+          0.1
+        );
+      }
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // C. SECTION 6: CONTACT & FOOTER MONUMENT
+  // --------------------------------------------------------------------------
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    const contactBadge = contactSection.querySelector('.contact-badge');
+    const contactLineInners = contactSection.querySelectorAll('.contact-line-inner');
+    const contactSentence = contactSection.querySelector('.contact-supporting-sentence');
+    const contactActionCol = contactSection.querySelector('.contact-action-col');
+
+    const contactTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: contactSection,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    if (contactBadge) {
+      contactTl.from(
+        contactBadge,
+        { opacity: 0, x: -16, duration: 0.45, ease: 'power2.out', clearProps: 'opacity,transform' },
+        0
+      );
+    }
+
+    // Line-by-line reveal of LET'S BUILD / SOMETHING GOOD.
+    if (contactLineInners.length) {
+      contactTl.fromTo(
+        contactLineInners,
+        { yPercent: 110 },
+        {
+          yPercent: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power4.out',
+          clearProps: 'transform',
+        },
+        0.06
+      );
+    }
+
+    if (contactSentence) {
+      contactTl.from(
+        contactSentence,
+        { opacity: 0, y: 18, duration: 0.65, ease: 'power2.out', clearProps: 'opacity,transform' },
+        0.18
+      );
+    }
+
+    if (contactActionCol) {
+      contactTl.from(
+        contactActionCol,
+        { opacity: 0, y: 22, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,transform' },
+        0.22
+      );
+    }
+  }
+
+  // Footer metadata & monumental wordmark
+  const footerRow = document.querySelector('.footer-restrained-row');
+  if (footerRow) {
+    gsap.from(footerRow, {
+      opacity: 0,
+      y: 16,
+      duration: 0.65,
+      ease: 'power2.out',
+      clearProps: 'opacity,transform',
+      scrollTrigger: {
+        trigger: '.site-footer',
+        start: 'top 90%',
+        toggleActions: 'play none none none',
+      },
+    });
+  }
+
+  const wordmark = document.getElementById('footer-wordmark');
+  if (wordmark) {
+    gsap.fromTo(
+      wordmark,
+      { opacity: 0.15, y: 24, scale: 0.96 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.85,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform,scale',
+        scrollTrigger: {
+          trigger: '.footer-monument-stage',
+          start: 'top 92%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }
+}
+
+/**
+ * ============================================================================
+ * 5. WINDOW RESIZE & MEDIA QUERY LISTENER
+ * ============================================================================
+ */
+let resizeTimeout = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    initHorizontalGallery();
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+  }, 150);
 });
