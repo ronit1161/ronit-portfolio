@@ -189,6 +189,7 @@ function initHeroToWorkTransition() {
   // Desktop & Tablet (> 768px): Coordinated Pinned Scrubbed Transition
   heroTransitionMM.add('(min-width: 769px)', () => {
     document.documentElement.classList.add('js-transition-ready');
+    const siteHeader = document.getElementById('site-header');
 
     const heroCanvas = heroStage.querySelector('.seb-hero-canvas');
     const upperCluster = heroStage.querySelector('.seb-hero-upper-cluster');
@@ -462,6 +463,8 @@ function initHeroToWorkTransition() {
   heroTransitionMM.add('(max-width: 768px)', () => {
     document.documentElement.classList.remove('js-transition-ready');
     gsap.set([heroStage, bridgeSection], { clearProps: 'all' });
+    const siteHeaderMobile = document.getElementById('site-header');
+    const workSectionMobile = document.getElementById('work');
 
     const bgTargetsMobile = [heroStage, container].filter(Boolean);
     const instantBgTriggerMobile = ScrollTrigger.create({
@@ -905,7 +908,15 @@ function initSkillsMarquee() {
 
 /**
  * ============================================================================
- * 5. ABOUT & CONTACT VIEWPORT REVEALS
+ * 5. ABOUT — CINEMATIC SCROLL EXPERIENCE
+ * Moved to js/about.js — initAboutTypoSection() is defined there.
+ * ============================================================================
+ */
+
+/**
+ * ============================================================================
+ * 5b. LEGACY SCROLL REVEAL MOTION (SKILLS + CONTACT + FOOTER)
+ * ── The about block is now handled by initAboutTypoSection() above ──
  * ============================================================================
  */
 function initScrollRevealMotion() {
@@ -1034,105 +1045,9 @@ function initScrollRevealMotion() {
   });
 
   // --------------------------------------------------------------------------
-  // B. SECTION 5: ABOUT, EDUCATION & EXPERIENCE
-  // Handled by js/about.js
-  
-  // --------------------------------------------------------------------------
   // C. SECTION 6: CONTACT & FOOTER MONUMENT
+  // Moved to js/contact.js — initContactSection() is defined there.
   // --------------------------------------------------------------------------
-  const contactSection = document.getElementById('contact');
-  if (contactSection) {
-    const contactBadge = contactSection.querySelector('.contact-badge');
-    const contactLineInners = contactSection.querySelectorAll('.contact-line-inner');
-    const contactSentence = contactSection.querySelector('.contact-supporting-sentence');
-    const contactActionCol = contactSection.querySelector('.contact-action-col');
-
-    const contactTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: contactSection,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    if (contactBadge) {
-      contactTl.from(
-        contactBadge,
-        { opacity: 0, x: -16, duration: 0.45, ease: 'power2.out', clearProps: 'opacity,transform' },
-        0
-      );
-    }
-
-    // Line-by-line reveal of LET'S BUILD / SOMETHING GOOD.
-    if (contactLineInners.length) {
-      contactTl.fromTo(
-        contactLineInners,
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: 'power4.out',
-          clearProps: 'transform',
-        },
-        0.06
-      );
-    }
-
-    if (contactSentence) {
-      contactTl.from(
-        contactSentence,
-        { opacity: 0, y: 18, duration: 0.65, ease: 'power2.out', clearProps: 'opacity,transform' },
-        0.18
-      );
-    }
-
-    if (contactActionCol) {
-      contactTl.from(
-        contactActionCol,
-        { opacity: 0, y: 22, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,transform' },
-        0.22
-      );
-    }
-  }
-
-  // Footer metadata & monumental wordmark
-  const footerRow = document.querySelector('.footer-restrained-row');
-  if (footerRow) {
-    gsap.from(footerRow, {
-      opacity: 0,
-      y: 16,
-      duration: 0.65,
-      ease: 'power2.out',
-      clearProps: 'opacity,transform',
-      scrollTrigger: {
-        trigger: '.site-footer',
-        start: 'top 90%',
-        toggleActions: 'play none none none',
-      },
-    });
-  }
-
-  const wordmark = document.getElementById('footer-wordmark');
-  if (wordmark) {
-    gsap.fromTo(
-      wordmark,
-      { opacity: 0.15, y: 24, scale: 0.96 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.85,
-        ease: 'power2.out',
-        clearProps: 'opacity,transform,scale',
-        scrollTrigger: {
-          trigger: '.footer-monument-stage',
-          start: 'top 92%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-  }
 }
 
 /**
