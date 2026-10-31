@@ -1,374 +1,190 @@
 /* ==========================================================================
-   SCENE 6: DIRECT CONTACT & MONUMENTAL CONCLUSION
-   Creative Direction: The Final Composition
-   Palette: Background #0B0B0C · Text #F0EFEA / #898991 · Lines #29292D · Accent #E6533D
-   Typography: Syne (headings/wordmark), Inter (body), JetBrains Mono (labels)
+   RONIT TAMBE — CONTACT & MONUMENTAL CONCLUSION (AWWWARDS EDITORIAL)
+   Typography: Anton (Headings / Links / Wordmark) + Instrument Sans (Body / Meta)
+   Colors: --bg: rgb(11,11,12) · --fg: rgb(239,237,232) · --acc: #4D5BFF
    ========================================================================== */
 
-/* Outer Section */
-.editorial-contact-section {
+#contact {
+  --bg: rgb(11, 11, 12);
+  --fg: rgb(239, 237, 232);
+  --acc: #4D5BFF;
+  --pad: clamp(1.25rem, 4vw, 4rem);
+  box-sizing: border-box;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  padding-top: clamp(80px, 14vh, 160px);
   position: relative;
-  padding: clamp(96px, 14vh, 160px) 0 clamp(80px, 12vh, 140px);
-  background-color: var(--color-bg);
 }
 
-/* Thin Structural Architectural Framing Lines */
-.contact-structural-line {
-  width: 100%;
+#contact * {
+  box-sizing: border-box;
+}
+
+#contact a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#contact a:focus-visible,
+#contact button:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 4px;
+}
+
+#contact .d {
+  font-family: Anton, Impact, 'Arial Narrow', sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0;
+  line-height: .92;
+}
+
+#contact .pad {
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+#contact .h-xl {
+  font-size: clamp(3.8rem, 15.5vw, 16rem);
+  margin-top: 0;
+}
+
+#contact .ln {
+  display: block;
+  overflow: hidden;
+  padding: .04em 0;
+}
+
+#contact .ln .in {
+  display: block;
+  will-change: transform;
+}
+
+#contact .gd {
+  position: relative;
+}
+
+#contact .gd .o {
+  color: transparent;
+  -webkit-text-stroke: 2px currentColor;
+}
+
+#contact .gd .f {
+  position: absolute;
+  inset: 0;
+  color: var(--acc);
+  clip-path: inset(0 0 0 0);
+}
+
+#contact .intro {
+  max-width: 30rem;
+  margin: 5vh 0 0 auto;
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+#contact .mailrow {
+  position: relative;
+  margin-top: 14vh;
+  padding-top: 2rem;
+}
+
+#contact .mailrow > i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
   height: 1px;
-  background-color: var(--color-border-hairline);
+  background: currentColor;
+  opacity: .35;
+  transform-origin: left;
+}
+
+#contact .k {
+  font-size: .85rem;
+  letter-spacing: .1em;
+  opacity: .6;
+  margin-bottom: 1rem;
+}
+
+#contact .mail {
   position: relative;
-  z-index: 2;
+  display: inline-block;
+  font-size: clamp(1.7rem, 6.3vw, 7rem);
+  line-height: 1.05;
+  padding: .05em 0;
+  text-transform: none;
 }
 
-.contact-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Level A: Section Meta Header */
-.contact-meta-header {
-  margin-bottom: clamp(32px, 4vh, 48px);
-}
-
-.contact-badge {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--color-accent);
-  text-transform: uppercase;
+#contact .mail .b {
+  opacity: .5;
   display: block;
+  transition: opacity 0.3s ease;
 }
 
-/* Level B: Asymmetric Contact Composition */
-.contact-editorial-layout {
+#contact .mail .f {
+  position: absolute;
+  inset: 0;
+  color: var(--acc);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path .7s cubic-bezier(.7, 0, .2, 1);
+}
+
+#contact .mail:hover .f,
+#contact .mail:focus-visible .f {
+  clip-path: inset(0 0 0 0);
+}
+
+#contact .acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.2rem;
+  align-items: center;
+}
+
+#contact .btn {
+  font: 500 1rem 'Instrument Sans', sans-serif;
+  color: inherit;
+  background: none;
+  border: 1px solid rgba(128, 128, 128, .5);
+  border-radius: 99px;
+  padding: .9rem 1.5rem;
+  cursor: pointer;
+  transition: background .3s, color .3s, border-color .3s;
+}
+
+#contact .btn:hover {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+#contact .send {
+  position: absolute;
+  right: 0;
+  top: 4.5rem;
+  width: clamp(120px, 12vw, 170px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--acc);
+  color: #fff;
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: clamp(48px, 6.5vw, 96px);
-  align-items: start;
-}
-
-/* Left Column: Typographic Heading & Statement */
-.contact-statement-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-display-heading {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5.2vw, 4.6rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.04;
-  color: var(--color-text-primary);
-  text-transform: uppercase;
-  margin: 0 0 24px 0;
-}
-
-.contact-line-mask {
-  display: block;
-  overflow: hidden;
-}
-
-.contact-line-inner {
-  display: block;
-  will-change: transform, opacity;
-}
-
-.contact-supporting-sentence {
-  font-family: var(--font-sans);
-  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
-  font-weight: 350;
-  line-height: 1.68;
-  color: var(--color-text-secondary);
-  max-width: 520px;
-  margin: 0;
-}
-
-/* Right Column: Actions & Social Manifest */
-.contact-action-col {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(36px, 4.5vh, 48px);
-  padding-top: 8px;
-}
-
-.action-block-label {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 12px;
-}
-
-/* Primary Email Display & Direct Actions */
-.contact-action-block {
-  display: flex;
-  flex-direction: column;
-}
-
-.email-display-wrap {
-  border: 1px solid var(--color-border-hairline);
-  background-color: var(--color-bg-surface);
-  padding: 18px 22px;
-  margin-bottom: 16px;
-  transition: border-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard);
-}
-
-.email-display-wrap:hover {
-  border-color: var(--color-border-medium);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-}
-
-.email-address-text {
-  font-family: var(--font-mono);
-  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
-  font-weight: 500;
-  color: var(--color-text-primary);
-  letter-spacing: 0.02em;
-  user-select: all;
-  display: block;
-}
-
-/* Direct Action Buttons */
-.contact-button-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.contact-action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 14px 24px;
-  border: 1px solid var(--color-border-subtle);
-  background-color: transparent;
-  color: var(--color-text-primary);
-  text-decoration: none;
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-standard);
-  outline: none;
-}
-
-.contact-action-btn:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-.contact-action-btn.btn-send {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #ffffff;
-}
-
-.contact-action-btn.btn-send:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  transform: translateY(-2px);
-}
-
-.contact-action-btn.btn-copy:hover {
-  background-color: var(--color-bg-subtle);
-  border-color: var(--color-text-primary);
-  transform: translateY(-2px);
-}
-
-.contact-action-btn.btn-copy.is-copied {
-  border-color: #10b981;
-  color: #10b981;
-}
-
-/* Social Block */
-.contact-social-block {
-  display: flex;
-  flex-direction: column;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-border-hairline);
-}
-
-.contact-social-links {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.contact-social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.84rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color var(--duration-fast);
-}
-
-.contact-social-link:hover {
-  color: var(--color-accent);
-}
-
-.contact-social-link:focus-visible {
-  outline: 1px solid var(--color-accent);
-  outline-offset: 3px;
-}
-
-.link-arrow {
-  font-size: 0.9em;
-  color: var(--color-accent);
-}
-
-.social-divider {
-  color: var(--color-text-muted);
-  font-size: 0.8rem;
-}
-
-/* ==========================================================================
-   MONUMENTAL FOOTER
-   Creative Direction: The Final Typographic Resolution
-   ========================================================================== */
-.site-footer {
-  background-color: var(--color-bg);
-  position: relative;
-  overflow: hidden;
-  border-top: 1px solid var(--color-border-hairline);
-}
-
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Restrained Footer Row (Above Wordmark) */
-.footer-meta-container {
-  padding-top: clamp(40px, 6vh, 64px);
-  padding-bottom: 0;
-}
-
-.footer-restrained-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--color-border-hairline);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.1em;
-  color: var(--color-text-muted);
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-/* Edge-to-Edge Wordmark Stage at Complete Bottom (0 padding) */
-.footer-monument-stage {
-  padding-top: clamp(20px, 3vh, 40px);
-  padding-bottom: 0;
-  margin-bottom: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0.72;
-}
-
-.footer-monument-row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  line-height: 0.72;
-}
-
-.footer-monument-text {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(5rem, 24vw, 28rem);
-  letter-spacing: -0.04em;
-  line-height: 0.74;
-  color: var(--color-text-primary);
-  text-transform: uppercase;
-  white-space: nowrap;
-  user-select: none;
-  opacity: 0.12;
-  margin: -20px;
-  padding: 0;
-  width: 100%;
+  place-items: center;
   text-align: center;
-  display: block;
-  transform: translateY(0.04em);
-  transition: opacity var(--duration-normal);
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(77, 91, 255, 0.25);
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
 }
 
-.footer-monument-text:hover {
-  opacity: 0.5;
+#contact .send:hover {
+  box-shadow: 0 15px 40px rgba(77, 91, 255, 0.45);
 }
 
-.footer-author-col {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.footer-author-name {
-  color: var(--color-text-primary);
-  font-weight: 600;
-}
-
-.footer-author-dot {
-  color: var(--color-accent);
-}
-
-.footer-copyright-text {
-  color: var(--color-text-muted);
-}
-
-.footer-back-to-top {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--color-text-secondary);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 4px 0;
-  transition: color var(--duration-fast);
-  outline: none;
-}
-
-.footer-back-to-top:hover {
-  color: var(--color-accent);
-}
-
-.footer-back-to-top:focus-visible {
-  outline: 1px solid var(--color-accent);
-  outline-offset: 3px;
-}
-
-.footer-back-to-top .arrow-up {
-  color: var(--color-accent);
-  transition: transform var(--duration-fast);
-}
-
-.footer-back-to-top:hover .arrow-up {
-  transform: translateY(-2px);
-}
