@@ -36,6 +36,16 @@ function initApp() {
     initHorizontalGallery();
   }
 
+  // Phase 5a: About — Typography-driven editorial scroll experience
+  if (typeof initAboutTypoSection === 'function') {
+    initAboutTypoSection();
+  }
+
+  // Phase 6: Contact — Awwwards editorial scroll experience
+  if (typeof initContactSection === 'function') {
+    initContactSection();
+  }
+
   if (typeof initScrollRevealMotion === 'function') {
     initScrollRevealMotion();
   }
@@ -171,6 +181,9 @@ function openMobileMenu() {
   overlay.classList.add('is-open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.classList.add('drawer-open');
+  if (window._lenis) {
+    window._lenis.stop();
+  }
 }
 
 function closeMobileMenu() {
@@ -186,6 +199,9 @@ function closeMobileMenu() {
   overlay.classList.remove('is-open');
   overlay.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('drawer-open');
+  if (window._lenis) {
+    window._lenis.start();
+  }
 }
 window.closeMobileMenu = closeMobileMenu;
 
@@ -274,10 +290,14 @@ window.copyEmail = copyEmail;
 
 function scrollToTop() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  window.scrollTo({
-    top: 0,
-    behavior: prefersReducedMotion ? 'auto' : 'smooth',
-  });
+  if (window._lenis && !prefersReducedMotion) {
+    window._lenis.scrollTo(0, { immediate: false });
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  }
 }
 window.scrollToTop = scrollToTop;
 
