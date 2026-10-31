@@ -1,365 +1,156 @@
 /* ==========================================================================
-   SCENE 5: ABOUT, EDUCATION & EXPERIENCE
-   Creative Direction: The Human Side of Engineering
-   Palette: Background #0B0B0C · Text #F0EFEA / #898991 · Lines #29292D · Accent #E6533D
-   Typography: Syne (headings), Inter (body), JetBrains Mono (labels/numerals)
+   RONIT TAMBE — ABOUT SECTION (AWWWARDS EDITORIAL & PINNED STORYTELLING)
+   Typography: Anton (Headings/Display) + Instrument Sans (Body/Meta)
+   Colors: --bg: rgb(11,11,12) · --fg: rgb(239,237,232) · --acc: #4D5BFF
    ========================================================================== */
 
-/* Outer Section */
-.editorial-about-section {
+#about {
+  --bg: rgb(11, 11, 12);
+  --fg: rgb(239, 237, 232);
+  --acc: #4D5BFF;
+  --pad: clamp(1.25rem, 4vw, 4rem);
+  box-sizing: border-box;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
   position: relative;
-  padding: clamp(96px, 14vh, 160px) 0 clamp(80px, 12vh, 140px);
-  background-color: var(--color-bg);
+  transition: background-color 0.9s cubic-bezier(0.16, 1, 0.3, 1), color 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Thin Structural Architectural Framing Lines */
-.about-structural-line {
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-border-hairline);
-  position: relative;
-  z-index: 2;
+#about * {
+  box-sizing: border-box;
 }
 
-.about-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/* ==========================================================================
-   LEVEL A: SECTION INTRODUCTION (EDITORIAL BALANCE)
-   ========================================================================== */
-
-.about-intro-header {
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: clamp(36px, 5vw, 72px);
-  align-items: flex-end;
-  padding-bottom: clamp(36px, 5vh, 56px);
-  margin-bottom: clamp(48px, 7vh, 80px);
-  border-bottom: 1px solid var(--color-border-hairline);
-}
-
-.about-heading-block {
-  display: flex;
-  flex-direction: column;
-}
-
-.about-badge {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--color-accent);
+#about .d {
+  font-family: Anton, Impact, 'Arial Narrow', sans-serif;
   text-transform: uppercase;
-  margin-bottom: 14px;
-  display: block;
-}
-
-.about-display-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
-  color: var(--color-text-primary);
-  text-transform: uppercase;
+  font-weight: 400;
   margin: 0;
+  line-height: .92;
 }
 
-.about-statement-block {
-  display: flex;
-  align-items: flex-end;
+#about .pad {
+  padding-left: var(--pad);
+  padding-right: var(--pad);
 }
 
-.about-statement-text {
-  font-family: var(--font-sans);
-  font-size: clamp(1.05rem, 1.35vw, 1.28rem);
-  font-weight: 350;
-  line-height: 1.64;
-  color: var(--color-text-secondary);
-  max-width: 540px;
-  margin: 0;
-}
-
-/* ==========================================================================
-   LEVEL B: ASYMMETRIC TWO-COLUMN COMPOSITION
-   ========================================================================== */
-
-.about-editorial-grid {
-  display: grid;
-  grid-template-columns: minmax(320px, 390px) 1fr;
-  gap: clamp(48px, 6.5vw, 96px);
-  align-items: start;
-}
-
-/* Left Column — Portrait in Tall Editorial Frame */
-.about-portrait-column {
-  position: relative;
-}
-
-.about-portrait-frame {
-  position: relative;
-  border: 1px solid var(--color-border-hairline);
-  background-color: var(--color-bg-surface);
-  padding: 16px;
-  transition: border-color var(--duration-normal) var(--ease-standard),
-              box-shadow var(--duration-normal) var(--ease-standard);
-}
-
-.about-portrait-frame:hover {
-  border-color: var(--color-border-medium);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-}
-
-.portrait-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background-color: var(--color-bg-subtle);
-}
-
-.about-portrait-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  display: block;
-  /* Authentic natural representation — no artificial facial alterations or duotone */
-  filter: contrast(1.02) brightness(0.98);
-  transition: transform var(--duration-slow) var(--ease-editorial),
-              filter var(--duration-normal) var(--ease-standard);
-}
-
-.about-portrait-frame:hover .about-portrait-photo {
-  transform: scale(1.02);
-  filter: contrast(1.04) brightness(1);
-}
-
-/* Restrained Architectural Corner Ticks */
-.frame-tick-top-left,
-.frame-tick-bottom-right {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.frame-tick-top-left {
-  top: 8px;
-  left: 8px;
-  border-top: 1px solid var(--color-accent);
-  border-left: 1px solid var(--color-accent);
-}
-
-.frame-tick-bottom-right {
-  bottom: 8px;
-  right: 8px;
-  border-bottom: 1px solid var(--color-accent);
-  border-right: 1px solid var(--color-accent);
-}
-
-/* Authentic Portrait Caption */
-.about-portrait-caption {
+#about .lab {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  padding-top: 16px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  gap: 1rem;
+  font-size: .85rem;
+  letter-spacing: .1em;
 }
 
-.caption-name {
-  color: var(--color-text-primary);
-  font-weight: 500;
-}
-
-.caption-separator {
-  color: var(--color-accent);
-}
-
-.caption-location {
-  color: var(--color-text-muted);
-}
-
-/* Right Column — Biography & Chronological Ledgers */
-.about-content-column {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Biography Block */
-.about-bio-block {
-  margin-bottom: clamp(48px, 6vh, 64px);
-}
-
-.about-bio-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.25;
-  color: var(--color-text-primary);
-  text-transform: uppercase;
-  margin: 0 0 20px 0;
-}
-
-.bio-heading-mask {
-  display: block;
-  overflow: hidden;
-}
-
-.bio-heading-inner {
-  display: block;
-  will-change: transform, opacity;
-}
-
-.about-bio-text {
-  max-width: 620px;
-}
-
-.about-bio-text p {
-  font-family: var(--font-sans);
-  font-size: clamp(1.02rem, 1.22vw, 1.15rem);
-  font-weight: 350;
-  line-height: 1.72;
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
-/* ==========================================================================
-   SUBSECTIONS: EDUCATION & EXPERIENCE (RESTRAINED CHRONOLOGICAL LEDGERS)
-   ========================================================================== */
-
-.about-ledger-section {
-  margin-bottom: clamp(40px, 5vh, 56px);
-}
-
-.about-ledger-section:last-child {
-  margin-bottom: 0;
-}
-
-.ledger-header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 24px;
-}
-
-.ledger-title {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: var(--color-accent);
-  text-transform: uppercase;
-}
-
-.ledger-line {
+#about .lab i {
   flex: 1;
   height: 1px;
-  background-color: var(--color-border-hairline);
-  transform-origin: left center;
+  background: currentColor;
+  opacity: .35;
+  transform-origin: left;
+}
+
+#about .ln {
+  display: block;
+  overflow: hidden;
+  padding: .04em 0;
+}
+
+#about .ch {
+  display: inline-block;
   will-change: transform;
 }
 
-.ledger-entries {
-  display: flex;
-  flex-direction: column;
+#about .s1 {
+  padding-top: 14vh;
+  padding-bottom: 10vh;
 }
 
-/* Individual Factual Ledger Entry */
-.ledger-entry {
+#about .h-xl {
+  font-size: clamp(4.2rem, 17.5vw, 18rem);
+  margin-top: 6vh;
+}
+
+#about .sub {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  line-height: 1.4;
+  margin: 5vh 0 0 auto;
+}
+
+#about .s2 {
   display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: clamp(16px, 2.5vw, 32px);
-  padding: 24px 0;
-  border-top: 1px solid var(--color-border-hairline);
-  align-items: baseline;
-  transition: background-color var(--duration-fast) var(--ease-standard);
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+  padding-top: 10vh;
+  padding-bottom: 18vh;
 }
 
-.ledger-entry:last-child {
-  border-bottom: 1px solid var(--color-border-hairline);
+#about .pw {
+  position: relative;
+  max-width: 520px;
+  cursor: none;
 }
 
-.entry-meta {
-  display: flex;
-  align-items: flex-start;
+#about .pic {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(120% 80% at 30% 15%, #2c2c38, #121214 62%);
+  clip-path: inset(100% 0 0 0);
 }
 
-.entry-index {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: 0.08em;
+#about .pic .ph-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.4);
+  transform-origin: center center;
+  will-change: transform;
 }
 
-.entry-main {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+#about .cap {
+  margin-top: .9rem;
+  font-size: .8rem;
+  letter-spacing: .1em;
 }
 
-.entry-qualification {
-  font-family: var(--font-display);
-  font-size: clamp(1.08rem, 1.35vw, 1.28rem);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  letter-spacing: -0.015em;
-  line-height: 1.38;
-  margin: 0;
+#about .badge {
+  position: absolute;
+  right: -3.2rem;
+  bottom: 3.5rem;
+  width: 140px;
+  height: 140px;
+  color: #fff;
+  z-index: 3;
+  pointer-events: none;
 }
 
-.entry-institution {
-  font-family: var(--font-sans);
-  font-size: 0.94rem;
-  font-weight: 400;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-  margin: 0;
+#about .h3 {
+  font-size: clamp(2.4rem, 5.4vw, 5.6rem);
 }
 
-/* Experience Specific Elements */
-.entry-title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.entry-role {
-  font-family: var(--font-display);
-  font-size: clamp(1.08rem, 1.35vw, 1.28rem);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  letter-spacing: -0.015em;
-  line-height: 1.38;
-  margin: 0;
-}
-
-.entry-duration {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+#about .bio {
+  font-size: clamp(1.3rem, 2.3vw, 2.2rem);
+  line-height: 1.28;
+  margin: 5vh 0 0;
+  max-width: 30em;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-accent);
-  padding: 3px 10px;
-  border: 1px solid rgba(255, 62, 24, 0.22);
-  background-color: rgba(255, 62, 24, 0.04);
 }
 
-.entry-description {
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 400;
-  color: var(--color-text-secondary);
-  line-height: 1.64;
-  margin: 6px 0 0 0;
-  max-width: 620px;
+#about .bio .about-word {
+  display: inline-block;
+  opacity: 0.15;
+  will-change: opacity;
 }
+
+#about .bio b {
+  font-weight: 500;
+  background: linear-gradient(var(--acc), var(--acc)) 0 100% / 0% 3px no-repeat;
+  padding-bottom: 2px;
+}
+
