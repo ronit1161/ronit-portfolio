@@ -196,6 +196,107 @@ function initAboutTypoSection() {
   });
 
   // Scene 3 — pinned chapters (desktop) / simple reveals (mobile)
-  }
+  var mm = gsap.matchMedia();
+  mm.add({ desk: '(min-width: 900px)', mob: '(max-width: 899px)' }, function(ctx) {
+    var chaps = gsap.utils.toArray('#about .chap');
+    if (ctx.conditions.desk) {
+      root.classList.add('pin-on');
+      gsap.set(chaps.slice(1), { opacity: 0 });
+      var tl = gsap.timeline({
+        defaults: { ease: 'power2.inOut' },
+        scrollTrigger: {
+          trigger: '#about .pin',
+          start: 'top top',
+          end: '+=300%',
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+      tl.fromTo(chaps[0].querySelectorAll('.a'),
+          { y: 70, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.25, duration: 1 }
+        )
+        .fromTo(chaps[0].querySelectorAll('.row i'),
+          { scaleX: 0 },
+          { scaleX: 1, stagger: 0.25, duration: 1 },
+          '<0.2'
+        )
+        .to(chaps[0], { opacity: 0, yPercent: -25, duration: 1 }, '+=1')
+        .to('#about .digits', { yPercent: -33.333, duration: 1 }, '<')
+        .fromTo(chaps[1], { opacity: 0, yPercent: 25 }, { opacity: 1, yPercent: 0, duration: 1 }, '<0.3')
+        .fromTo(chaps[1].querySelectorAll('.row i'), { scaleX: 0 }, { scaleX: 1, duration: 1 }, '<0.3')
+        .to(chaps[1], { opacity: 0, yPercent: -25, duration: 1 }, '+=1.2')
+        .to('#about .digits', { yPercent: -66.666, duration: 1 }, '<')
+        .fromTo(chaps[2], { opacity: 0, yPercent: 25 }, { opacity: 1, yPercent: 0, duration: 1 }, '<0.3')
+        .to({}, { duration: 1.2 });
 
+      var D = tl.duration();
+      tl.fromTo('#about .ghost', { xPercent: 8 }, { xPercent: -42, ease: 'none', duration: D }, 0)
+        .fromTo('#about .prog', { scaleY: 0.02 }, { scaleY: 1, ease: 'none', duration: D }, 0);
+    } else {
+      chaps.forEach(function(c) {
+        gsap.fromTo(c.querySelectorAll('.a'),
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.9,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: c, start: 'top 82%' }
+          }
+        );
+      });
+    }
+    return function() {
+      root.classList.remove('pin-on');
+    };
+  });
+
+  // Scene 4 — marquee reacts to scroll velocity
+  var mq = gsap.to('#about .track', { xPercent: -50, repeat: -1, duration: 22, ease: 'none' });
+  ScrollTrigger.create({
+    onUpdate: function(s) {
+      mq.timeScale(1 + Math.min(Math.abs(s.getVelocity()) / 220, 7));
+    }
+  });
+  gsap.ticker.add(function() {
+    mq.timeScale(mq.timeScale() + (1 - mq.timeScale()) * 0.06);
+  });
+  gsap.from('#about .strip', {
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: { trigger: '#about .strip', start: 'top 90%' }
+  });
+
+  // Section background handoff: dark → off-white → dark
+  // Uses endTrigger: '#about .strip' so the entire pinned section + marquee remain off-white
+  ScrollTrigger.create({
+    trigger: '#about',
+    start: 'top 55%',
+    endTrigger: '#about .strip',
+    end: 'bottom 45%',
+    onToggle: function(s) {
+      var bg = s.isActive ? 'rgb(239,237,232)' : 'rgb(11,11,12)';
+      var fg = s.isActive ? 'rgb(11,11,12)' : 'rgb(239,237,232)';
+      gsap.to(aboutSec, {
+        backgroundColor: bg,
+        color: fg,
+        '--bg': bg,
+        '--fg': fg,
+        duration: 0.9,
+        ease: 'power2.out'
+      });
+    }
+  });
+
+  window.addEventListener('load', function() { ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() { ScrollTrigger.refresh(); });
+  }
+}
+
+// Export for main.js lifecycle
 window.initAboutTypoSection = initAboutTypoSection;
