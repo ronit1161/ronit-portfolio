@@ -188,3 +188,131 @@
   box-shadow: 0 15px 40px rgba(77, 91, 255, 0.45);
 }
 
+#contact .net {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem 3rem;
+  margin-top: 12vh;
+}
+
+#contact .roll {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1.15;
+  vertical-align: bottom;
+  font-size: clamp(2rem, 4.6vw, 4.6rem);
+}
+
+#contact .roll span {
+  display: block;
+  transition: transform .55s cubic-bezier(.7, 0, .2, 1);
+}
+
+#contact .roll span + span {
+  color: var(--acc);
+}
+
+#contact .roll:hover span,
+#contact .roll:focus-visible span {
+  transform: translateY(-100%);
+}
+
+#contact .wm {
+  overflow: hidden;
+  margin-top: 12vh;
+  display: flex;
+  justify-content: center;
+  line-height: .8;
+  user-select: none;
+}
+
+#contact .wm .w {
+  font-size: clamp(7rem, 36vw, 40rem);
+  display: flex;
+  padding-top: .08em;
+  letter-spacing: -0.02em;
+}
+
+#contact .wm .ch {
+  display: inline-block;
+  will-change: transform;
+}
+
+#contact .wm sup {
+  font-size: .14em;
+  margin: .9em 0 0 .1em;
+  font-family: 'Instrument Sans', sans-serif;
+  align-self: flex-start;
+  opacity: 0.8;
+}
+
+#contact .foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid rgba(128, 128, 128, .35);
+  font-size: .85rem;
+  letter-spacing: .06em;
+  color: rgba(239, 237, 232, 0.7);
+}
+
+#contact .foot button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  letter-spacing: inherit;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+#contact .foot button:hover {
+  color: var(--fg);
+}
+
+@media (max-width: 899px) {
+  #contact .send {
+    position: static;
+    margin-top: 2rem;
+    width: auto;
+    aspect-ratio: auto;
+    border-radius: 99px;
+    padding: 1rem 1.6rem;
+    display: inline-block;
+  }
+  #contact .mailrow {
+    margin-top: 10vh;
+  }
+  #contact .intro {
+    margin-left: 0;
+  }
+  #contact .net {
+    gap: 1rem 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contact .ln .in,
+  #contact .wm .ch,
+  #contact .roll span {
+    transform: none !important;
+  }
+  #contact .gd .f {
+    clip-path: none !important;
+  }
+  #contact .mail .f {
+    clip-path: none !important;
+    position: static;
+    display: none;
+  }
+  #contact .mail .b {
+    opacity: 1 !important;
+  }
+}
