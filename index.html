@@ -620,115 +620,43 @@
 
     <!-- ==========================================================================
            SCENE 6: CONTACT & MONUMENTAL CONCLUSION
-           Creative Direction: The Final Composition
+           Creative Direction: Editorial Typography, Scrubbed Gradient Text,
+           Interactive Email & Circular Magnetic Badge, Kinetic Socials,
+           Monumental Scrubbed Wordmark
            ========================================================================== -->
-    <section id="contact" class="section editorial-contact-section" aria-label="Contact">
-      <!-- Top Structural Framing Line -->
-      <div class="contact-structural-line" aria-hidden="true"></div>
+    <section id="contact" aria-label="Contact">
+      <div class="pad">
+        <h2 class="d h-xl" aria-label="Let’s build something good.">
+          <span class="ln" aria-hidden="true"><span class="in">Let’s build</span></span>
+          <span class="ln" aria-hidden="true"><span class="in">something</span></span>
+          <span class="ln gd" aria-hidden="true"><span class="in"><span class="o">good.</span><span class="f">good.</span></span></span>
+        </h2>
+        <p class="intro cp">I’m open to opportunities where I can build useful products, solve engineering problems, and continue growing as a developer.</p>
 
-      <div class="container contact-container">
-        <!-- Level A: Section Meta -->
-        <div class="contact-meta-header">
-          <span class="contact-badge">04 / CONTACT</span>
+        <div class="mailrow">
+          <i></i>
+          <div class="k">DIRECT EMAIL</div>
+          <a class="mail d" href="mailto:ronittambe116@gmail.com" id="mail"><span class="b">ronittambe116@gmail.com</span><span class="f" aria-hidden="true">ronittambe116@gmail.com</span></a>
+          <div class="acts"><button class="btn mag" id="copy" type="button">Copy email ⎘</button></div>
+          <a class="send mag" href="mailto:ronittambe116@gmail.com">Send an<br>email ↗</a>
         </div>
 
-        <!-- Level B: Asymmetric Contact Composition -->
-        <div class="contact-editorial-layout">
-          <!-- Left Editorial Text Column -->
-          <div class="contact-statement-col">
-            <h2 class="contact-display-heading">
-              <span class="contact-line-mask"><span class="contact-line-inner">LET'S BUILD</span></span>
-              <span class="contact-line-mask"><span class="contact-line-inner">SOMETHING GOOD.</span></span>
-            </h2>
-            <p class="contact-supporting-sentence">
-              I'm open to opportunities where I can build useful products, solve engineering problems, and continue
-              growing as a developer.
-            </p>
-          </div>
-
-          <!-- Right Direct Action Column -->
-          <div class="contact-action-col">
-            <!-- Primary Email Display & Direct Actions -->
-            <div class="contact-action-block">
-              <span class="action-block-label">DIRECT EMAIL</span>
-              <div class="email-display-wrap">
-                <span class="email-address-text" id="email-address-val">ronittambe116@gmail.com</span>
-              </div>
-              <div class="contact-button-row">
-                <button type="button" class="contact-action-btn btn-copy" id="btn-copy-email" onclick="copyEmail()"
-                  aria-label="Copy email address to clipboard">
-                  <span class="btn-copy-label">Copy Email</span>
-                  <span class="btn-copy-icon" aria-hidden="true">⎘</span>
-                </button>
-                <a href="mailto:ronittambe116@gmail.com" class="contact-action-btn btn-send"
-                  aria-label="Send an email to ronittambe116@gmail.com">
-                  <span>Send an Email</span>
-                  <span class="btn-arrow" aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- Social Links -->
-            <div class="contact-social-block">
-              <span class="action-block-label">NETWORK</span>
-              <div class="contact-social-links">
-                <a href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer"
-                  class="contact-social-link" aria-label="Ronit Tambe on GitHub (opens in new tab)">
-                  <span>GitHub</span>
-                  <span class="link-arrow" aria-hidden="true">↗</span>
-                </a>
-                <span class="social-divider" aria-hidden="true">/</span>
-                <a href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer"
-                  class="contact-social-link" aria-label="Ronit Tambe on LinkedIn (opens in new tab)">
-                  <span>LinkedIn</span>
-                  <span class="link-arrow" aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div class="net d">
+          <span class="k" style="font-family:'Instrument Sans',sans-serif;margin:0">NETWORK</span>
+          <a class="roll d" href="https://github.com/ronit1161" target="_blank" rel="noopener noreferrer"><span>GitHub ↗</span><span aria-hidden="true">GitHub ↗</span></a>
+          <a class="roll d" href="https://www.linkedin.com/in/ronit-tambe-781a09204/" target="_blank" rel="noopener noreferrer"><span>LinkedIn ↗</span><span aria-hidden="true">LinkedIn ↗</span></a>
         </div>
       </div>
 
-      <!-- Bottom Structural Framing Line -->
-      <div class="contact-structural-line" aria-hidden="true"></div>
+      <div class="wm" aria-label="Ronit"><div class="w d" aria-hidden="true"><span class="ch">R</span><span class="ch">O</span><span class="ch">N</span><span class="ch">I</span><span class="ch">T</span><sup>®</sup></div></div>
+
+      <footer class="foot pad" role="contentinfo" aria-label="Site Footer">
+        <span>RONIT TAMBE · © <span id="current-year"></span> ALL RIGHTS RESERVED</span>
+        <span id="clock">PUNE · IST</span>
+        <button id="top" type="button" aria-label="Scroll back to top of page">BACK TO TOP ↑</button>
+      </footer>
     </section>
   </main>
-
-  <!-- ==========================================================================
-         MONUMENTAL FOOTER
-         Creative Direction: The Final Typographic Resolution
-         ========================================================================== -->
-  <footer class="site-footer" role="contentinfo" aria-label="Site Footer">
-    <div class="footer-inner">
-      <!-- Restrained Footer Row -->
-      <div class="container footer-meta-container">
-        <div class="footer-restrained-row">
-          <div class="footer-author-col">
-            <span class="footer-author-name">RONIT TAMBE</span>
-            <span class="footer-author-dot" aria-hidden="true">·</span>
-            <span class="footer-copyright-text">
-              © <span id="current-year"></span> ALL RIGHTS RESERVED
-            </span>
-          </div>
-
-          <div class="footer-action-col">
-            <button type="button" class="footer-back-to-top" onclick="scrollToTop()"
-              aria-label="Scroll back to top of page">
-              <span>BACK TO TOP</span>
-              <span class="arrow-up" aria-hidden="true">↑</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Monumental Wordmark: Only RONIT at Complete Bottom (0 padding) -->
-      <div class="footer-monument-stage" aria-hidden="true">
-        <div class="footer-monument-row">
-          <span class="footer-monument-text" id="footer-wordmark">RONIT</span>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <!-- Core Vendor Animation Engines (Native GSAP + ScrollTrigger) -->
   <script src="assets/gsap.min.js"></script>
