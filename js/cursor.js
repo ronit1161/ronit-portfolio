@@ -75,7 +75,7 @@ function initPrecisionCursor() {
 
   // Interactive Hover Expansion
   const interactiveSelector =
-    'a, button, input, [role="button"], [tabindex="0"], .scene-image-frame, .domain-column, .about-portrait-frame, .email-display-wrap';
+    'a, button, input, [role="button"], [tabindex="0"], .editorial-project-row, .pw, .mail, .roll, .mag';
   document.addEventListener('mouseover', (e) => {
     if (e.target.closest(interactiveSelector)) {
       stencil.classList.add('is-hovering');

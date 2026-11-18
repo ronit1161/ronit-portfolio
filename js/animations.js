@@ -177,7 +177,7 @@ function initHeroToWorkTransition() {
     gsap.set([heroStage, bridgeSection], { clearProps: 'all' });
     gsap.set(
       document.querySelectorAll(
-        '.quote-line, .quote-line-inner, .bridge-forward-lead, .bridge-structural-line, .serif-italic'
+        '.quote-line, .quote-line-inner, .bridge-structural-line, .serif-italic'
       ),
       { clearProps: 'all' }
     );
@@ -189,7 +189,6 @@ function initHeroToWorkTransition() {
   // Desktop & Tablet (> 768px): Coordinated Pinned Scrubbed Transition
   heroTransitionMM.add('(min-width: 769px)', () => {
     document.documentElement.classList.add('js-transition-ready');
-    const siteHeader = document.getElementById('site-header');
 
     const heroCanvas = heroStage.querySelector('.seb-hero-canvas');
     const upperCluster = heroStage.querySelector('.seb-hero-upper-cluster');
@@ -202,9 +201,6 @@ function initHeroToWorkTransition() {
     const quoteWrap = bridgeSection.querySelector('.bridge-statement-wrap');
     const quoteInners = bridgeSection.querySelectorAll('.quote-line-inner');
     const italicWords = bridgeSection.querySelectorAll('.serif-italic');
-    const forwardLead = bridgeSection.querySelector('.bridge-forward-lead');
-    const axisLine = bridgeSection.querySelector('.axis-line');
-    const axisNode = bridgeSection.querySelector('.axis-node');
 
     // Initial state before Stage C
     gsap.set(bridgeSection, { opacity: 0, pointerEvents: 'none' });
@@ -216,15 +212,6 @@ function initHeroToWorkTransition() {
     }
     if (italicWords.length) {
       gsap.set(italicWords, { scale: 1 });
-    }
-    if (forwardLead) {
-      gsap.set(forwardLead, { opacity: 0, y: 16 });
-    }
-    if (axisLine) {
-      gsap.set(axisLine, { scaleY: 0, transformOrigin: 'top center' });
-    }
-    if (axisNode) {
-      gsap.set(axisNode, { scale: 0 });
     }
 
     // Master Scrubbed Timeline with extended scroll distance for spacious reading
@@ -348,17 +335,6 @@ function initHeroToWorkTransition() {
       );
     }
 
-    // Forward indicator enters
-    if (axisLine) {
-      tl.to(axisLine, { scaleY: 1, duration: 0.18, ease: 'power2.out' }, 0.50);
-    }
-    if (axisNode) {
-      tl.to(axisNode, { scale: 1, duration: 0.15, ease: 'back.out(2)' }, 0.54);
-    }
-    if (forwardLead) {
-      tl.to(forwardLead, { opacity: 1, y: 0, duration: 0.18, ease: 'power2.out' }, 0.54);
-    }
-
     // ------------------------------------------------------------------------
     // STAGE D: Stationary Reading Plateau (0.56 -> 0.74)
     // Generous breathing window: text remains static in center as user scrolls
@@ -366,7 +342,6 @@ function initHeroToWorkTransition() {
 
     // ------------------------------------------------------------------------
     // STAGE E: Upward exit as user scrolls down to next section (0.70 -> 0.86)
-    // "after scrolling down to next section make the text go upward opposite like it was coming up initially"
     // ------------------------------------------------------------------------
     if (quoteInners.length) {
       quoteInners.forEach((inner, idx) => {
@@ -392,16 +367,6 @@ function initHeroToWorkTransition() {
         { y: -40, duration: 0.18, ease: 'power2.in' },
         0.72
       );
-    }
-
-    if (forwardLead) {
-      tl.to(forwardLead, { opacity: 0, y: -24, duration: 0.14, ease: 'power2.in' }, 0.70);
-    }
-    if (axisLine) {
-      tl.to(axisLine, { scaleY: 0, transformOrigin: 'top center', duration: 0.14, ease: 'power2.in' }, 0.70);
-    }
-    if (axisNode) {
-      tl.to(axisNode, { scale: 0, duration: 0.10, ease: 'power2.in' }, 0.72);
     }
 
     const workSection = document.getElementById('work');
@@ -435,7 +400,6 @@ function initHeroToWorkTransition() {
     // Teardown
     return () => {
       instantBgTrigger.kill();
-      if (siteHeader) siteHeader.classList.remove('is-dark');
       document.documentElement.classList.remove('js-transition-ready');
       gsap.set(
         [heroStage, bridgeSection, container, heroCanvas, document.body, document.documentElement, workSection].filter(Boolean),
@@ -450,9 +414,6 @@ function initHeroToWorkTransition() {
         quoteWrap,
         ...quoteInners,
         ...italicWords,
-        forwardLead,
-        axisLine,
-        axisNode,
         ...bridgeLines,
       ].filter(Boolean);
       gsap.set(allSub, { clearProps: 'all' });
@@ -463,7 +424,6 @@ function initHeroToWorkTransition() {
   heroTransitionMM.add('(max-width: 768px)', () => {
     document.documentElement.classList.remove('js-transition-ready');
     gsap.set([heroStage, bridgeSection], { clearProps: 'all' });
-    const siteHeaderMobile = document.getElementById('site-header');
     const workSectionMobile = document.getElementById('work');
 
     const bgTargetsMobile = [heroStage, container].filter(Boolean);
@@ -489,7 +449,6 @@ function initHeroToWorkTransition() {
     });
 
     const quoteInners = bridgeSection.querySelectorAll('.quote-line-inner');
-    const lead = bridgeSection.querySelector('.bridge-forward-lead');
 
     if (quoteInners.length) {
       // Opening with more time
@@ -525,30 +484,10 @@ function initHeroToWorkTransition() {
       });
     }
 
-    if (lead) {
-      gsap.fromTo(
-        lead,
-        { opacity: 0, y: 14 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          delay: 0.25,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: bridgeSection,
-            start: 'top 75%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    }
-
     return () => {
       instantBgTriggerMobile.kill();
-      if (siteHeaderMobile) siteHeaderMobile.classList.remove('is-dark');
       gsap.set(
-        [heroStage, bridgeSection, container, document.body, document.documentElement, workSectionMobile, ...quoteInners, lead].filter(Boolean),
+        [heroStage, bridgeSection, container, document.body, document.documentElement, workSectionMobile, ...quoteInners].filter(Boolean),
         { clearProps: 'all' }
       );
     };
@@ -805,21 +744,7 @@ function initEditorialProjects() {
   }
 }
 
-// Backward-compatibility aliases & Global Window Exposure
-function initProjectStripsAnimation() {
-  initEditorialProjects();
-}
-function initProjectStackAnimation() {
-  initEditorialProjects();
-}
-function initHorizontalGallery() {
-  initEditorialProjects();
-}
-
 window.initEditorialProjects = initEditorialProjects;
-window.initProjectStripsAnimation = initEditorialProjects;
-window.initProjectStackAnimation = initEditorialProjects;
-window.initHorizontalGallery = initEditorialProjects;
 
 /**
  * ============================================================================
@@ -831,9 +756,6 @@ window.initHorizontalGallery = initEditorialProjects;
  * - Each row's track translates LEFT as the user scrolls through the section.
  * - Each row has a different parallax speed for depth/overlap feel.
  * - NO section pinning — user scrolls freely through without stopping.
- * - Smooth background transition from dark (#0A0A0C, from #work) to white
- *   (#FFFFFF, for #skills), fully scrubbed and bi-directional.
- * - Header reverts from dark mode back to frosted light mode in sync.
  */
 function initSkillsMarquee() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -844,28 +766,21 @@ function initSkillsMarquee() {
   const track1 = document.getElementById('skills-track-1');
   const track2 = document.getElementById('skills-track-2');
   const track3 = document.getElementById('skills-track-3');
-  const siteHeader = document.getElementById('site-header');
   const workSection = document.getElementById('work');
 
   // ── Unified Pristine White Canvas ─────────────────────────────────────────
-  // Both #work and #skills share a seamless white canvas — no jarring seams or cuts.
   gsap.set([document.body, document.documentElement, section, workSection].filter(Boolean), {
     backgroundColor: '#FFFFFF',
   });
 
   if (isReducedMotion()) return;
 
-  // ── Horizontal Marquee Scroll Motion ─────────────────────────────────────
-  // Each track moves left proportionally as the section scrolls through viewport.
-  // The scrub amount and travel distance differ per row for a layered parallax.
-  // Using section as the trigger (no pin), so the user scrolls naturally through.
-
   const isMobile = window.innerWidth <= 768;
-  const travelBase = isMobile ? -30 : -42; // vw units of leftward travel
+  const travelBase = isMobile ? -30 : -42;
 
   if (track1) {
     gsap.to(track1, {
-      xPercent: travelBase * 1.0, // Row 1: base speed
+      xPercent: travelBase * 1.0,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
@@ -879,7 +794,7 @@ function initSkillsMarquee() {
 
   if (track2) {
     gsap.to(track2, {
-      xPercent: travelBase * 1.4, // Row 2: 40% faster (deeper parallax)
+      xPercent: travelBase * 1.4,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
@@ -893,7 +808,7 @@ function initSkillsMarquee() {
 
   if (track3) {
     gsap.to(track3, {
-      xPercent: travelBase * 0.7, // Row 3: 30% slower (near-plane)
+      xPercent: travelBase * 0.7,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
@@ -908,158 +823,13 @@ function initSkillsMarquee() {
 
 /**
  * ============================================================================
- * 5. ABOUT — CINEMATIC SCROLL EXPERIENCE
- * Moved to js/about.js — initAboutTypoSection() is defined there.
- * ============================================================================
- */
-
-/**
- * ============================================================================
- * 5b. LEGACY SCROLL REVEAL MOTION (SKILLS + CONTACT + FOOTER)
- * ── The about block is now handled by initAboutTypoSection() above ──
- * ============================================================================
- */
-function initScrollRevealMotion() {
-  if (isReducedMotion() || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    return;
-  }
-
-  // --------------------------------------------------------------------------
-  // A. SECTION 4: THE ARCHITECTURAL INDEX (SKILLS) — now replaced, skip
-  // --------------------------------------------------------------------------
-  const indexHeader = document.querySelector('.index-intro-header');
-  if (indexHeader) {
-    const badge = indexHeader.querySelector('.index-badge');
-    const title = indexHeader.querySelector('.index-display-title');
-    const statement = indexHeader.querySelector('.index-statement-text');
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: indexHeader,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    if (badge) {
-      tl.fromTo(
-        badge,
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
-        0
-      );
-    }
-    if (title) {
-      tl.fromTo(
-        title,
-        { opacity: 0, y: 28 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
-        0.08
-      );
-    }
-    if (statement) {
-      tl.fromTo(
-        statement,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-        0.16
-      );
-    }
-  }
-
-  // Four Engineering Domains: vertical numeral masks, top accent lines & manifests
-  const domainColumns = document.querySelectorAll('.domain-column');
-  domainColumns.forEach((col, idx) => {
-    const numeral = col.querySelector('.domain-numeral');
-    const accentLine = col.querySelector('.domain-accent-line');
-    const title = col.querySelector('.domain-title');
-    const summary = col.querySelector('.domain-summary');
-    const items = col.querySelectorAll('.domain-tech-item');
-
-    const dtl = gsap.timeline({
-      scrollTrigger: {
-        trigger: col,
-        start: 'top 82%',
-        toggleActions: 'play none none none',
-      },
-    });
-
-    // Top accent line draws in
-    if (accentLine) {
-      dtl.fromTo(
-        accentLine,
-        { scaleX: 0, transformOrigin: 'left center' },
-        { scaleX: 1, duration: 0.45, ease: 'power3.out' },
-        0
-      );
-    }
-
-    // Large domain numeral vertical mask reveal
-    if (numeral) {
-      dtl.fromTo(
-        numeral,
-        { yPercent: 110 },
-        { yPercent: 0, duration: 0.65, ease: 'power4.out' },
-        0.06
-      );
-
-      // Subtle scroll-linked vertical parallax shift as user scrolls through the matrix
-      gsap.to(numeral, {
-        y: -16,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: col,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }
-
-    if (title) {
-      dtl.fromTo(
-        title,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        0.14
-      );
-    }
-
-    if (summary) {
-      dtl.fromTo(
-        summary,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        0.2
-      );
-    }
-
-    if (items.length) {
-      dtl.fromTo(
-        items,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power2.out' },
-        0.24
-      );
-    }
-  });
-
-  // --------------------------------------------------------------------------
-  // C. SECTION 6: CONTACT & FOOTER MONUMENT
-  // Moved to js/contact.js — initContactSection() is defined there.
-  // --------------------------------------------------------------------------
-}
-
-/**
- * ============================================================================
- * 5. WINDOW RESIZE & MEDIA QUERY LISTENER
+ * 5. WINDOW RESIZE LISTENER (Recalibrates ScrollTrigger cleanly)
  * ============================================================================
  */
 let resizeTimeout = null;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
   resizeTimeout = setTimeout(() => {
-    initHorizontalGallery();
     if (typeof ScrollTrigger !== 'undefined') {
       ScrollTrigger.refresh();
     }

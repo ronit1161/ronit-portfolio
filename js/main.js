@@ -15,11 +15,6 @@ function initApp() {
     initPrecisionCursor();
   }
 
-  // Hero Opening Sequence (TYPE AS ARCHITECTURE, ~600-800ms)
-  if (typeof initHeroEntrance === 'function') {
-    initHeroEntrance();
-  }
-
   // Phase 2: Cinematic Hero-to-Work Transition
   if (typeof initHeroToWorkTransition === 'function') {
     initHeroToWorkTransition();
@@ -28,15 +23,9 @@ function initApp() {
   // Phase 3: Editorial Interactive Directory & Cursor Follower
   if (typeof initEditorialProjects === 'function') {
     initEditorialProjects();
-  } else if (typeof initProjectStripsAnimation === 'function') {
-    initProjectStripsAnimation();
-  } else if (typeof initProjectStackAnimation === 'function') {
-    initProjectStackAnimation();
-  } else if (typeof initHorizontalGallery === 'function') {
-    initHorizontalGallery();
   }
 
-  // Phase 5a: About — Typography-driven editorial scroll experience
+  // Phase 5a: About — Typography-driven editorial scroll experience (initializes Lenis)
   if (typeof initAboutTypoSection === 'function') {
     initAboutTypoSection();
   }
@@ -44,10 +33,6 @@ function initApp() {
   // Phase 6: Contact — Awwwards editorial scroll experience
   if (typeof initContactSection === 'function') {
     initContactSection();
-  }
-
-  if (typeof initScrollRevealMotion === 'function') {
-    initScrollRevealMotion();
   }
 
   // Phase 4: Skills Cinematic Marquee + dark→white transition
@@ -59,8 +44,15 @@ function initApp() {
   initHeaderScroll();
   initScrollSpy();
   initMobileNav();
-  initFooterMonumentScale();
   initCopyrightYear();
+
+  // Scene 0 / Hero Opening: Run Editorial Landing Loader or fall back to instant Hero Entrance
+  const loaderRunning =
+    typeof initLandingLoader === 'function' ? initLandingLoader() : false;
+
+  if (!loaderRunning && typeof initHeroEntrance === 'function') {
+    initHeroEntrance();
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -206,138 +198,11 @@ function closeMobileMenu() {
 window.closeMobileMenu = closeMobileMenu;
 
 /**
- * 4. CLIPBOARD & TOAST UTILITY
+ * 4. DYNAMIC COPYRIGHT YEAR
  */
-function showToast(message) {
-  let toast = document.getElementById('ui-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'ui-toast';
-    toast.className = 'ui-toast';
-    document.body.appendChild(toast);
-  }
-  toast.innerHTML = `<span class="toast-icon">✓</span><span>${message}</span>`;
-  toast.classList.add('is-visible');
-
-  clearTimeout(window._toastTimeout);
-  window._toastTimeout = setTimeout(() => {
-    toast.classList.remove('is-visible');
-  }, 2600);
-}
-
-function copyEmail() {
-  const email = 'ronittambe116@gmail.com';
-  const copyBtn = document.getElementById('btn-copy-email');
-  const copyLabel = copyBtn ? copyBtn.querySelector('.btn-copy-label') || copyBtn : null;
-
-  function setSuccess() {
-    if (copyLabel) copyLabel.textContent = 'COPIED ✓';
-    if (copyBtn) copyBtn.classList.add('is-copied');
-    showToast('Email address copied to clipboard');
-
-    setTimeout(() => {
-      if (copyLabel) copyLabel.textContent = 'Copy Email';
-      if (copyBtn) copyBtn.classList.remove('is-copied');
-    }, 2400);
-  }
-
-  function setFallback() {
-    // Graceful fallback: select text on screen so user can copy manually
-    const textEl = document.getElementById('email-address-val');
-    if (textEl && window.getSelection) {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(textEl);
-      selection.removeAllRanges();
-      selection.addRange(range);
-      showToast('Press Cmd+C / Ctrl+C to copy email');
-    } else {
-      showToast('ronittambe116@gmail.com');
-    }
-  }
-
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard
-      .writeText(email)
-      .then(setSuccess)
-      .catch((err) => {
-        console.warn('Clipboard writeText failed, using fallback:', err);
-        setFallback();
-      });
-  } else {
-    try {
-      const textArea = document.createElement('textarea');
-      textArea.value = email;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-9999px';
-      textArea.style.top = '0';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      const successful = document.execCommand('copy');
-      document.body.removeChild(textArea);
-      if (successful) {
-        setSuccess();
-      } else {
-        setFallback();
-      }
-    } catch (e) {
-      setFallback();
-    }
-  }
-}
-window.copyEmail = copyEmail;
-
-function scrollToTop() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (window._lenis && !prefersReducedMotion) {
-    window._lenis.scrollTo(0, { immediate: false });
-  } else {
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth',
-    });
-  }
-}
-window.scrollToTop = scrollToTop;
-
 function initCopyrightYear() {
   const yearEl = document.getElementById('current-year');
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
-}
-
-/**
- * 5. FOOTER MONUMENT WORDMARK AUTO-SCALER
- * Measures and sizes "RONIT TAMBE" to fit 100% of viewport width without clipping.
- */
-function initFooterMonumentScale() {
-  const stage = document.querySelector('.footer-monument-stage');
-  const text = document.querySelector('.footer-monument-text');
-  if (!stage || !text) return;
-
-  function fitMonument() {
-    text.style.fontSize = '';
-    const stageWidth = stage.clientWidth;
-    if (stageWidth <= 0) return;
-
-    const usableWidth = stageWidth * 0.98;
-    const currentTextWidth = text.scrollWidth;
-
-    if (currentTextWidth > 0) {
-      const currentFontSize = parseFloat(window.getComputedStyle(text).fontSize);
-      const scale = usableWidth / currentTextWidth;
-      const targetFontSize = Math.floor(currentFontSize * scale);
-      text.style.fontSize = `${targetFontSize}px`;
-    }
-  }
-
-  window.addEventListener('resize', fitMonument);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(fitMonument);
-  }
-  setTimeout(fitMonument, 100);
-  setTimeout(fitMonument, 500);
-  fitMonument();
 }
