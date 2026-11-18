@@ -502,10 +502,6 @@
   border: none;
 }
 
-.bridge-line-bottom {
-  border: none;
-}
-
 .bridge-container {
   padding-top: clamp(48px, 8vh, 96px);
   padding-bottom: clamp(48px, 8vh, 96px);
@@ -554,82 +550,4 @@
   color: #ffffff;
   padding: 0 0.06em;
   background-color: #FE3C01;
-}
-
-/* Stage D — Architectural Bridge toward Selected Work */
-.bridge-forward-lead {
-  margin-top: clamp(44px, 6.5vh, 76px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  will-change: transform, opacity;
-}
-
-.forward-axis {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.axis-line {
-  width: 1px;
-  height: 36px;
-  background-color: var(--color-border-hairline);
-  display: block;
-  will-change: transform;
-  transform-origin: top center;
-}
-
-.axis-node {
-  width: 4px;
-  height: 4px;
-  background-color: var(--color-accent);
-  border-radius: 50%;
-  margin-top: -2px;
-}
-
-.forward-meta {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.forward-index {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
-.forward-separator {
-  color: var(--color-border-hairline);
-}
-
-.forward-label {
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
-
-.forward-arrow {
-  color: var(--color-accent);
-  font-size: 0.85rem;
-  display: inline-block;
-  animation: bridgeGuidePulse 2.4s ease-in-out infinite;
-}
-
-@keyframes bridgeGuidePulse {
-
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: translateY(3px);
-    opacity: 1;
-  }
 }

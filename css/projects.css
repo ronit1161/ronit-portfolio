@@ -40,17 +40,6 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.projects-eyebrow {
-  font-family: 'Aeonik Bold', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 8px;
-}
-
 .projects-heading {
   font-family: BlinkMacSystemFont, sans-serif;
   font-size: clamp(2.4rem, 4.8vw, 4.2rem);
@@ -196,53 +185,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.row-action-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: 'Aeonik Bold', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #383842;
-  background-color: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 6px;
-  padding: 7px 15px;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.row-action-link:hover {
-  color: #FFFFFF;
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  transform: translateY(-1px);
-}
-
-.row-action-link.action-live {
-  background-color: rgba(254, 60, 1, 0.1);
-  border-color: rgba(254, 60, 1, 0.35);
-  color: #FE3C01;
-}
-
-.row-action-link.action-live:hover {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #FFFFFF;
-}
-
-.row-action-link .action-arrow {
-  display: inline-block;
-  font-size: 0.85em;
-  transition: transform 0.25s ease;
-}
-
-.row-action-link:hover .action-arrow {
-  transform: translate(2px, -2px);
 }
 
 /* Distinctive Monumental Arrow (Matching Weirdo.is design scale) */
@@ -456,13 +398,6 @@
     margin-top: 6px;
   }
 
-  .row-action-link {
-    flex: 1 1 auto;
-    justify-content: center;
-    padding: 8px 12px;
-    font-size: 0.72rem;
-  }
-
   /* Mobile Inline Media Reveal on Tap */
   .mobile-project-media {
     display: block;
@@ -511,57 +446,4 @@
   .preview-card {
     transition: none !important;
   }
-}
-
-/* ==========================================================================
-   HEADER DARK THEME INTEGRATION FOR EDITORIAL PROJECTS
-   ========================================================================== */
-
-.site-header {
-  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    transform var(--duration-normal) var(--ease-editorial);
-}
-
-.site-header .nav-brand,
-.site-header .nav-link,
-.site-header .nav-cv-btn,
-.site-header .mobile-menu-trigger span {
-  transition: color 0.35s ease,
-    background-color 0.35s ease,
-    border-color 0.35s ease;
-}
-
-.site-header.is-dark {
-  background-color: rgba(10, 10, 12, 0.88) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-}
-
-.site-header.is-dark .nav-brand {
-  color: #FFFFFF !important;
-}
-
-.site-header.is-dark .nav-link {
-  color: #A0A0AC !important;
-}
-
-.site-header.is-dark .nav-link:hover,
-.site-header.is-dark .nav-link.active {
-  color: #FFFFFF !important;
-}
-
-.site-header.is-dark .nav-cv-btn {
-  color: #FFFFFF !important;
-  border-color: rgba(255, 255, 255, 0.28) !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-.site-header.is-dark .nav-cv-btn:hover {
-  background-color: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-  color: #FFFFFF !important;
-}
-
-.site-header.is-dark .mobile-menu-trigger span {
-  background-color: #FFFFFF !important;
 }
