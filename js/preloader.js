@@ -152,9 +152,12 @@ function initLandingLoader(onComplete) {
     splitTextNodes(talkCta, { i: 0 });
   }
 
-  // Force reflow before priming so initial translateY(112%) states commit without transitioning
-  void document.body.offsetWidth;
-  html.classList.add('loader-hero-primed');
+  // Defer hero priming to the next animation frame (avoids synchronous forced reflow)
+  requestAnimationFrame(() => {
+    if (!isFinished) {
+      html.classList.add('loader-hero-primed');
+    }
+  });
 
   // State tracking for timers, animations, and cleanup
   const timers = [];
@@ -266,9 +269,8 @@ function initLandingLoader(onComplete) {
       window._lenis.stop();
     }
 
-    // Place centered pill photo before fading in
+    // Place centered pill photo before fading in (natural paint before 100ms, no forced reflow)
     applyCenteredPhoto();
-    void ldPhoto.offsetWidth;
 
     // t = 100ms: Centered circular/pill portrait fades in
     at(100, () => {

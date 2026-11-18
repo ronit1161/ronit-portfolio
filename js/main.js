@@ -5,15 +5,11 @@
  */
 
 let isAppInitialized = false;
+let isMotionInitialized = false;
 
-function initApp() {
-  if (isAppInitialized) return;
-  isAppInitialized = true;
-
-  // Initialize Interaction & Physics Subsystems
-  if (typeof initPrecisionCursor === 'function') {
-    initPrecisionCursor();
-  }
+function initDeferredMotion() {
+  if (isMotionInitialized) return;
+  isMotionInitialized = true;
 
   // Phase 2: Cinematic Hero-to-Work Transition
   if (typeof initHeroToWorkTransition === 'function') {
@@ -35,12 +31,39 @@ function initApp() {
     initContactSection();
   }
 
-  // Phase 4: Skills Cinematic Marquee + dark→white transition
+  // Phase 4: Skills Cinematic Marquee
   if (typeof initSkillsMarquee === 'function') {
     initSkillsMarquee();
   }
 
-  // Utilities & Listeners
+  // Keep Lenis paused if landing loader is still running
+  if (document.documentElement.classList.contains('loader-active') && window._lenis) {
+    window._lenis.stop();
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const scrollVal = params.get('scroll');
+  const gotoVal = params.get('goto');
+  if (scrollVal) {
+    window.scrollTo(0, parseInt(scrollVal, 10));
+  } else if (gotoVal) {
+    const el = document.getElementById(gotoVal);
+    if (el) el.scrollIntoView();
+  }
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
+  }
+}
+
+function initApp() {
+  if (isAppInitialized) return;
+  isAppInitialized = true;
+
+  // Lightweight above-the-fold utilities (zero forced reflow)
+  if (typeof initPrecisionCursor === 'function') {
+    initPrecisionCursor();
+  }
   initHeaderScroll();
   initScrollSpy();
   initMobileNav();
@@ -53,6 +76,11 @@ function initApp() {
   if (!loaderRunning && typeof initHeroEntrance === 'function') {
     initHeroEntrance();
   }
+
+  // If document already finished loading (e.g. deferred script ran late), initialize motion in next frame
+  if (document.readyState === 'complete') {
+    requestAnimationFrame(initDeferredMotion);
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -61,24 +89,9 @@ if (document.readyState === 'loading') {
   initApp();
 }
 
-// Ensure ScrollTrigger recalibrates after all images and fonts load
+// Initialize below-the-fold ScrollTrigger & Lenis after deferred CSS & assets settle (prevents forced reflow storm)
 window.addEventListener('load', () => {
-  if (typeof ScrollTrigger !== 'undefined') {
-    ScrollTrigger.refresh();
-  }
-  const params = new URLSearchParams(window.location.search);
-  const scrollVal = params.get('scroll');
-  const gotoVal = params.get('goto');
-  if (scrollVal) {
-    window.scrollTo(0, parseInt(scrollVal, 10));
-    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-  } else if (gotoVal) {
-    const el = document.getElementById(gotoVal);
-    if (el) {
-      el.scrollIntoView();
-      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-    }
-  }
+  requestAnimationFrame(initDeferredMotion);
 });
 
 /**
@@ -172,6 +185,7 @@ function openMobileMenu() {
   if (menuText) menuText.innerText = 'Close';
   overlay.classList.add('is-open');
   overlay.setAttribute('aria-hidden', 'false');
+  overlay.inert = false;
   document.body.classList.add('drawer-open');
   if (window._lenis) {
     window._lenis.stop();
@@ -190,6 +204,7 @@ function closeMobileMenu() {
   if (menuText) menuText.innerText = 'Menu';
   overlay.classList.remove('is-open');
   overlay.setAttribute('aria-hidden', 'true');
+  overlay.inert = true;
   document.body.classList.remove('drawer-open');
   if (window._lenis) {
     window._lenis.start();

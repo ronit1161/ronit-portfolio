@@ -538,18 +538,7 @@ function initEditorialProjects() {
           row.classList.add('is-active');
         }
       } else {
-        const primaryLink = row.querySelector('.row-actions a');
-        if (primaryLink && primaryLink.href) {
-          window.open(primaryLink.href, '_blank', 'noopener,noreferrer');
-        }
-      }
-    });
-
-    // Keyboard accessibility
-    row.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const primaryLink = row.querySelector('.row-actions a');
+        const primaryLink = row.querySelector('.project-title-link') || row.querySelector('a[href]');
         if (primaryLink && primaryLink.href) {
           window.open(primaryLink.href, '_blank', 'noopener,noreferrer');
         }

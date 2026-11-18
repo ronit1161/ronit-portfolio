@@ -129,6 +129,17 @@
   white-space: nowrap;
 }
 
+.editorial-project-row .project-title-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline;
+}
+
+.project-title-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
+}
+
 .editorial-project-row .project-subtitle {
   font-family: 'Aeonik Bold', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: clamp(0.70rem, 0.8vw, 0.78rem);

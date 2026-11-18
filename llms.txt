@@ -1,0 +1,33 @@
+# Ronit Tambe — Full Stack Developer Portfolio
+
+> Personal developer portfolio of Ronit Tambe, a Full Stack Developer based in Pune, Maharashtra, India, specializing in Java, Spring Boot, React.js, Next.js, MySQL, REST APIs, and modern web engineering.
+
+## Profile
+
+- **Name**: Ronit Tambe
+- **Role**: Full Stack Developer
+- **Location**: Pune, Maharashtra, India
+- **Website**: https://ronit1161.github.io/ronit-portfolio/
+- **GitHub**: https://github.com/ronit1161
+- **LinkedIn**: https://www.linkedin.com/in/ronit-tambe-781a09204/
+- **Email**: mailto:ronittambe116@gmail.com
+- **Resume (PDF)**: https://ronit1161.github.io/ronit-portfolio/assets/resume-example.pdf
+
+## Featured Projects
+
+- [Freelance Marketplace](https://github.com/ronit1161/Freelance-Marketplace): Enterprise talent and gig platform built with Java, Spring Boot, Spring Security, JWT, React, MySQL, Hibernate, and Docker.
+- [Food Ordering App](https://food-ordering-app-roan.vercel.app/): Commerce and real-time cart engine built with Next.js, React, MongoDB, NextAuth, and Razorpay ([Source Code](https://github.com/ronit1161/food-ordering)).
+- [Expense Tracker](https://expense-tracker-react-sage.vercel.app/): Personal finance and budget analytics dashboard built with React, Vite, Express, MySQL, and REST APIs ([Source Code](https://github.com/ronit1161/expense-tracker-react)).
+
+## Technical Skills
+
+- **Backend**: Java, Spring Boot, Microservices, REST APIs, Express.js
+- **Frontend**: React.js, Next.js, JavaScript (ES6+), HTML5, CSS3
+- **Database & Infrastructure**: MySQL, MongoDB, Docker, Git
+
+## Education & Experience
+
+- **Post Graduate Diploma in Advanced Computing (PG-DAC)** — Sunbeam Institute of Information Technology, Pune
+- **B.E. in Electronics & Telecommunication Engineering** — Finolex Academy of Management and Technology (FAMT)
+- **Data Annotator (~1.5 years)** — ValuPitch Pvt. Ltd.
+

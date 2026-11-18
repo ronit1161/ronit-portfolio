@@ -13,30 +13,75 @@
   <meta name="author" content="Ronit Tambe" />
   <meta name="theme-color" content="#0B0B0C" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph & Social Metadata -->
+  <link rel="canonical" href="https://ronit1161.github.io/ronit-portfolio/" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ronit1161.github.io/ronit-portfolio/" />
   <meta property="og:title" content="Ronit Tambe — Full Stack Developer" />
   <meta property="og:description"
     content="Portfolio and software projects built by Ronit Tambe. Specializing in Java, Spring Boot, React.js, and full-stack development." />
+  <meta property="og:image" content="https://ronit1161.github.io/ronit-portfolio/assets/profile-pic.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicon & Typography -->
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ronit Tambe",
+      "jobTitle": "Full Stack Developer",
+      "url": "https://ronit1161.github.io/ronit-portfolio/",
+      "image": "https://ronit1161.github.io/ronit-portfolio/assets/profile-pic.webp",
+      "email": "mailto:ronittambe116@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pune",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://github.com/ronit1161",
+        "https://www.linkedin.com/in/ronit-tambe-781a09204/"
+      ]
+    }
+  </script>
+
+  <!-- Favicon & Preloads -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preload" href="assets/fonts/Aeonik-Black.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/profile-pic.webp" as="image" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
-    rel="stylesheet" />
 
-  <!-- Modular Stylesheets -->
-  <link rel="stylesheet" href="css/base.css?v=3" />
-  <link rel="stylesheet" href="css/preloader.css?v=2" />
-  <link rel="stylesheet" href="css/cursor.css?v=2" />
+  <!-- Non-blocking Google Fonts (Below-the-fold sections) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Critical Above-the-Fold Stylesheets -->
+  <link rel="stylesheet" href="css/base.css?v=4" />
+  <link rel="stylesheet" href="css/preloader.css?v=3" />
   <link rel="stylesheet" href="css/hero.css?v=3" />
-  <link rel="stylesheet" href="css/projects.css?v=7" />
-  <link rel="stylesheet" href="css/skills.css?v=6" />
-  <link rel="stylesheet" href="css/about.css?v=4" />
-  <link rel="stylesheet" href="css/contact.css?v=3" />
   <link rel="stylesheet" href="css/responsive.css?v=3" />
+
+  <!-- Deferred Below-the-Fold & Enhancement Stylesheets -->
+  <link rel="stylesheet" href="css/cursor.css?v=2" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/projects.css?v=8" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/skills.css?v=7" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/about.css?v=4" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/contact.css?v=3" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="css/cursor.css?v=2" />
+    <link rel="stylesheet" href="css/projects.css?v=8" />
+    <link rel="stylesheet" href="css/skills.css?v=7" />
+    <link rel="stylesheet" href="css/about.css?v=4" />
+    <link rel="stylesheet" href="css/contact.css?v=3" />
+  </noscript>
 
   <!-- Zero-FOUC Landing Loader Primer -->
   <script>
@@ -63,7 +108,7 @@
     <div class="ld-rv ld-big ld-bl">LET’S BUILD</div>
     <div class="ld-rv ld-big ld-br" id="ld-cnt"><span class="ld-w"><span class="ld-c" id="ld-num">000</span></span></div>
     <div id="ld-photo">
-      <img id="ld-photo-img" src="./assets/profile-pic.webp" alt="" loading="eager" decoding="async" />
+      <img id="ld-photo-img" src="./assets/profile-pic.webp" alt="" width="1080" height="992" loading="eager" fetchpriority="high" decoding="async" />
     </div>
   </div>
 
@@ -111,7 +156,7 @@
   </header>
 
   <!-- Fullscreen Editorial Mobile Navigation Overlay -->
-  <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true">
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true" inert>
     <nav class="mobile-nav-links">
       <a href="#work" class="mobile-nav-item" onclick="closeMobileMenu()">
         <span>01</span> Work
@@ -164,7 +209,7 @@
               <h1 class="seb-display-line">
                 <span class="seb-word-mask"><span class="seb-word-inner">HI, WELCOME</span></span>
                 <span class="seb-avatar-sticker" aria-hidden="true">
-                  <img src="./assets/profile-pic.webp" alt="Ronit" />
+                  <img src="./assets/profile-pic.webp" alt="" width="76" height="76" decoding="async" />
                 </span>
                 <span class="seb-word-mask"><span class="seb-word-inner">HOME</span></span>
               </h1>
@@ -230,7 +275,7 @@
           <div class="seb-portrait-card">
             <div class="seb-portrait-image-wrapper">
               <img src="./assets/profile-pic.webp" alt="Ronit Tambe — Full Stack Developer based in Pune, India"
-                class="seb-portrait-img" width="600" height="600" loading="eager" />
+                class="seb-portrait-img" width="1080" height="992" loading="eager" fetchpriority="high" decoding="async" />
             </div>
             <div class="seb-portrait-meta">
               <div class="meta-col-left">
@@ -296,15 +341,15 @@
         <div class="preview-inner">
           <div class="preview-card" data-preview-index="0">
             <img src="./assets/freelance.webp" alt="Freelance Marketplace interface preview" class="preview-img"
-              loading="eager" />
+              width="960" height="475" loading="lazy" decoding="async" />
           </div>
           <div class="preview-card" data-preview-index="1">
             <img src="./assets/food ordering.webp" alt="Food Ordering App interface preview" class="preview-img"
-              loading="eager" />
+              width="960" height="470" loading="lazy" decoding="async" />
           </div>
           <div class="preview-card" data-preview-index="2">
             <img src="./assets/expense tracker.webp" alt="Expense Tracker dashboard preview" class="preview-img"
-              loading="eager" />
+              width="960" height="603" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -323,17 +368,19 @@
         </header>
 
         <!-- Project Editorial Directory List -->
-        <div class="editorial-projects-list" id="editorial-projects-list" role="list">
+        <div class="editorial-projects-list" id="editorial-projects-list">
 
           <!-- PROJECT 01: FREELANCE MARKETPLACE -->
-          <article class="editorial-project-row" data-index="0" data-project="freelance" role="listitem" tabindex="0"
-            aria-label="Freelance Marketplace project details">
+          <article class="editorial-project-row" data-index="0" data-project="freelance">
             <div class="row-left">
               <h3 class="project-title">
-                <span class="title-word">FREELANCE</span>
-                <span class="title-word">MARKETPLACE</span>
+                <a href="https://github.com/ronit1161/Freelance-Marketplace" target="_blank" rel="noopener noreferrer"
+                  class="project-title-link">
+                  <span class="title-word">FREELANCE</span>
+                  <span class="title-word">MARKETPLACE</span>
+                </a>
               </h3>
-              <span class="project-subtitle">ENTERPRISE TALENT & GIG PLATFORM</span>
+              <span class="project-subtitle">ENTERPRISE TALENT &amp; GIG PLATFORM</span>
             </div>
 
             <div class="row-middle">
@@ -347,11 +394,6 @@
             </div>
 
             <div class="row-right">
-              <div class="row-actions">
-                <a href="https://github.com/ronit1161/Freelance-Marketplace" target="_blank" rel="noopener noreferrer"
-                  aria-label="View Freelance Marketplace source code on GitHub" onclick="event.stopPropagation()">
-                </a>
-              </div>
               <div class="row-arrow-wrap" aria-hidden="true">
                 <svg class="row-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -363,20 +405,23 @@
 
             <!-- Mobile Inline Media (visible on touch devices / small screens) -->
             <div class="mobile-project-media" aria-hidden="true">
-              <img src="./assets/freelance.webp" alt="Freelance Marketplace preview" loading="lazy" />
+              <img src="./assets/freelance.webp" alt="Freelance Marketplace preview" width="960" height="475"
+                loading="lazy" decoding="async" />
             </div>
           </article>
 
           <!-- PROJECT 02: FOOD ORDERING APP -->
-          <article class="editorial-project-row" data-index="1" data-project="food-ordering" role="listitem"
-            tabindex="0" aria-label="Food Ordering App project details">
+          <article class="editorial-project-row" data-index="1" data-project="food-ordering">
             <div class="row-left">
               <h3 class="project-title">
-                <span class="title-word">FOOD</span>
-                <span class="title-word">ORDERING</span>
-                <span class="title-word">APP</span>
+                <a href="https://food-ordering-app-roan.vercel.app/" target="_blank" rel="noopener noreferrer"
+                  class="project-title-link">
+                  <span class="title-word">FOOD</span>
+                  <span class="title-word">ORDERING</span>
+                  <span class="title-word">APP</span>
+                </a>
               </h3>
-              <span class="project-subtitle">COMMERCE & REAL-TIME CART ENGINE</span>
+              <span class="project-subtitle">COMMERCE &amp; REAL-TIME CART ENGINE</span>
             </div>
 
             <div class="row-middle">
@@ -390,14 +435,6 @@
             </div>
 
             <div class="row-right">
-              <div class="row-actions">
-                <a href="https://food-ordering-app-roan.vercel.app/" target="_blank" rel="noopener noreferrer"
-                  aria-label="Launch Food Ordering live application" onclick="event.stopPropagation()">
-                </a>
-                <a href="https://github.com/ronit1161/food-ordering" target="_blank" rel="noopener noreferrer"
-                  aria-label="View Food Ordering source code on GitHub" onclick="event.stopPropagation()">
-                </a>
-              </div>
               <div class="row-arrow-wrap" aria-hidden="true">
                 <svg class="row-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -409,19 +446,22 @@
 
             <!-- Mobile Inline Media -->
             <div class="mobile-project-media" aria-hidden="true">
-              <img src="./assets/food ordering.webp" alt="Food Ordering App preview" loading="lazy" />
+              <img src="./assets/food ordering.webp" alt="Food Ordering App preview" width="960" height="470"
+                loading="lazy" decoding="async" />
             </div>
           </article>
 
           <!-- PROJECT 03: EXPENSE TRACKER -->
-          <article class="editorial-project-row" data-index="2" data-project="expense-tracker" role="listitem"
-            tabindex="0" aria-label="Expense Tracker project details">
+          <article class="editorial-project-row" data-index="2" data-project="expense-tracker">
             <div class="row-left">
               <h3 class="project-title">
-                <span class="title-word">EXPENSE</span>
-                <span class="title-word">TRACKER</span>
+                <a href="https://expense-tracker-react-sage.vercel.app/" target="_blank" rel="noopener noreferrer"
+                  class="project-title-link">
+                  <span class="title-word">EXPENSE</span>
+                  <span class="title-word">TRACKER</span>
+                </a>
               </h3>
-              <span class="project-subtitle">PERSONAL FINANCE & BUDGET ANALYTICS</span>
+              <span class="project-subtitle">PERSONAL FINANCE &amp; BUDGET ANALYTICS</span>
             </div>
 
             <div class="row-middle">
@@ -435,14 +475,6 @@
             </div>
 
             <div class="row-right">
-              <div class="row-actions">
-                <a href="https://expense-tracker-react-sage.vercel.app/" target="_blank" rel="noopener noreferrer"
-                  aria-label="Launch Expense Tracker live application" onclick="event.stopPropagation()">
-                </a>
-                <a href="https://github.com/ronit1161/expense-tracker-react" target="_blank" rel="noopener noreferrer"
-                  aria-label="View Expense Tracker source code on GitHub" onclick="event.stopPropagation()">
-                </a>
-              </div>
               <div class="row-arrow-wrap" aria-hidden="true">
                 <svg class="row-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -454,7 +486,8 @@
 
             <!-- Mobile Inline Media -->
             <div class="mobile-project-media" aria-hidden="true">
-              <img src="./assets/expense tracker.webp" alt="Expense Tracker preview" loading="lazy" />
+              <img src="./assets/expense tracker.webp" alt="Expense Tracker preview" width="960" height="603"
+                loading="lazy" decoding="async" />
             </div>
           </article>
 
@@ -476,8 +509,8 @@
       <div class="skills-section-label" aria-hidden="true">SKILLS</div>
 
       <!-- Row 1: Backend Core — Java · Spring Boot · Microservices -->
-      <div class="skills-strip skills-strip--row1" aria-label="Backend skills" role="list">
-        <div class="skills-strip-track" id="skills-track-1">
+      <div class="skills-strip skills-strip--row1">
+        <div class="skills-strip-track" id="skills-track-1" role="list" aria-label="Backend skills">
           <span class="skill-item" role="listitem">
             <sup class="skill-index">01</sup>Java
           </span>
@@ -510,8 +543,8 @@
       <div class="skills-hairline" aria-hidden="true"></div>
 
       <!-- Row 2: Web & Frontend — React.js · Next.js · JavaScript -->
-      <div class="skills-strip skills-strip--row2" aria-label="Frontend skills" role="list">
-        <div class="skills-strip-track" id="skills-track-2">
+      <div class="skills-strip skills-strip--row2">
+        <div class="skills-strip-track" id="skills-track-2" role="list" aria-label="Frontend skills">
           <span class="skill-item" role="listitem">
             <sup class="skill-index">04</sup>React.js
           </span>
@@ -544,8 +577,8 @@
       <div class="skills-hairline" aria-hidden="true"></div>
 
       <!-- Row 3: Data & Infra — MySQL · REST APIs · Docker -->
-      <div class="skills-strip skills-strip--row3" aria-label="Database and infrastructure skills" role="list">
-        <div class="skills-strip-track" id="skills-track-3">
+      <div class="skills-strip skills-strip--row3">
+        <div class="skills-strip-track" id="skills-track-3" role="list" aria-label="Database and infrastructure skills">
           <span class="skill-item" role="listitem">
             <sup class="skill-index">07</sup>MySQL
           </span>
@@ -599,7 +632,10 @@
                 src="./assets/profile-pic.webp"
                 alt="Portrait of Ronit Tambe, Full Stack Developer based in Pune, India"
                 class="ph-img"
+                width="1080"
+                height="992"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68" fill="#4D5BFF"/><path id="c" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0" fill="none"/><text font-size="11" fill="#fff" font-family="'Instrument Sans', sans-serif" font-weight="500"><textPath href="#c" textLength="320" lengthAdjust="spacing">DEVELOPER · STILL BUILDING · </textPath></text></svg>
@@ -673,9 +709,9 @@
         </div>
       </div>
 
-      <div class="wm" aria-label="Ronit"><div class="w d" aria-hidden="true"><span class="ch">R</span><span class="ch">O</span><span class="ch">N</span><span class="ch">I</span><span class="ch">T</span><sup>®</sup></div></div>
+      <div class="wm" aria-hidden="true"><div class="w d"><span class="ch">R</span><span class="ch">O</span><span class="ch">N</span><span class="ch">I</span><span class="ch">T</span><sup>®</sup></div></div>
 
-      <footer class="foot pad" role="contentinfo" aria-label="Site Footer">
+      <footer class="foot pad" aria-label="Site Footer">
         <span>RONIT TAMBE · © <span id="current-year"></span> ALL RIGHTS RESERVED</span>
         <span id="clock">PUNE · IST</span>
         <button id="top" type="button" aria-label="Scroll back to top of page">BACK TO TOP ↑</button>
@@ -684,17 +720,17 @@
   </main>
 
   <!-- Core Vendor Animation Engines (Native GSAP + ScrollTrigger + Lenis) -->
-  <script src="assets/lenis.min.js"></script>
-  <script src="assets/gsap.min.js"></script>
-  <script src="assets/ScrollTrigger.min.js"></script>
+  <script src="assets/lenis.min.js" defer></script>
+  <script src="assets/gsap.min.js" defer></script>
+  <script src="assets/ScrollTrigger.min.js" defer></script>
 
   <!-- Application Interaction Engines -->
-  <script src="js/cursor.js?v=2"></script>
-  <script src="js/animations.js?v=8"></script>
-  <script src="js/about.js?v=1"></script>
-  <script src="js/contact.js?v=1"></script>
-  <script src="js/preloader.js?v=2"></script>
-  <script src="js/main.js?v=9"></script>
+  <script src="js/cursor.js?v=2" defer></script>
+  <script src="js/animations.js?v=9" defer></script>
+  <script src="js/about.js?v=1" defer></script>
+  <script src="js/contact.js?v=1" defer></script>
+  <script src="js/preloader.js?v=3" defer></script>
+  <script src="js/main.js?v=10" defer></script>
 </body>
 
 </html>
