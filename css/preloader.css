@@ -1,133 +1,235 @@
 /* ==========================================================================
-   PURPOSEFUL TYPOGRAPHIC ENTRANCE (SCENE 0)
-   Monogram "RT." Expands into Architectural Framing & Curtain Reveal
+   RONIT TAMBE — EDITORIAL LANDING LOADER (SCENE 0)
+   Exact choreography from Landing Loader demo adapted to live Hero canvas:
+   - Vermilion #FE3C01 canvas & solid black #000000 Aeonik Black corner type
+   - 000 → 100 counter + centered pill photo FLIP morph into docked portrait card
+   - Character-split masked reveals into live Hero typography & metadata bar
    ========================================================================== */
 
-#preloader-overlay.editorial-preloader {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  height: 100dvh !important;
-  z-index: 999999 !important;
+/* Lock viewport scroll & prevent FOUC before JS primes hero characters */
+html.loader-active,
+html.loader-active body {
   overflow: hidden !important;
-  user-select: none !important;
-  pointer-events: auto;
+  background-color: #FE3C01;
+}
+
+html.loader-active .site-header {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Keep hero elements laid out (for getBoundingClientRect) but invisible until primed */
+html.loader-active:not(.loader-hero-primed) .seb-hero-upper-cluster,
+html.loader-active:not(.loader-hero-primed) .seb-hero-bottom-cluster,
+html.loader-active:not(.loader-hero-primed) .seb-adjacent-links,
+html.loader-active .seb-portrait-image-wrapper:not(.ld-img-show) {
+  visibility: hidden;
+}
+
+/* Keep portrait card shell transparent while meta bar slides up at t=5000ms */
+html.loader-active .seb-portrait-card {
   background-color: transparent;
+  box-shadow: none;
 }
 
-body.preloader-active {
-  overflow: hidden !important;
-}
-
-/* Two-Panel Deep Obsidian Curtain (#090A0F) */
-.curtain-panel {
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
-  background-color: #0A0A0C;
-  z-index: 1;
+html.loader-active .seb-portrait-meta {
+  transform: translateY(100%);
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
 }
 
-.curtain-panel.curtain-left {
-  left: 0;
-  width: 50vw;
-  border-right: 1px solid var(--color-border-hairline);
+html.loader-active .seb-portrait-meta.ld-cap-show {
+  transform: translateY(0);
 }
 
-.curtain-panel.curtain-right {
-  right: 0;
-  width: 50.5vw; /* Subpixel bleed prevents retina hairline gaps */
-  border-left: 1px solid var(--color-border-hairline);
+/* Allow per-word .ld-w masks to control clipping cleanly without clipping descenders */
+html.loader-hero-primed .seb-word-mask {
+  overflow: visible;
 }
 
-/* Center Typographic Identity Stage */
-.editorial-identity-stage {
-  position: absolute;
+/* Hero sticker scale entrance matching demo .pil */
+html.loader-hero-primed .seb-avatar-sticker {
+  transform: rotate(-8deg) scale(0);
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.5s;
+  will-change: transform;
+}
+
+html.loader-hero-primed .row-welcome.ld-show .seb-avatar-sticker {
+  transform: rotate(-8deg) scale(1);
+}
+
+/* Hero micro-tags smooth entrance alongside their row */
+html.loader-hero-primed .seb-micro-tag {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.65s ease 0.35s,
+              transform 0.85s cubic-bezier(0.76, 0, 0.24, 1) 0.35s;
+  will-change: opacity, transform;
+}
+
+html.loader-hero-primed .seb-typo-row.ld-show .seb-micro-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Adjacent links (Email / CV) slide-in alongside CTA */
+html.loader-hero-primed .seb-adjacent-links {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.65s ease,
+              transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: opacity, transform;
+}
+
+html.loader-hero-primed .seb-adjacent-links.ld-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   LANDING LOADER OVERLAY STAGE
+   ========================================================================== */
+#landing-loader {
+  position: fixed;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 9999;
+  pointer-events: auto;
+  overflow: hidden;
+  display: none;
+  background-color: transparent;
+  user-select: none;
+}
+
+html.loader-active #landing-loader {
+  display: block;
+}
+
+/* Massive Corner Typographic Blocks (HELLO, / I'M RONIT® / LET'S BUILD / 000) */
+.ld-big {
+  position: fixed;
+  font-family: 'Aeonik Black', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+  font-size: 10.5vw;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #000000;
   pointer-events: none;
-  padding: 0 24px;
+  z-index: 10;
 }
 
-/* Monogram (Syne, Bold, Accent Ember) */
-.monogram-wrapper {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
+.ld-tl {
+  left: 2vw;
+  top: max(2vw, env(safe-area-inset-top, 0px));
 }
 
-.editorial-monogram {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  color: var(--color-accent);
-  letter-spacing: -0.04em;
+.ld-tr {
+  right: 2vw;
+  top: max(2vw, env(safe-area-inset-top, 0px));
+}
+
+.ld-bl {
+  left: 2vw;
+  bottom: max(2vw, env(safe-area-inset-bottom, 0px));
+}
+
+.ld-br {
+  right: 2vw;
+  bottom: max(2vw, env(safe-area-inset-bottom, 0px));
+  font-variant-numeric: tabular-nums;
+}
+
+/* Character-Split Masked Wave (.ld-w / .ld-c) */
+.ld-w {
   display: inline-block;
-  line-height: 1;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.04em 0.02em 0.12em;
+  margin: -0.04em -0.02em -0.12em;
 }
 
-/* Typographic Name Reveal */
-.identity-name-mask {
+.ld-c {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1) calc(var(--i, 0) * 45ms);
+  will-change: transform;
+}
+
+.ld-rv.ld-show .ld-c {
+  transform: none;
+}
+
+.ld-rv.ld-out .ld-c {
+  transform: translateY(-112%);
+}
+
+/* Centered Pill Photo that FLIP-morphs into .seb-portrait-image-wrapper */
+#ld-photo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
   overflow: hidden;
-  padding: 4px 8px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 12;
+  pointer-events: none;
+  background-color: #000000;
+  will-change: transform, clip-path, opacity;
+}
+
+#ld-photo-img {
   display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: contrast(1.1) brightness(0.95);
+  transform-origin: 50% 50%;
+  transform: scale(1.4);
+  will-change: transform;
 }
 
-.editorial-identity-name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.8rem, 4.2vw, 3.6rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  color: #F0EFEA;
-  margin: 0;
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .ld-big {
+    font-size: clamp(2.1rem, 10.5vw, 4.8rem);
+  }
+
+  .ld-tl {
+    left: 4vw;
+    top: max(4vw, env(safe-area-inset-top, 16px));
+  }
+
+  .ld-tr {
+    right: 4vw;
+    top: max(4vw, env(safe-area-inset-top, 16px));
+  }
+
+  .ld-bl {
+    left: 4vw;
+    bottom: max(4vw, env(safe-area-inset-bottom, 16px));
+  }
+
+  .ld-br {
+    right: 4vw;
+    bottom: max(4vw, env(safe-area-inset-bottom, 16px));
+  }
 }
 
-/* Vermilion Horizontal Divider Line */
-.identity-divider-track {
-  width: min(280px, 60vw);
-  height: 1.5px;
-  background-color: #29292D;
-  margin: 14px 0;
-  overflow: hidden;
-  position: relative;
-}
-
-.identity-divider-line {
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-accent);
-  transform-origin: center;
-}
-
-/* Role Subtitle */
-.identity-role-mask {
-  overflow: hidden;
-  padding: 2px 4px;
-}
-
-.editorial-identity-role {
-  font-family: var(--font-mono);
-  font-size: clamp(0.72rem, 1.2vw, 0.85rem);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: #898991;
-  text-transform: uppercase;
-  display: block;
-}
-
-/* Reduced Motion Fallback */
+/* Accessibility: Reduced motion disables loader immediately */
 @media (prefers-reduced-motion: reduce) {
-  #preloader-overlay.editorial-preloader {
+  #landing-loader {
     display: none !important;
+  }
+
+  html.loader-active,
+  html.loader-active body {
+    overflow: auto !important;
+    height: auto !important;
   }
 }
