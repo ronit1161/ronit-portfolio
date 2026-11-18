@@ -29,6 +29,7 @@
 
   <!-- Modular Stylesheets -->
   <link rel="stylesheet" href="css/base.css?v=2" />
+  <link rel="stylesheet" href="css/preloader.css?v=2" />
   <link rel="stylesheet" href="css/cursor.css?v=2" />
   <link rel="stylesheet" href="css/hero.css?v=2" />
   <link rel="stylesheet" href="css/projects.css?v=6" />
@@ -36,9 +37,36 @@
   <link rel="stylesheet" href="css/about.css?v=4" />
   <link rel="stylesheet" href="css/contact.css?v=3" />
   <link rel="stylesheet" href="css/responsive.css?v=2" />
+
+  <!-- Zero-FOUC Landing Loader Primer -->
+  <script>
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var params = new URLSearchParams(window.location.search);
+      var skip = params.has('skip_intro') || params.has('scroll') || params.has('goto');
+      if (!reduce && !skip) {
+        document.documentElement.classList.add('loader-active');
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+      }
+    })();
+  </script>
 </head>
 
 <body>
+  <!-- ==========================================================================
+         SCENE 0: EDITORIAL LANDING LOADER
+         ========================================================================== -->
+  <div id="landing-loader" role="presentation" aria-hidden="true">
+    <div class="ld-rv ld-big ld-tl">HELLO,</div>
+    <div class="ld-rv ld-big ld-tr">I’M RONIT®</div>
+    <div class="ld-rv ld-big ld-bl">LET’S BUILD</div>
+    <div class="ld-rv ld-big ld-br" id="ld-cnt"><span class="ld-w"><span class="ld-c" id="ld-num">000</span></span></div>
+    <div id="ld-photo">
+      <img id="ld-photo-img" src="./assets/profile-pic.webp" alt="" loading="eager" decoding="async" />
+    </div>
+  </div>
+
   <!-- Keyboard Accessibility: Skip to Primary Content -->
   <a href="#work" class="skip-to-content">Skip to content</a>
   <!-- ==========================================================================
@@ -665,7 +693,8 @@
   <script src="js/animations.js?v=7"></script>
   <script src="js/about.js?v=1"></script>
   <script src="js/contact.js?v=1"></script>
-  <script src="js/main.js?v=7"></script>
+  <script src="js/preloader.js?v=2"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 
 </html>
