@@ -205,13 +205,10 @@ ronit-portfolio/
 ├── README.md                    # Project documentation
 │
 ├── assets/                      # Self-hosted vendor scripts, brand fonts & media
-│   ├── Aeonik-Black.woff2       # Primary editorial brand font (900 weight)
-│   ├── Aeonik-Bold.woff2        # Primary editorial brand font (700 weight)
-│   ├── Aeonik-Medium.woff2      # Primary editorial brand font (500 weight)
+│   ├── fonts/                   # Local Aeonik WOFF2 fonts (Black, Bold, Medium)
 │   ├── expense tracker.webp     # Preview image: ExpenseWise Tracker application
 │   ├── food ordering.webp       # Preview image: Food Ordering application
 │   ├── freelance.webp           # Preview image: Freelance Marketplace application
-│   ├── hero-character.webp      # Editorial illustration asset
 │   ├── profile-pic.webp         # Author portrait asset (Ronit Tambe)
 │   ├── resume-example.pdf       # Downloadable resume document
 │   ├── gsap.min.js              # GSAP 3 core animation library
@@ -220,23 +217,22 @@ ronit-portfolio/
 │
 ├── css/                         # Modular CSS3 architecture
 │   ├── base.css                 # Design system tokens, root variables, typography & resets
+│   ├── preloader.css            # Editorial landing loader & FLIP portrait morph styles
 │   ├── hero.css                 # Sebastián Martínez inspired hero stage & transition bridge
 │   ├── projects.css             # Editorial project directory & floating cursor preview
 │   ├── skills.css               # Three-track horizontal marquee strips layout
 │   ├── about.css                # About section, pinned chapters & color transitions
 │   ├── contact.css              # Contact layout, email row, live clock & footer wordmark
 │   ├── cursor.css               # Custom dual-element reticle cursor styling
-│   ├── responsive.css           # Global media queries for tablet & mobile viewports
-│   └── preloader.css            # Modular preloader stylesheet (dormant)
+│   └── responsive.css           # Global media queries for mobile viewports
 │
 └── js/                          # Modular ES6+ JavaScript architecture
     ├── main.js                  # Master application controller, scrollspy & lifecycle engine
+    ├── preloader.js             # Editorial landing loader choreography & hero handoff
     ├── animations.js            # GSAP hero motion, pinned transition & cursor follower
     ├── about.js                 # Text split reveals, bio scrub, pinned chapters & theme handoff
     ├── contact.js               # Live IST clock, magnetic buttons, email copy & footer
-    ├── cursor.js                # Custom reticle cursor physics & hover scaling
-    ├── marquee.js               # Standalone draggable marquee utility (dormant)
-    └── preloader.js             # Standalone monogram preloader utility (dormant)
+    └── cursor.js                # Custom reticle cursor physics & hover scaling
 ```
 
 ---
